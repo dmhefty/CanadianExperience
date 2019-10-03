@@ -34,7 +34,7 @@ void CScoreBoard::Draw(Gdiplus::Graphics* graphics)
 	FontFamily fontFamily(L"Arial");
 	Gdiplus::Font font(&fontFamily, 16);
 
-	SolidBrush green(Color(0, 64, 0));
+	SolidBrush green(Color(100, 100, 100));
 	graphics->DrawString(to_wstring(mCorrect).c_str(), -1, &font, PointF(100, 50), &green);
 	graphics->DrawString(L"Correct", -1, &font, PointF(80, 100), &green);
 	graphics->DrawString(to_wstring(mUnfair).c_str(), -1, &font, PointF(670, 50), &green);

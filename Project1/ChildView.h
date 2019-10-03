@@ -12,6 +12,7 @@
 #pragma once
 
 #include "ScoreBoard.h"
+#include "Game.h"
 
 
 // CChildView window
@@ -43,11 +44,7 @@ protected:
 
 private:
 	/// The object for our game
-	//CGame mGame;
-
-	// FOR TESTING PURPOSES ONLY. DELETE AFTER IMPLEMENTING GAME CLASS
-	// SCOREBOARD SHOULD BE UPDATED THROUGH THE GAME CLASS
-	CScoreBoard mScoreBoard;
+	CGame mGame;
 
 	/// True until the first time we draw
 	bool mFirstDraw = true;

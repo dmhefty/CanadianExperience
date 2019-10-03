@@ -4,7 +4,7 @@
 using namespace Gdiplus;
 void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 	// Fill the background with black
-	SolidBrush brush(Color::Black);
+	SolidBrush brush(Color::White);
 	graphics->FillRectangle(&brush, 0, 0, width, height);
 
 	//
@@ -26,6 +26,12 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 	// From here on you are drawing virtual pixels
 }
 
+void CGame::Update(Gdiplus::Graphics* graphics, double elapsedTime)
+{
+	mScoreBoard.Draw(graphics);
+}
+
 void CGame::Load(std::string filePath)
 {
+
 }

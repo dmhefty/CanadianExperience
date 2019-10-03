@@ -21,8 +21,8 @@ private:
 //pointer to the player object
 	std::unique_ptr<CHarold> mPlayer;
 
-//pointer to the scoreboard object
-	std::unique_ptr<CScoreBoard> mScoreBoard;
+//The game coreboard object
+	CScoreBoard mScoreBoard;
 
 //list of all items on screen
 	std::vector<std::unique_ptr<CItem> > mItems;
@@ -36,8 +36,8 @@ public:
 */
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 	
-	
-	//void OnLButtonDown(int x, int y);
+	void Update(Gdiplus::Graphics* graphics, double elapsedTime);
+
 	void Load(std::string filePath);
 
 
