@@ -64,6 +64,7 @@ BOOL CProject1App::InitInstance()
 
 	CWinApp::InitInstance();
 
+	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
 	// Initialize OLE libraries
 	if (!AfxOleInit())
@@ -112,7 +113,8 @@ BOOL CProject1App::InitInstance()
 
 int CProject1App::ExitInstance()
 {
-	//TODO: handle additional resources you may have added
+	Gdiplus::GdiplusShutdown(gdiplusToken);
+
 	AfxOleTerm(FALSE);
 
 	return CWinApp::ExitInstance();
