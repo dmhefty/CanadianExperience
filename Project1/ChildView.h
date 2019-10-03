@@ -1,7 +1,13 @@
-
-// ChildView.h : interface of the CChildView class
-//
-
+/**
+* \file ChildView.h
+*
+* \author Team Sarson
+*
+*  Class that implements the child window our program draws in.
+*
+* The window is a child of the main frame, which holds this
+* window, the menu bar, and the status bar.
+*/
 
 #pragma once
 
@@ -32,5 +38,7 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnFileOpen();
 };
 
