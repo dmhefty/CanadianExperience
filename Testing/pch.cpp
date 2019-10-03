@@ -1,3 +1,9 @@
+/**
+ * \file pch.cpp
+ *
+ * \author Jaideep Prasad
+ */
+
 // pch.cpp: source file corresponding to the pre-compiled header
 
 #include "pch.h"
