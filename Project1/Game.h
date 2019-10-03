@@ -24,7 +24,7 @@ private:
 	float mYOffset;
 
 //pointer to the player object
-	std::unique_ptr<CHarold> mPlayer;
+	CHarold mPlayer;
 
 //The game coreboard object
 	CScoreBoard mScoreBoard;

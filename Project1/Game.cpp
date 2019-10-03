@@ -38,6 +38,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	// From here on you are drawing virtual pixels
 	mScoreBoard.Draw(graphics);
+	mPlayer.Draw(graphics, 400, 10, 10);
 }
 
 /**

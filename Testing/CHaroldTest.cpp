@@ -18,7 +18,7 @@ namespace Testing
 		
 		TEST_METHOD(TestHaroldConstructor)
 		{
-			CHarold harold(CGame * game);
+			CHarold harold();
 		}
 
 	};

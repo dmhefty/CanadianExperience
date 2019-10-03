@@ -16,10 +16,7 @@ class CGame;
 class CHarold
 {
 public:
-	/// Default constructor (disabled)
-	CHarold() = delete;
-
-	CHarold(CGame* game);
+	CHarold();
 
 	/// Copy constructor (disabled)
 	CHarold(const CHarold&) = delete;
