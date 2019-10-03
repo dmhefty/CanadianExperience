@@ -8,6 +8,7 @@
 
 
 #pragma once
+
 class CGame;
  /**
   * Harold class
@@ -17,6 +18,8 @@ class CHarold
 public:
 	/// Default constructor (disabled)
 	CHarold() = delete;
+
+	CHarold(CGame* game);
 
 	/// Copy constructor (disabled)
 	CHarold(const CHarold&) = delete;
@@ -40,5 +43,6 @@ private:
 	double  mX = 0;     ///< X location for the center of Harold
 	double  mY = 0;     ///< Y location for the center of Harold
 	double mAngle = 0; /// < Angle for Harold
+	std::unique_ptr<Gdiplus::Bitmap> mHaroldImage; ///< Harold's image to use.
 };
 

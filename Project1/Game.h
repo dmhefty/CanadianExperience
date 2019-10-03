@@ -36,7 +36,7 @@ public:
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 	
 	
-	void OnLButtonDown(int x, int y);
+	//void OnLButtonDown(int x, int y);
 	void Load(std::string filePath);
 
 

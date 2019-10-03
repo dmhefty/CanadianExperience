@@ -25,3 +25,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	// From here on you are drawing virtual pixels
 }
+
+void CGame::Load(std::string filePath)
+{
+}

@@ -4,9 +4,10 @@
  * \author Isaac Mayers
  */
 #include "pch.h"
-#include "Harold.h"
 #include <string>
 #include <memory>
+#include "Harold.h"
+
 using namespace std;
 using namespace Gdiplus;
 
@@ -17,7 +18,7 @@ const wstring HaroldImageName = L"images/harold.png";
 * Constructor
 * \param game Game Harold is a member of
 */
-CHarold(CGame* game)
+CHarold::CHarold(CGame* game)
 {
 	mHaroldImage = unique_ptr<Bitmap>(Bitmap::FromFile(HaroldImageName.c_str()));
 	if (mHaroldImage->GetLastStatus() != Ok)
@@ -26,6 +27,13 @@ CHarold(CGame* game)
 		msg += HaroldImageName;
 		AfxMessageBox(msg.c_str());
 	}
+}
+
+/**
+ * Destructor
+ */
+CHarold::~CHarold()
+{
 }
 
  /**
