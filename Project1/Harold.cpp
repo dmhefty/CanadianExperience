@@ -12,7 +12,7 @@ using namespace std;
 using namespace Gdiplus;
 
 
-/// Fish filename 
+/// Harold filename 
 const wstring HaroldImageName = L"images/harold.png";
 /**
 * Constructor
