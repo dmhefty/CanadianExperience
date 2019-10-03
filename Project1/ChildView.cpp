@@ -91,7 +91,10 @@ void CChildView::OnPaint()
 	CDoubleBufferDC dc(&paintDC); // device context for painting
 	Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context
 
-	mGame.OnDraw(&graphics, Width, Height);
+	CRect rect;
+	GetClientRect(&rect);
+
+	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 
 	if (mFirstDraw)
 	{

@@ -12,7 +12,10 @@
 #define new DEBUG_NEW
 #endif
 
-// CMainFrame
+/// Default game area width in virtual pixels
+const static int Width = 1250;
+/// Default game area height in virtual pixels
+const static int Height = 1000;
 
 IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 
@@ -81,6 +84,9 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
+
+	//cs.cx = Width;
+	//cs.cy = Height;
 
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
 	cs.lpszClass = AfxRegisterWndClass(0);
