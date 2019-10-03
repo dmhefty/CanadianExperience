@@ -115,7 +115,7 @@ void CChildView::OnPaint()
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
 
-	mGame.Update(&graphics, elapsed);
+	mGame.Update(elapsed);
 }
 
 /** Menu handler update for opening a file of data */

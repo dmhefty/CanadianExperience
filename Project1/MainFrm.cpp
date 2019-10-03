@@ -1,3 +1,9 @@
+/**
+ * \file MainFrm.cpp
+ *
+ * \author Jaideep Prasad
+ */
+
 
 // MainFrm.cpp : implementation of the CMainFrame class
 //

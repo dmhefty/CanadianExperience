@@ -1,3 +1,12 @@
+/**
+ * \file Game.h
+ *
+ * \author Akhil Alluri
+ * \author Jaideep Prasad
+ *
+ * System class for the UML Wars Game
+ */
+
 #pragma once
 #include "pch.h"
 #include <string>
@@ -6,14 +15,10 @@
 #include "Harold.h"
 #include "ScoreBoard.h"
 #include "Item.h"
+
 class CGame
 {
 private:
-/// Game area width in virtual pixels
-	const static int Width = 1250;
-/// Game area height in virtual pixels
-	const static int Height = 1000;
-
 	float mScale;
 	float mXOffset;
 	float mYOffset;
@@ -36,7 +41,7 @@ public:
 */
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 	
-	void Update(Gdiplus::Graphics* graphics, double elapsedTime);
+	void Update(double elapsedTime);
 
 	void Load(std::string filePath);
 
