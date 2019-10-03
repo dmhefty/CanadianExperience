@@ -25,12 +25,6 @@ using namespace Gdiplus;
 /// Frame duration in milliseconds
 const int FrameDuration = 30;
 
-/// Default game area width in virtual pixels
-const static int Width = 1250;
-/// Default game area height in virtual pixels
-const static int Height = 1000;
-
-
 /**
  * Constructor
  */
@@ -92,7 +86,7 @@ void CChildView::OnPaint()
 	Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context
 
 	CRect rect;
-	GetClientRect(&rect);
+	GetClientRect(&rect); //Determine window size automatically
 
 	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 

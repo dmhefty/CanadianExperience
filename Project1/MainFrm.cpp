@@ -12,11 +12,6 @@
 #define new DEBUG_NEW
 #endif
 
-/// Default game area width in virtual pixels
-const static int Width = 1250;
-/// Default game area height in virtual pixels
-const static int Height = 1000;
-
 IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
