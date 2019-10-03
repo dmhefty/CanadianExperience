@@ -1,24 +1,29 @@
 /**
  * \file ChildView.cpp
  *
- * \author Team Sarson
+ * \author Reid Shinabarker
+ * \author Jaideep Prasad
  */
 
 #include "pch.h"
-#include "framework.h"
-#include "Project1.h"
-#include "ChildView.h"
 #include <sstream>
 #include <iostream>
 
+#include "framework.h"
+#include "Project1.h"
+#include "ChildView.h"
+#include "DoubleBufferDC.h"
+
 using namespace std;
+using namespace Gdiplus;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CChildView
+/// Frame duration in milliseconds
+const int FrameDuration = 30;
 
 
 /**
@@ -40,6 +45,8 @@ CChildView::~CChildView()
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_COMMAND(ID_FILE_OPEN32771, &CChildView::OnFileOpen)
+	ON_WM_ERASEBKGND()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 /// \endcond
 
@@ -75,11 +82,37 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 */
 void CChildView::OnPaint() 
 {
-	CPaintDC dc(this); // device context for painting
-	
-	// TODO: Add your message handler code here
-	
-	// Do not call CWnd::OnPaint() for painting messages
+	CPaintDC paintDC(this);     // device context for painting
+	CDoubleBufferDC dc(&paintDC); // device context for painting
+	Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context
+
+	//mGame.OnDraw(&graphics); //In case we want a background image for our game
+	mScoreBoard.Draw(&graphics);
+
+	if (mFirstDraw)
+	{
+		mFirstDraw = false;
+		SetTimer(1, FrameDuration, nullptr);
+
+		/*
+		 * Initialize the elapsed time system
+		 */
+		LARGE_INTEGER time, freq;
+		QueryPerformanceCounter(&time);
+		QueryPerformanceFrequency(&freq);
+
+		mLastTime = time.QuadPart;
+		mTimeFreq = double(freq.QuadPart);
+	}
+
+	/*
+	 * Compute the elapsed time since the last draw
+	 */
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	long long diff = time.QuadPart - mLastTime;
+	double elapsed = double(diff) / mTimeFreq;
+	mLastTime = time.QuadPart;
 }
 
 /** Menu handler update for opening a file of data */
@@ -96,4 +129,28 @@ void CChildView::OnFileOpen()
 	wstring filename = dlg.GetPathName();
 	// mGame.Load(filename);
 	// Invalidate;
+}
+
+
+/**
+ * Erase the background
+ *
+ * This is disabled to eliminate flicker
+ * \param pDC Device context
+ * \returns FALSE
+ */
+BOOL CChildView::OnEraseBkgnd(CDC* pDC)
+{
+	return FALSE;
+}
+
+
+/**
+ * Handle timer events
+ * \param nIDEvent The timer event ID
+ */
+void CChildView::OnTimer(UINT_PTR nIDEvent)
+{
+	Invalidate();
+	CWnd::OnTimer(nIDEvent);
 }

@@ -11,6 +11,8 @@
 
 #pragma once
 
+#include "ScoreBoard.h"
+
 
 // CChildView window
 
@@ -38,7 +40,24 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+
+private:
+	/// The object for our game
+	//CGame mGame;
+
+	// FOR TESTING PURPOSES ONLY. DELETE AFTER IMPLEMENTING GAME CLASS
+	// SCOREBOARD SHOULD BE UPDATED THROUGH THE GAME CLASS
+	CScoreBoard mScoreBoard;
+
+	/// True until the first time we draw
+	bool mFirstDraw = true;
+
+	long long mLastTime = 0;    ///< Last time we read the timer
+	double mTimeFreq = 0.0;       ///< Rate the timer updates
+
 public:
 	afx_msg void OnFileOpen();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
