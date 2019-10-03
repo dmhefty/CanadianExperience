@@ -5,6 +5,7 @@
 #include <vector>
 #include "Harold.h"
 #include "ScoreBoard.h"
+#include "Item.h"
 class CGame
 {
 private:
@@ -24,7 +25,7 @@ private:
 	std::unique_ptr<CScoreBoard> mScoreBoard;
 
 //list of all items on screen
-	//std::vector<std::unique_ptr<CItem> > mItems;
+	std::vector<std::unique_ptr<CItem> > mItems;
 
 public:
 /**
