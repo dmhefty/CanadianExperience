@@ -192,17 +192,22 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Harold.h" />
+    <ClInclude Include="HaroldPen.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Harold.cpp" />
+    <ClCompile Include="HaroldPen.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -212,6 +217,7 @@
     </ClCompile>
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Project1.rc" />
