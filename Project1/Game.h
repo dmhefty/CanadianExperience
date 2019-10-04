@@ -38,6 +38,15 @@ private:
 	std::vector<std::shared_ptr<CItem> > mItems;
 
 public:
+
+	//copy constructor (disabled)
+	CGame(const CGame&) = delete;
+
+	//default constructor
+	CGame();
+
+	//destructor
+	~CGame();
 	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 
