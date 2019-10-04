@@ -25,12 +25,6 @@ using namespace Gdiplus;
 /// Frame duration in milliseconds
 const int FrameDuration = 30;
 
-/// Default game area width in virtual pixels
-const static int Width = 1250;
-/// Default game area height in virtual pixels
-const static int Height = 1000;
-
-
 /**
  * Constructor
  */
@@ -52,6 +46,8 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_FILE_OPEN32771, &CChildView::OnFileOpen)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 /// \endcond
 
@@ -92,7 +88,7 @@ void CChildView::OnPaint()
 	Graphics graphics(dc.m_hDC);    // Create GDI+ graphics context
 
 	CRect rect;
-	GetClientRect(&rect);
+	GetClientRect(&rect); //Determine window size automatically
 
 	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 
@@ -121,7 +117,7 @@ void CChildView::OnPaint()
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
 
-	mGame.Update(&graphics, elapsed);
+	mGame.Update(elapsed);
 }
 
 /** Menu handler update for opening a file of data */
@@ -162,4 +158,27 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	Invalidate();
 	CWnd::OnTimer(nIDEvent);
+}
+
+
+/**
+ * Game response to mouse left button press
+ * \param nFlags Flags associated with this event
+ * \param point Mouse point location
+ */
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	mGame.OnLButtonDown(point.x, point.y);
+	CWnd::OnLButtonDown(nFlags, point);
+}
+
+/**
+ * Game response to mouse movement
+ * \param nFlags Flags associated with this event
+ * \param point Mouse point location
+ */
+void CChildView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	mGame.RotatePlayer(point.x, point.y);
+	CWnd::OnMouseMove(nFlags, point);
 }

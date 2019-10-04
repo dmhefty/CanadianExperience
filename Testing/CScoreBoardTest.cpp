@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "Harold.h"
+#include "ScoreBoard.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Testing
 {
-	TEST_CLASS(HaroldTest)
+	TEST_CLASS(CScoreBoardTest)
 	{
 	public:
 
@@ -16,9 +16,9 @@ namespace Testing
 			::SetCurrentDirectory(g_dir);
 		}
 		
-		TEST_METHOD(TestHaroldConstructor)
+		TEST_METHOD(TestConstructor)
 		{
-			CHarold harold();
+			CScoreBoard scoreBoard;
 		}
 
 	};

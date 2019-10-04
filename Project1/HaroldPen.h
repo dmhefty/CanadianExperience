@@ -9,10 +9,12 @@
 #pragma once
 #include "Item.h"
 #include "Vector.h"
+#include <string>
 
 class CHaroldPen :
 	public CItem
 {
+public:
 	/// Default constructor (disabled)
 	CHaroldPen() = delete;
 
@@ -20,4 +22,12 @@ class CHaroldPen :
 	CHaroldPen(const CHaroldPen&) = delete;
 
 	CHaroldPen(CVector position, CVector velocity);
+
+	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
+	virtual void Update(double elapsedTime) override;
+
+private:
+	bool mIsAttached;
+	std::wstring mHaroldPenImage;
+	
 };

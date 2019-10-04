@@ -2,6 +2,7 @@
  * \file Harold.h
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  *
  * Class for the character, Harold
  */
@@ -16,10 +17,7 @@ class CGame;
 class CHarold
 {
 public:
-	/// Default constructor (disabled)
-	CHarold() = delete;
-
-	CHarold(CGame* game);
+	CHarold();
 
 	/// Copy constructor (disabled)
 	CHarold(const CHarold&) = delete;
@@ -37,7 +35,12 @@ public:
 	/// \param x X location
 	/// \param y Y location
 	void SetLocation(double x, double y, double angle) { mX = x; mY = y; mAngle = angle; }
-	void Draw(Gdiplus::Graphics* graphics, double x, double y, double angle);
+
+	/// Set angle for player rotation
+	/// \param angle The new angle
+	void SetAngle(double angle) { mAngle = angle; }
+
+	void Draw(Gdiplus::Graphics* graphics, double x, double y);
 private:
 	// Harold's location in the Game
 	double  mX = 0;     ///< X location for the center of Harold

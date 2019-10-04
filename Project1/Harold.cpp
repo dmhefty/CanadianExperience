@@ -2,6 +2,7 @@
  * \file Harold.cpp
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  */
 #include "pch.h"
 #include <string>
@@ -16,9 +17,8 @@ using namespace Gdiplus;
 const wstring HaroldImageName = L"images/harold.png";
 /**
 * Constructor
-* \param game Game Harold is a member of
 */
-CHarold::CHarold(CGame* game)
+CHarold::CHarold()
 {
 	mHaroldImage = unique_ptr<Bitmap>(Bitmap::FromFile(HaroldImageName.c_str()));
 	if (mHaroldImage->GetLastStatus() != Ok)
@@ -43,7 +43,7 @@ CHarold::~CHarold()
  * \param y Y location to draw in virtual pixels
  * \param angle Angle of rotation in radians
  */
-void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y, double angle)
+void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y)
 {
 	float wid = (float)mHaroldImage->GetWidth();
 	float hit = (float)mHaroldImage->GetHeight();
@@ -51,8 +51,8 @@ void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y, double angle
 	const double RtoD = 57.295779513;
 
 	auto state = graphics->Save();
-	graphics->TranslateTransform((float)x, (float)y);
-	graphics->RotateTransform((float)(-angle * RtoD));
+	graphics->TranslateTransform((float)x, (float)(y-hit));
+	graphics->RotateTransform((float)(-mAngle * RtoD));
 	graphics->DrawImage(mHaroldImage.get(), -wid / 2, -hit / 2,
 		wid, hit);
 	graphics->Restore(state);
