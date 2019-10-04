@@ -24,9 +24,8 @@ private:
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
 
-	float mScale = 0;
-	float mXOffset = 0;
-	float mYOffset = 0;
+//pointer to the player object
+	std::unique_ptr<CHarold> mPlayer;
 
 	///Player of the game
 	CHarold mPlayer;
