@@ -18,7 +18,7 @@ const wstring HaroldImageName = L"images/harold.png";
 * Constructor
 * \param game Game Harold is a member of
 */
-CHarold::CHarold(CGame* game)
+CHarold::CHarold()
 {
 	mHaroldImage = unique_ptr<Bitmap>(Bitmap::FromFile(HaroldImageName.c_str()));
 	if (mHaroldImage->GetLastStatus() != Ok)
