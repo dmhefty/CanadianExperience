@@ -19,13 +19,14 @@
 class CGame
 {
 private:
+	float mScale = 0;
+	float mXOffset = 0;
+	float mYOffset = 0;
+
 	/// Game area width in virtual pixels
 	const static int Width = 1250;
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
-
-//pointer to the player object
-	std::unique_ptr<CHarold> mPlayer;
 
 	///Player of the game
 	CHarold mPlayer;
@@ -37,8 +38,6 @@ private:
 	std::vector<std::unique_ptr<CItem> > mItems;
 
 public:
-
-	CGame() : mPlayer(this) {}
 	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 
