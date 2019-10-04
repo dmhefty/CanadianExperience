@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_FILE_OPEN32771, &CChildView::OnFileOpen)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 /// \endcond
 
@@ -156,4 +157,16 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	Invalidate();
 	CWnd::OnTimer(nIDEvent);
+}
+
+
+/**
+ * Game response to mouse left button press
+ * \param nFlags Flags associated with this event
+ * \param point Mouse point location
+ */
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	mGame.OnLButtonDown(point.x, point.y);
+	CWnd::OnLButtonDown(nFlags, point);
 }

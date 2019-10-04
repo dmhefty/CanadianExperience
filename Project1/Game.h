@@ -19,27 +19,29 @@
 class CGame
 {
 private:
-	float mScale;
-	float mXOffset;
-	float mYOffset;
+	float mScale = 0;
+	float mXOffset = 0;
+	float mYOffset = 0;
 
-//pointer to the player object
+	/// Game area width in virtual pixels
+	const static int Width = 1250;
+	/// Game area height in virtual pixels
+	const static int Height = 1000;
+
+	///Player of the game
 	CHarold mPlayer;
 
-//The game coreboard object
+	///The game scoreboard object
 	CScoreBoard mScoreBoard;
 
-//list of all items on screen
+	///List of all items on screen
 	std::vector<std::unique_ptr<CItem> > mItems;
 
 public:
-/**
-* Draw the game area
-* \param graphics The GDI+ graphics context to draw on
-* \param width Width of the client window
-* \param height Height of the client window
-*/
+	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
+
+	void OnLButtonDown(LONG x, LONG y);
 	
 	void Update(double elapsedTime);
 

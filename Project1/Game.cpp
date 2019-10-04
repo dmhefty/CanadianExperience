@@ -10,11 +10,12 @@
 
 using namespace Gdiplus;
 
-/// Game area width in virtual pixels
-const static int Width = 1250;
-/// Game area height in virtual pixels
-const static int Height = 1000;
-
+/**
+* Draw the game area
+* \param graphics The GDI+ graphics context to draw on
+* \param width Width of the client window
+* \param height Height of the client window
+*/
 void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 	// Fill the background with black
 	SolidBrush brush(Color::Black);
@@ -38,7 +39,17 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	// From here on you are drawing virtual pixels
 	mScoreBoard.Draw(graphics);
-	mPlayer.Draw(graphics, 400, 10, 10);
+	mPlayer.Draw(graphics, 0, Height, 0);
+}
+
+/**
+ * Fire the player's pen when mouse left is pressed
+ * \param x Mouse point x location
+ * \param y Mouse point y location
+ */
+void CGame::OnLButtonDown(LONG x, LONG y)
+{
+	//TODO: implement pen firing
 }
 
 /**
