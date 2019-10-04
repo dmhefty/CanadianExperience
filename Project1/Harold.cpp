@@ -51,7 +51,7 @@ void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y, double angle
 	const double RtoD = 57.295779513;
 
 	auto state = graphics->Save();
-	graphics->TranslateTransform((float)x, (float)y);
+	graphics->TranslateTransform((float)x, (float)(y-hit));
 	graphics->RotateTransform((float)(-angle * RtoD));
 	graphics->DrawImage(mHaroldImage.get(), -wid / 2, -hit / 2,
 		wid, hit);
