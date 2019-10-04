@@ -38,19 +38,7 @@ private:
 	std::vector<std::unique_ptr<CItem> > mItems;
 
 public:
-	//Default constructor
-	CGame();
-
-	//Destructor
-	~CGame();
-
-
-	//copy constructor disabled
-	CGame(const CGame&) = delete;
-
-
-
-
+	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 
 	void OnLButtonDown(LONG x, LONG y);
