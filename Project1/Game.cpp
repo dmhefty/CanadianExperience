@@ -69,3 +69,8 @@ void CGame::Load(std::string filePath)
 {
 
 }
+CGame::CGame() {
+	Load("uml.xml");
+}
+
+CGame::~CGame() {}
