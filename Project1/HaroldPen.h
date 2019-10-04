@@ -24,6 +24,7 @@ public:
 	CHaroldPen(CVector position, CVector velocity);
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
+	virtual void Update(double elapsedTime) override;
 
 private:
 	bool mIsAttached;

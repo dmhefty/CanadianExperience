@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
- /// Pen filename 
+/// Pen filename 
 const wstring PEN_IMAGE_NAME = L"images/redpen.png";
 
  /**
@@ -21,12 +21,24 @@ const wstring PEN_IMAGE_NAME = L"images/redpen.png";
   */
 CHaroldPen::CHaroldPen(CVector position, CVector velocity) : CItem(position, velocity, PEN_IMAGE_NAME)
 {
-	mIsAttached = true;
+	mIsAttached = false; // false for now since we dont have a real attachment to Harold
 }
 
 void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 {
 	CItem::Draw(graphics, position);
+}
+
+void CHaroldPen::Update(double elapsedTime)
+{
+	if (!mIsAttached)
+	{
+		CItem::Update(elapsedTime);
+	}
+	else
+	{
+		//TODO -> for updating with OnMouseMove in coordination with Harold
+	}
 }
 
 

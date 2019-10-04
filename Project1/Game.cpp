@@ -58,7 +58,10 @@ void CGame::OnLButtonDown(LONG x, LONG y)
  */
 void CGame::Update(double elapsedTime)
 {
-	
+	for (auto item : mItems)
+	{
+		item->Update(elapsedTime);
+	}
 }
 
 /**
