@@ -2,6 +2,7 @@
  * \file Harold.h
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  *
  * Class for the character, Harold
  */

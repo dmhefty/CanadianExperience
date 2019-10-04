@@ -2,6 +2,7 @@
  * \file Harold.cpp
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  */
 #include "pch.h"
 #include <string>
