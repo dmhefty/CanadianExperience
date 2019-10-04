@@ -16,7 +16,6 @@ using namespace Gdiplus;
 const wstring HaroldImageName = L"images/harold.png";
 /**
 * Constructor
-* \param game Game Harold is a member of
 */
 CHarold::CHarold()
 {
