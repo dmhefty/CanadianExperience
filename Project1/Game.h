@@ -35,7 +35,7 @@ private:
 	CScoreBoard mScoreBoard;
 
 	///List of all items on screen
-	std::vector<std::unique_ptr<CItem> > mItems;
+	std::vector<std::shared_ptr<CItem> > mItems;
 
 public:
 	
