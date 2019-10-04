@@ -23,10 +23,10 @@ private:
 	float mXOffset;
 	float mYOffset;
 
-//player object
+//pointer to the player object
 	CHarold mPlayer;
 
-//The game scoreboard object
+//The game coreboard object
 	CScoreBoard mScoreBoard;
 
 //list of all items on screen
