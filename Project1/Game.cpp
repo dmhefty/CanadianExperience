@@ -3,6 +3,7 @@
  *
  * \author Akhil Alluri
  * \author Jaideep Prasad
+ * \author Isaac Mayers
  */
 
 #include "pch.h"

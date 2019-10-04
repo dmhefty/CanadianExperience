@@ -3,6 +3,7 @@
  *
  * \author Akhil Alluri
  * \author Jaideep Prasad
+ * \author Isaac Mayers
  *
  * System class for the UML Wars Game
  */
