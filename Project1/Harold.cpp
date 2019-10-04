@@ -12,14 +12,15 @@ using namespace std;
 using namespace Gdiplus;
 
 
-/// Harold filename 
-const wstring HaroldImageName = L"images/harold.png";
+
 /**
 * Constructor
 * \param game Game Harold is a member of
 */
 CHarold::CHarold()
 {
+	/// Harold filename 
+	const wstring HaroldImageName = L"images/harold.png";
 	mHaroldImage = unique_ptr<Bitmap>(Bitmap::FromFile(HaroldImageName.c_str()));
 	if (mHaroldImage->GetLastStatus() != Ok)
 	{
