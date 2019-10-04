@@ -41,9 +41,11 @@ public:
 	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 
-	void OnLButtonDown(LONG x, LONG y);
+	void OnLButtonDown(double x, double y);
 	
 	void Update(double elapsedTime);
+
+	void RotatePlayer(double x, double y);
 
 	void Load(std::string filePath);
 

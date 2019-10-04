@@ -42,7 +42,7 @@ CHarold::~CHarold()
  * \param y Y location to draw in virtual pixels
  * \param angle Angle of rotation in radians
  */
-void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y, double angle)
+void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y)
 {
 	float wid = (float)mHaroldImage->GetWidth();
 	float hit = (float)mHaroldImage->GetHeight();
@@ -51,7 +51,7 @@ void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y, double angle
 
 	auto state = graphics->Save();
 	graphics->TranslateTransform((float)x, (float)(y-hit));
-	graphics->RotateTransform((float)(-angle * RtoD));
+	graphics->RotateTransform((float)(-mAngle * RtoD));
 	graphics->DrawImage(mHaroldImage.get(), -wid / 2, -hit / 2,
 		wid, hit);
 	graphics->Restore(state);

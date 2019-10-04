@@ -10,6 +10,9 @@
 
 using namespace Gdiplus;
 
+// Half Pi radians
+const double AngleOffset = 3.14159 / 2.0;
+
 /**
 * Draw the game area
 * \param graphics The GDI+ graphics context to draw on
@@ -39,7 +42,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	// From here on you are drawing virtual pixels
 	mScoreBoard.Draw(graphics);
-	mPlayer.Draw(graphics, 0, Height, 0);
+	mPlayer.Draw(graphics, 0, Height);
 }
 
 /**
@@ -47,7 +50,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
  * \param x Mouse point x location
  * \param y Mouse point y location
  */
-void CGame::OnLButtonDown(LONG x, LONG y)
+void CGame::OnLButtonDown(double x, double y)
 {
 	//TODO: implement pen firing
 }
@@ -62,6 +65,17 @@ void CGame::Update(double elapsedTime)
 	{
 		item->Update(elapsedTime);
 	}
+}
+
+/**
+ * Determines and updates the orientation of the player in the game field
+ * \param x Mouse x location
+ * \param y Mouse y location
+ */
+void CGame::RotatePlayer(double x, double y)
+{
+	double angle = atan2(Height - y, x - Width/2.0) - AngleOffset;
+	mPlayer.SetAngle(angle);
 }
 
 /**

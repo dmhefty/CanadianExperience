@@ -47,6 +47,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
 	ON_WM_LBUTTONDOWN()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 /// \endcond
 
@@ -169,4 +170,15 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	mGame.OnLButtonDown(point.x, point.y);
 	CWnd::OnLButtonDown(nFlags, point);
+}
+
+/**
+ * Game response to mouse movement
+ * \param nFlags Flags associated with this event
+ * \param point Mouse point location
+ */
+void CChildView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	mGame.RotatePlayer(point.x, point.y);
+	CWnd::OnMouseMove(nFlags, point);
 }
