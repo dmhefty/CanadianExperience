@@ -88,8 +88,19 @@ void CGame::Load(std::string filePath)
 
 }
 
-CGame::CGame() {
+/**
+ * Constructor loads UML data file
+ */
+CGame::CGame() 
+{
 	Load("uml.xml");
 }
 
-CGame::~CGame() {}
+
+/**
+ * Destructor
+ */
+CGame::~CGame() 
+{
+
+}

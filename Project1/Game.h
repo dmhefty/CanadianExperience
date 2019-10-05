@@ -47,7 +47,7 @@ public:
 	CGame();
 
 	//destructor
-	~CGame();
+	virtual ~CGame();
 	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
 
