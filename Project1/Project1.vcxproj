@@ -206,6 +206,7 @@
     <ClInclude Include="UML.h" />
     <ClInclude Include="UMLAttribute.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="XmlNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BadUML.cpp" />
@@ -228,6 +229,7 @@
     <ClCompile Include="UML.cpp" />
     <ClCompile Include="UMLAttribute.cpp" />
     <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="XmlNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Project1.rc" />

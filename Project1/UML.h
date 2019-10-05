@@ -21,8 +21,7 @@ private:
 	//vector of 0-3 operations associated with this uml object
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperations;
 
-
-
+	
 
 public:
 	//TODO -> Accept function to be added aftor visitors are implemented
