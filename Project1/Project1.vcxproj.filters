@@ -57,6 +57,18 @@
     <ClInclude Include="HaroldPen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BadUML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UMLAttribute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BadUMLAttribute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -87,6 +99,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HaroldPen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BadUML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UMLAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BadUMLAttribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
