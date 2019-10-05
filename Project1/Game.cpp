@@ -7,9 +7,14 @@
  */
 
 #include "pch.h"
+#include <memory>
 #include "Game.h"
+#include "XmlNode.h"
+
 
 using namespace Gdiplus;
+using namespace std;
+using namespace xmlnode;
 
 // Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
@@ -83,9 +88,28 @@ void CGame::RotatePlayer(double x, double y)
  * Loads a file containing characteristics for UML objects
  * \param filePath File path for UML data
  */
-void CGame::Load(std::string filePath)
+void CGame::Load(const std::wstring &filePath)
 {
+	try
+	{
+		//Open document to read
+		std::shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filePath);
+	
 
+
+		for (auto node : root->GetChildren())
+		{
+			if (node->GetType() == NODE_ELEMENT)
+			{
+				//XmlItem(node);
+				
+			}
+		}
+	}
+	catch(CXmlNode::Exception ex)
+	{
+		AfxMessageBox(ex.Message().c_str());
+	}
 }
 
 /**
@@ -93,7 +117,8 @@ void CGame::Load(std::string filePath)
  */
 CGame::CGame() 
 {
-	Load("uml.xml");
+	std::wstring filename = L"uml.xml";
+	Load(filename);
 }
 
 

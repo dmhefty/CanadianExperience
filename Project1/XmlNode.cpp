@@ -23,7 +23,7 @@ using namespace xmlnode;
  *
  * Creates an empty CXmlNode with no attached XML document.
  * You can then call either Open or Create on the node. However,
- * the preferred method is to use the static member functions
+ * the preferred method is to use the stati c member functions
  * OpenDocument and CreateDocument.
  *
  */
