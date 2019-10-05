@@ -1,6 +1,6 @@
 #pragma once
 #include "UML.h"
-class CBadUML :
+class CGoodUML :
 	public CUML
 {
 public:
