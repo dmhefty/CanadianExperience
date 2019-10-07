@@ -197,6 +197,7 @@
     <ClInclude Include="Harold.h" />
     <ClInclude Include="HaroldPen.h" />
     <ClInclude Include="IsPenVisitor.h" />
+    <ClInclude Include="IsPowerItemVisitor.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Harold.cpp" />
     <ClCompile Include="HaroldPen.cpp" />
     <ClCompile Include="IsPenVisitor.cpp" />
+    <ClCompile Include="IsPowerItemVisitor.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="pch.cpp">
