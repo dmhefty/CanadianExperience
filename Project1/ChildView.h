@@ -53,7 +53,6 @@ private:
 	double mTimeFreq = 0.0;       ///< Rate the timer updates
 
 public:
-	afx_msg void OnFileOpen();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);

@@ -43,7 +43,6 @@ CChildView::~CChildView()
 /// This doxygen switch tells it to ignore this block of code
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
-	ON_COMMAND(ID_FILE_OPEN32771, &CChildView::OnFileOpen)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
 	ON_WM_LBUTTONDOWN()
@@ -119,23 +118,6 @@ void CChildView::OnPaint()
 
 	mGame.Update(elapsed);
 }
-
-/** Menu handler update for opening a file of data */
-void CChildView::OnFileOpen()
-{
-	CFileDialog dlg(true,	// true = Open dialog box
-		L".xml",			// Default file extension
-		nullptr,			// Default file name (none)
-		0,	// Flags
-		L"XML Files (*.xml)|*.xml|All Files (*.*)|(*.*||");		// Filter
-	if (dlg.DoModal() != IDOK)
-		return;
-
-	wstring filename = dlg.GetPathName();
-	// mGame.Load(filename);
-	// Invalidate;
-}
-
 
 /**
  * Erase the background
