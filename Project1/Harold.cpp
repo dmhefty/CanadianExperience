@@ -15,6 +15,10 @@ using namespace Gdiplus;
 
 /// Harold filename 
 const wstring HaroldImageName = L"images/harold.png";
+
+/// Constant ratio to convert radians to degrees
+const double RtoD = 57.295779513;
+
 /**
 * Constructor
 */
@@ -47,11 +51,9 @@ void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y)
 {
 	float wid = (float)mHaroldImage->GetWidth();
 	float hit = (float)mHaroldImage->GetHeight();
-	/// Constant ratio to convert radians to degrees
-	const double RtoD = 57.295779513;
 
 	auto state = graphics->Save();
-	graphics->TranslateTransform((float)x, (float)(y-hit));
+	graphics->TranslateTransform((float)x, (float)(y - (hit / 1.5f)));
 	graphics->RotateTransform((float)(-mAngle * RtoD));
 	graphics->DrawImage(mHaroldImage.get(), -wid / 2, -hit / 2,
 		wid, hit);
