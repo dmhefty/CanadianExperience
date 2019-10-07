@@ -1,5 +1,5 @@
 /**
- * \file IsPenVisitor.cpp
+ * \file IsPowerItemVisitor.cpp
  *
  * \author Isaac Mayers
  */
