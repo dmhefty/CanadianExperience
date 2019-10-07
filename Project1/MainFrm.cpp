@@ -33,6 +33,11 @@ static UINT indicators[] =
 	ID_INDICATOR_SCRL,
 };
 
+// Pre-defined window width
+const int Width = 1250;
+// Pre-defined window height
+const int Height = 1000;
+
 // CMainFrame construction/destruction
 
 CMainFrame::CMainFrame() noexcept
@@ -86,8 +91,8 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
-	//cs.cx = Width;
-	//cs.cy = Height;
+	cs.cx = Width;
+	cs.cy = Height;
 
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
 	cs.lpszClass = AfxRegisterWndClass(0);

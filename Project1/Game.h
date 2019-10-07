@@ -21,9 +21,12 @@
 class CGame
 {
 private:
-	float mScale = 0;
-	float mXOffset = 0;
-	float mYOffset = 0;
+	/// Window resizing factor for virtual pixels
+	float mScale = 0; 
+	/// Window width offset for virtual pixels
+	float mXOffset = 0; 
+	/// Window height offset for virtual pixels
+	float mYOffset = 0; 
 
 	/// Game area width in virtual pixels
 	const static int Width = 1250;
@@ -39,18 +42,18 @@ private:
 	///List of all items on screen
 	std::vector<std::shared_ptr<CItem> > mItems;
 
-	///lists to store uml components
-	//list of possible good uml names
+	//lists to store uml components
+	///list of possible good uml names
 	std::vector<std::shared_ptr<CUMLAttribute> > mNames;
-	//list of possible bad uml names
+	///list of possible bad uml names
 	std::vector<std::shared_ptr<CUMLAttribute> > mNamesBad;
-	//list of possible good uml attributes
+	///list of possible good uml attributes
 	std::vector<std::shared_ptr<CUMLAttribute> > mAttributes;
-	//list of possible bad uml attributes
+	///list of possible bad uml attributes
 	std::vector<std::shared_ptr<CUMLAttribute> > mAttributesBad;
-	//list of possible good uml operations
+	///list of possible good uml operations
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperations;
-	//list of possible bad uml operations
+	///list of possible bad uml operations
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperationsBad;
 public:
 

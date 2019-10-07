@@ -47,8 +47,10 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 	graphics->ScaleTransform(mScale, mScale);
 
 	// From here on you are drawing virtual pixels
-	mScoreBoard.Draw(graphics);
 	mPlayer.Draw(graphics, 0, Height);
+
+	// ScoreBoard must ALWAYS be drawn last (on top of everything)
+	mScoreBoard.Draw(graphics);
 }
 
 /**
@@ -58,6 +60,9 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
  */
 void CGame::OnLButtonDown(double x, double y)
 {
+	// First convert screen pixels to virutal pixels
+	double oX = (x - mXOffset) / mScale;
+	double oY = (y - mYOffset) / mScale;
 	//TODO: implement pen firing
 }
 
@@ -80,7 +85,11 @@ void CGame::Update(double elapsedTime)
  */
 void CGame::RotatePlayer(double x, double y)
 {
-	double angle = atan2(Height - y, x - Width/2.0) - AngleOffset;
+	// First convert screen pixels to virutal pixels
+	double oX = (x - mXOffset) / mScale;
+	double oY = (y - mYOffset) / mScale;
+	// Determine and set the new angle
+	double angle = atan2(Height - oY, oX) - AngleOffset;
 	mPlayer.SetAngle(angle);
 }
 

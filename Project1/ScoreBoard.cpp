@@ -35,12 +35,12 @@ void CScoreBoard::Draw(Gdiplus::Graphics* graphics)
 	Gdiplus::Font font(&fontFamily, 16);
 
 	SolidBrush green(Color(100, 150, 100));
-	graphics->DrawString(to_wstring(mCorrect).c_str(), -1, &font, PointF(-625, 50), &green);
-	graphics->DrawString(L"Correct", -1, &font, PointF(-625, 100), &green);
-	graphics->DrawString(to_wstring(mMissed).c_str(), -1, &font, PointF(0, 50), &green);
-	graphics->DrawString(L"Missed", -1, &font, PointF(0, 100), &green);
-	graphics->DrawString(to_wstring(mUnfair).c_str(), -1, &font, PointF(625, 50), &green);
-	graphics->DrawString(L"Unfair", -1, &font, PointF(625, 100), &green);
+	graphics->DrawString(to_wstring(mCorrect).c_str(), -1, &font, PointF(-600, 50), &green);
+	graphics->DrawString(L"Correct", -1, &font, PointF(-600, 100), &green);
+	graphics->DrawString(to_wstring(mMissed).c_str(), -1, &font, PointF(-50, 50), &green);
+	graphics->DrawString(L"Missed", -1, &font, PointF(-50, 100), &green);
+	graphics->DrawString(to_wstring(mUnfair).c_str(), -1, &font, PointF(500, 50), &green);
+	graphics->DrawString(L"Unfair", -1, &font, PointF(500, 100), &green);
 
 	mCorrect++;
 	mUnfair += 3;
