@@ -8,7 +8,7 @@
 #include "IsPowerItemVisitor.h"
 
  /** \brief Visit a CPowerItem object
- * \param pen Pen item we are visiting */
+ * \param power Power item we are visiting */
  //void CIsPowerItemVisitor::VisitPowerItem(CPowerItem* poweritem)
  //{
  //	mIsPowerItem = true;
