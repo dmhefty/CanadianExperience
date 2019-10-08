@@ -196,9 +196,12 @@
     <ClInclude Include="GoodUML.h" />
     <ClInclude Include="Harold.h" />
     <ClInclude Include="HaroldPen.h" />
+    <ClInclude Include="IsHaroldPenVisitor.h" />
     <ClInclude Include="IsPenVisitor.h" />
     <ClInclude Include="IsPowerItemVisitor.h" />
+    <ClInclude Include="IsUMLItemVisitor.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemVisitor.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Project1.h" />
@@ -218,9 +221,12 @@
     <ClCompile Include="GoodUML.cpp" />
     <ClCompile Include="Harold.cpp" />
     <ClCompile Include="HaroldPen.cpp" />
+    <ClCompile Include="IsHaroldPenVisitor.cpp" />
     <ClCompile Include="IsPenVisitor.cpp" />
     <ClCompile Include="IsPowerItemVisitor.cpp" />
+    <ClCompile Include="IsUMLItemVisitor.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemVisitor.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -13,7 +13,7 @@ private:
 	int mNumberOfAttributes;
 
 	//pointer to the object for the name assigned to this uml item
-	std::unique_ptr<CUMLAttribute> mName;
+	std::shared_ptr<CUMLAttribute> mName;
 	
 	//vector of 0-3 attributes associated with this uml object
 	std::vector<std::shared_ptr<CUMLAttribute> > mAttributes;
@@ -29,6 +29,8 @@ public:
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 
+	CUML(std::shared_ptr<CUMLAttribute> name, std::vector<std::shared_ptr<CUMLAttribute> > attributes, 
+		std::vector<std::shared_ptr<CUMLAttribute> > operations, CVector position, CVector velocity, std::wstring image );
 
 };
 
