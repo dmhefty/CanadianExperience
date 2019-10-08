@@ -4,7 +4,7 @@ class CUMLAttribute
 {
 private:
 	std::wstring mAttribute;
-
+	std::wstring mError = L"";
 public:
 	
 	CUMLAttribute(std::wstring att) : mAttribute(att) {}

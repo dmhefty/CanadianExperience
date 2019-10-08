@@ -10,6 +10,8 @@
 #include <memory>
 #include "Game.h"
 #include "XmlNode.h"
+#include "UML.h"
+#include <vector>
 
 
 using namespace Gdiplus;
@@ -46,6 +48,11 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	graphics->TranslateTransform(mXOffset, mYOffset);
 	graphics->ScaleTransform(mScale, mScale);
+
+	
+	for (auto item : mItems) {
+		item->Draw(graphics, item->GetPosition());
+	}
 
 	// From here on you are drawing virtual pixels
 	mPlayer.Draw(graphics, 0, Height);
@@ -175,6 +182,13 @@ void CGame::Load(const std::wstring &filePath)
 	{
 		AfxMessageBox(ex.Message().c_str());
 	}
+
+	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 2);	
+	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
+	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
+
+	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(300, 60), CVector(0, 30), L"");
+	mItems.push_back(mUML);
 }
 
 /**
@@ -184,6 +198,8 @@ CGame::CGame()
 {
 	std::wstring filename = L"uml.xml";
 	Load(filename);
+	
+
 }
 
 
