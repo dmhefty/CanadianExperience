@@ -12,7 +12,7 @@ const wstring PEN_IMAGE_NAME = L"images/redpen.png";
 
 namespace Testing
 {
-	TEST_CLASS(HaroldTest)
+	TEST_CLASS(ItemTest)
 	{
 	public:
 
