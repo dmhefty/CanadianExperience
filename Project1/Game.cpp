@@ -10,6 +10,8 @@
 #include <memory>
 #include "Game.h"
 #include "XmlNode.h"
+#include "UML.h"
+#include <vector>
 
 
 using namespace Gdiplus;
@@ -18,6 +20,7 @@ using namespace xmlnode;
 
 // Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
+
 
 /**
 * Draw the game area
@@ -45,6 +48,11 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	graphics->TranslateTransform(mXOffset, mYOffset);
 	graphics->ScaleTransform(mScale, mScale);
+
+	
+	for (auto item : mItems) {
+		item->Draw(graphics, item->GetPosition());
+	}
 
 	// From here on you are drawing virtual pixels
 	mPlayer.Draw(graphics, 0, Height);
@@ -99,18 +107,73 @@ void CGame::RotatePlayer(double x, double y)
  */
 void CGame::Load(const std::wstring &filePath)
 {
+	
+	
+	std::shared_ptr<CUMLAttribute> attribute;
 	try
 	{
 		//Open document to read
 		std::shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filePath);
-	
-
+		
+		
 
 		for (auto node : root->GetChildren())
 		{
 			if (node->GetType() == NODE_ELEMENT)
 			{
-				//XmlItem(node);
+				
+				for (auto item : node->GetChildren()) 
+				{
+					if (item->GetType() == NODE_ELEMENT) {
+						std::wstring itemName = item->GetName();
+					//	
+						std::wstring error = item->GetAttributeValue(L"bad", L"");
+						std::wstring text;
+						if (item->GetNumChildren() > 0) {
+							text = item->GetChild(0)->GetValue();
+							
+						}
+						else {
+							text = L"";
+						}
+						
+						if (error == L"") {
+							attribute = make_shared<CUMLAttribute>(text);
+						}
+						else {
+							attribute = make_shared<CBadUMLAttribute>(text, error);
+						}
+
+						if (itemName == L"name") {
+							if (error == L"") {
+								mNames.push_back(attribute);
+							}
+							else {
+								mNamesBad.push_back(attribute);
+							}
+						}
+						else if (itemName == L"attribute") {
+							if (error == L"") {
+								mAttributes.push_back(attribute);
+							}
+							else {
+								mAttributesBad.push_back(attribute);
+							}
+						}
+						else if (itemName == L"operation") {
+							if (error == L"") {
+								mOperations.push_back(attribute);
+							}
+							else {
+								mOperationsBad.push_back(attribute);
+							}
+						}
+					}
+					
+				}
+
+				
+				
 				
 			}
 		}
@@ -119,6 +182,13 @@ void CGame::Load(const std::wstring &filePath)
 	{
 		AfxMessageBox(ex.Message().c_str());
 	}
+
+	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 2);	
+	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
+	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
+
+	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(300, 60), CVector(0, 30), L"");
+	mItems.push_back(mUML);
 }
 
 /**
@@ -128,6 +198,8 @@ CGame::CGame()
 {
 	std::wstring filename = L"uml.xml";
 	Load(filename);
+	
+
 }
 
 

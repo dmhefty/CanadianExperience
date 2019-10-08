@@ -17,7 +17,7 @@
 #include "ScoreBoard.h"
 #include "Item.h"
 #include "UMLAttribute.h"
-
+#include "BadUMLAttribute.h"
 class CGame
 {
 private:
@@ -38,6 +38,8 @@ private:
 
 	///The game scoreboard object
 	CScoreBoard mScoreBoard;
+
+	
 
 	///List of all items on screen
 	std::vector<std::shared_ptr<CItem> > mItems;
