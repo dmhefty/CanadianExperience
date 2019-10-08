@@ -134,12 +134,33 @@ void CGame::Load(const std::wstring &filePath)
 							attribute = make_shared<CUMLAttribute>(text);
 						}
 						else {
-						
+							attribute = make_shared<CBadUMLAttribute>(text, error);
 						}
 
 						if (itemName == L"name") {
-							
+							if (error == L"") {
+								mNames.push_back(attribute);
 							}
+							else {
+								mNamesBad.push_back(attribute);
+							}
+						}
+						else if (itemName == L"attribute") {
+							if (error == L"") {
+								mAttributes.push_back(attribute);
+							}
+							else {
+								mAttributesBad.push_back(attribute);
+							}
+						}
+						else if (itemName == L"operation") {
+							if (error == L"") {
+								mOperations.push_back(attribute);
+							}
+							else {
+								mOperationsBad.push_back(attribute);
+							}
+						}
 					}
 					
 				}

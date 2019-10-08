@@ -17,7 +17,7 @@
 #include "ScoreBoard.h"
 #include "Item.h"
 #include "UMLAttribute.h"
-
+#include "BadUMLAttribute.h"
 class CGame
 {
 private:
