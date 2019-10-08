@@ -109,7 +109,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch;Harold;Item;Vector;Game;ScoreBoard;XmlNode</AdditionalDependencies>
+      <AdditionalDependencies>pch;Harold;Item;Vector;Game;ScoreBoard;XmlNode;PowerItem</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -177,6 +177,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CItemTest.cpp" />
+    <ClCompile Include="CPowerItemTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="CScoreBoardTest.cpp">
       <SubType>
       </SubType>

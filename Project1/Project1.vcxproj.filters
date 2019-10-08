@@ -90,6 +90,9 @@
     <ClInclude Include="IsHaroldPenVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PowerItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -153,6 +156,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IsHaroldPenVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

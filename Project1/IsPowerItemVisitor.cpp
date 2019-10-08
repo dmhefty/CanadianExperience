@@ -9,7 +9,7 @@
 
  /** \brief Visit a CPowerItem object
  * \param power Power item we are visiting */
- //void CIsPowerItemVisitor::VisitPowerItem(CPowerItem* poweritem)
- //{
- //	mIsPowerItem = true;
- //}
+ void CIsPowerItemVisitor::VisitPowerItem(CPowerItem* poweritem)
+ {
+ 	mIsPowerItem = true;
+ }
