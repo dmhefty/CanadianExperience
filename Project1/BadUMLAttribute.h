@@ -4,13 +4,14 @@ class CBadUMLAttribute :
 	public CUMLAttribute
 {
 private:
-	std::string mErrorMessage;
+	std::wstring mErrorMessage;
 
 public:
 	
+	CBadUMLAttribute(std::wstring att, std::wstring em) : CUMLAttribute(att) { mErrorMessage = em; }
 
-	std::string GetErrorMessage() { return mErrorMessage; }
+	std::wstring GetErrorMessage() { return mErrorMessage; }
 
-	void SetErrorMessage(std::string em) { mErrorMessage = em;  }
+	void SetErrorMessage(std::wstring em) { mErrorMessage = em;  }
 };
 

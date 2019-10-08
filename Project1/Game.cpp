@@ -102,7 +102,7 @@ void CGame::Load(const std::wstring &filePath)
 {
 	
 	
-	shared_ptr<CUMLAttribute> attribute;
+	std::shared_ptr<CUMLAttribute> attribute;
 	try
 	{
 		//Open document to read
@@ -119,10 +119,27 @@ void CGame::Load(const std::wstring &filePath)
 				{
 					if (item->GetType() == NODE_ELEMENT) {
 						std::wstring itemName = item->GetName();
-					//	attribute = make_shared<CUMLAttribute>(this);
-						if (itemName == L"name") {
-							mNames.push_back(attribute);
+					//	
+						std::wstring error = item->GetAttributeValue(L"bad", L"");
+						std::wstring text;
+						if (item->GetNumChildren() > 0) {
+							text = item->GetChild(0)->GetValue();
+							
 						}
+						else {
+							text = L"";
+						}
+						
+						if (error == L"") {
+							attribute = make_shared<CUMLAttribute>(text);
+						}
+						else {
+						
+						}
+
+						if (itemName == L"name") {
+							
+							}
 					}
 					
 				}

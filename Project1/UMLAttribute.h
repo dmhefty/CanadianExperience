@@ -3,16 +3,16 @@
 class CUMLAttribute
 {
 private:
-	std::string mAttribute;
+	std::wstring mAttribute;
 
 public:
 	
-	CUMLAttribute(std::string att) : mAttribute(att) {}
+	CUMLAttribute(std::wstring att) : mAttribute(att) {}
 
 	/** returns the uml attribute stored in this item
 	*/
-	std::string GetAtt() { return mAttribute; }
+	std::wstring GetAtt() { return mAttribute; }
 
-	void SetAtt(std::string att) { mAttribute = att; }
+	void SetAtt(std::wstring att) { mAttribute = att; }
 };
 
