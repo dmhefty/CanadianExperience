@@ -19,6 +19,7 @@ using namespace xmlnode;
 // Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
 
+
 /**
 * Draw the game area
 * \param graphics The GDI+ graphics context to draw on
@@ -99,18 +100,35 @@ void CGame::RotatePlayer(double x, double y)
  */
 void CGame::Load(const std::wstring &filePath)
 {
+	
+	
+	shared_ptr<CUMLAttribute> attribute;
 	try
 	{
 		//Open document to read
 		std::shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filePath);
-	
-
+		
+		
 
 		for (auto node : root->GetChildren())
 		{
 			if (node->GetType() == NODE_ELEMENT)
 			{
-				//XmlItem(node);
+				
+				for (auto item : node->GetChildren()) 
+				{
+					if (item->GetType() == NODE_ELEMENT) {
+						std::wstring itemName = item->GetName();
+					//	attribute = make_shared<CUMLAttribute>(this);
+						if (itemName == L"name") {
+							mNames.push_back(attribute);
+						}
+					}
+					
+				}
+
+				
+				
 				
 			}
 		}
