@@ -13,6 +13,12 @@
 class CUML;
 class CPowerItem;
 class CHaroldPen;
+class CPowerAllGood;
+class CPowerAllBad;
+class CPowerAllGone;
+class CPowerRapidFire;
+class CPowerFast;
+class CPowerSlow;
 
 /** Item visitor base class */
 class CItemVisitor
@@ -32,5 +38,27 @@ public:
 	 * \param pen specific HaroldPen we are visiting */
 	virtual void VisitHaroldPen(CHaroldPen* pen) {}
 
+	/** Visit a CPowerAllGood object
+	 * \param allgood specific AllGood Power item we are visiting */
+	virtual void VisitPowerAllGood(CPowerAllGood* allgood) {}
 
+	/** Visit a CPowerAllBad object
+	 * \param allbad specific AllBad Power item we are visiting */
+	virtual void VisitPowerAllBad(CPowerAllBad* allbad) {}
+
+	/** Visit a CPowerAllGone object
+	 * \param allgone specific AllGone Power item we are visiting */
+	virtual void VisitPowerAllGone(CPowerAllGone* allgone) {}
+
+	/** Visit a CPowerRapidFire object
+	 * \param rapidfire specific RapidFire Power item we are visiting */
+	virtual void VisitPowerRapidFire(CPowerRapidFire* rapidfire) {}
+
+	/** Visit a CPowerFast object
+	 * \param fast specific Fast Power item we are visiting */
+	virtual void VisitPowerFast(CPowerFast* fast) {}
+
+	/** Visit a CPowerSlow object
+	 * \param slow specific Slow Power item we are visiting */
+	virtual void VisitPowerSlow(CPowerSlow* slow) {}
 };

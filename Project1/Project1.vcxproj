@@ -198,7 +198,13 @@
     <ClInclude Include="HaroldPen.h" />
     <ClInclude Include="IsHaroldPenVisitor.h" />
     <ClInclude Include="IsPenVisitor.h" />
+    <ClInclude Include="IsPowerAllBadVisitor.h" />
+    <ClInclude Include="IsPowerAllGoneVisitor.h" />
+    <ClInclude Include="IsPowerAllGoodVisitor.h" />
+    <ClInclude Include="IsPowerFastVisitor.h" />
     <ClInclude Include="IsPowerItemVisitor.h" />
+    <ClInclude Include="IsPowerRapidFireVisitor.h" />
+    <ClInclude Include="IsPowerSlowVisitor.h" />
     <ClInclude Include="IsUMLItemVisitor.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemVisitor.h" />
@@ -224,7 +230,13 @@
     <ClCompile Include="HaroldPen.cpp" />
     <ClCompile Include="IsHaroldPenVisitor.cpp" />
     <ClCompile Include="IsPenVisitor.cpp" />
+    <ClCompile Include="IsPowerAllBadVisitor.cpp" />
+    <ClCompile Include="IsPowerAllGoneVisitor.cpp" />
+    <ClCompile Include="IsPowerAllGoodVisitor.cpp" />
+    <ClCompile Include="IsPowerFastVisitor.cpp" />
     <ClCompile Include="IsPowerItemVisitor.cpp" />
+    <ClCompile Include="IsPowerRapidFireVisitor.cpp" />
+    <ClCompile Include="IsPowerSlowVisitor.cpp" />
     <ClCompile Include="IsUMLItemVisitor.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemVisitor.cpp" />
