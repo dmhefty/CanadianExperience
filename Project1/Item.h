@@ -10,7 +10,7 @@
 #include "Vector.h"
 #include <string>
 #include <memory>
-
+#include "ItemVisitor.h"
 
 
  /**
@@ -28,7 +28,7 @@ public:
 	/// Copy constructor (disabled)
 	CItem(const CItem&) = delete;
 
-	CItem(CVector position, CVector velocity, std::wstring imageLocation);
+	CItem(CVector position, CVector velocity);
 
 	/// Basic Destructor
 	virtual ~CItem() {};
@@ -49,12 +49,13 @@ public:
 	 *
 	 * Pure Virtual Draw since it can't be drawn as a basic Item
 	 */
-	virtual void Draw(Gdiplus::Graphics* graphics, CVector position);
+	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) = 0;
 
 	virtual void Update(double elapsedTime);
 
-	// TODO -> implement acceptor once visitors are made
-	//virtual void Accept(Visitor visitor) = 0;
+	virtual void Accept(CItemVisitor* visitor) = 0;
+
+	virtual void SetAngle(double angle) {}
 
 
 private:
@@ -62,8 +63,7 @@ private:
 	CVector mPosition;
 	/// Current velocity of the item in pixels/sec
 	CVector mVelocity;
-	/// Image file for the object
-	std::unique_ptr<Gdiplus::Bitmap> mItemImage; 
+	
 
 };
 

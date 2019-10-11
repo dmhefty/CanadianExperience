@@ -76,7 +76,11 @@ public:
 
 	void RotatePlayer(double x, double y);
 
+	void RotatePen(double x, double y);
+
 	void Load(const std::wstring &filePath);
+
+	void AddItem(std::shared_ptr<CItem> item);
 
 
 };

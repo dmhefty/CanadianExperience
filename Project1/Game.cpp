@@ -12,6 +12,10 @@
 #include "XmlNode.h"
 #include "UML.h"
 #include <vector>
+#include "HaroldPen.h"
+#include "Item.h"
+#include "MakePenActiveVisitor.h"
+#include "IsHaroldPenVisitor.h"
 
 
 using namespace Gdiplus;
@@ -71,7 +75,26 @@ void CGame::OnLButtonDown(double x, double y)
 	// First convert screen pixels to virutal pixels
 	double oX = (x - mXOffset) / mScale;
 	double oY = (y - mYOffset) / mScale;
-	//TODO: implement pen firing
+	
+	// pen firing
+
+	// Determine and set the new angle
+	double angle = (atan2(Height - oY, oX) - AngleOffset);
+
+	shared_ptr<CItem> currentPen;
+	CMakePenActiveVisitor changer(-angle);
+	CIsHaroldPenVisitor visitPen;
+	for (auto item : mItems)
+	{
+		item->Accept(&visitPen);
+		if (visitPen.IsHaroldPen() && visitPen.IsAttached())
+		{
+			item->Accept(&changer);
+		}
+
+	}
+
+	
 }
 
 /**
@@ -99,6 +122,37 @@ void CGame::RotatePlayer(double x, double y)
 	// Determine and set the new angle
 	double angle = atan2(Height - oY, oX) - AngleOffset;
 	mPlayer.SetAngle(angle);
+}
+
+/**
+ * Determines and updates the position and orientation of the pen in the game field
+ * \param x Mouse x location
+ * \param y Mouse y location
+ */
+void CGame::RotatePen(double x, double y)
+{
+	// First convert screen pixels to virutal pixels
+	double oX = (x - mXOffset) / mScale;
+	double oY = (y - mYOffset) / mScale;
+	// Determine and set the new angle
+	double angle = (atan2(Height - oY, oX) - AngleOffset) + (3.1415926535f)*3/4;
+	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle)+(1000.0f-105.0f));
+	
+	shared_ptr<CItem> currentPen;
+	CIsHaroldPenVisitor visitPen;
+	for (auto item : mItems)
+	{
+		item->Accept(&visitPen);
+		if (visitPen.IsHaroldPen())
+		{
+			currentPen = item;
+		}
+	}
+	if (visitPen.IsAttached())
+	{
+		currentPen->SetLocation(pos);
+		currentPen->SetAngle(angle);
+	}
 }
 
 /**
@@ -187,8 +241,13 @@ void CGame::Load(const std::wstring &filePath)
 	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
 	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
 
-	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(300, 60), CVector(0, 30), L"");
+	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(300, 60), CVector(0, 30));
 	mItems.push_back(mUML);
+}
+
+void CGame::AddItem(shared_ptr<CItem> item)
+{
+	mItems.push_back(item);
 }
 
 /**
@@ -198,8 +257,9 @@ CGame::CGame()
 {
 	std::wstring filename = L"uml.xml";
 	Load(filename);
-	
 
+	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f,1000.0-154.0f), CVector(0.0f,0.0f));
+	AddItem(hPen);
 }
 
 

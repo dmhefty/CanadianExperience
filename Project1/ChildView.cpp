@@ -117,6 +117,8 @@ void CChildView::OnPaint()
 	mLastTime = time.QuadPart;
 
 	mGame.Update(elapsed);
+
+
 }
 
 /**
@@ -162,5 +164,6 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 void CChildView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	mGame.RotatePlayer(point.x, point.y);
+	mGame.RotatePen(point.x, point.y);
 	CWnd::OnMouseMove(nFlags, point);
 }

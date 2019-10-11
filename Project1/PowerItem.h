@@ -29,7 +29,7 @@ public:
 	~CPowerItem() {};
 
 	/// Accept Visitor
-	void Accept(CItemVisitor visitor);
+	void Accept(CItemVisitor* visitor);
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 	virtual void Update(double elapsedTime) override;

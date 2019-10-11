@@ -9,6 +9,7 @@
 #pragma once
 #include "Item.h"
 #include "Vector.h"
+#include "ItemVisitor.h"
 #include <string>
 
 class CHaroldPen :
@@ -26,8 +27,21 @@ public:
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 	virtual void Update(double elapsedTime) override;
 
+	/// Set angle for player rotation
+	/// \param angle The new angle
+	void SetAngle(double angle) { mAngle = angle; }
+
+	void UnAttach() { mIsAttached = false; }
+	
+	bool GetAttachedState() { return mIsAttached; }
+
+	void ResetPen();
+
+	virtual void Accept(CItemVisitor* visitor) override;
+
 private:
 	bool mIsAttached;
-	std::wstring mHaroldPenImage;
+	std::unique_ptr<Gdiplus::Bitmap> mHaroldPenImage;
+	double mAngle = 25.0f;
 	
 };

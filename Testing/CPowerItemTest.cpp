@@ -26,7 +26,7 @@ namespace Testing
 		{
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
-			CPowerItem::CItem poweritem(position, velocity, PowerItemImageName);
+			CPowerItem poweritem(position, velocity);
 		}
 
 	};

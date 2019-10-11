@@ -8,6 +8,7 @@
 
 #pragma once
 #include "ItemVisitor.h"
+#include "HaroldPen.h"
 
 /** visitor class for determining if a CItem object is a CHaroldPen */
 class CIsHaroldPenVisitor :
@@ -18,14 +19,16 @@ public:
 	* Visits an Item object and determines if it is a HaroldPen object
 	* \param HaroldPen the CHaroldPen object in question
 	*/
-	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; }
+	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; mAttachedState = HaroldPen->GetAttachedState(); }
 
 	/**
 	* Determines if a HaroldPen object has been visited
 	* \return bool for if an HaroldPen object was visited
 	*/
 	bool IsHaroldPen() { return mIsHaroldPen; }
+	bool IsAttached() { return mAttachedState; }
 
 private:
 	bool mIsHaroldPen = false;
+	bool mAttachedState = false;
 };

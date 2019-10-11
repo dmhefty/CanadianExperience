@@ -5,13 +5,18 @@
 CUML::CUML(std::shared_ptr<CUMLAttribute> name, 
 	std::vector<std::shared_ptr<CUMLAttribute> > attributes, 
 	std::vector<std::shared_ptr<CUMLAttribute> > operations, 
-	CVector position, CVector velocity, std::wstring image) :
-	CItem(position, velocity, image) {
+	CVector position, CVector velocity) :
+	CItem(position, velocity) {
 	mName = name;
 	mAttributes = attributes;
 	mOperations = operations;
 
 
+}
+
+void CUML::Accept(CItemVisitor* visitor)
+{
+	visitor->VisitUML(this);
 }
 
 //TODO -> implement drawing for uml items

@@ -21,7 +21,7 @@ private:
 	//vector of 0-3 operations associated with this uml object
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperations;
 
-	
+	virtual void Accept(CItemVisitor* visitor) override;
 
 public:
 	//TODO -> Accept function to be added aftor visitors are implemented
@@ -30,7 +30,7 @@ public:
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 
 	CUML(std::shared_ptr<CUMLAttribute> name, std::vector<std::shared_ptr<CUMLAttribute> > attributes, 
-		std::vector<std::shared_ptr<CUMLAttribute> > operations, CVector position, CVector velocity, std::wstring image );
+		std::vector<std::shared_ptr<CUMLAttribute> > operations, CVector position, CVector velocity);
 
 };
 
