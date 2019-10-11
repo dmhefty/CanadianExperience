@@ -192,6 +192,7 @@
     <ClInclude Include="BadUMLVisitor.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="DoubleBufferDC.h" />
+    <ClInclude Include="Emitter.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GoodUML.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="BadUMLAttribute.cpp" />
     <ClCompile Include="BadUMLVisitor.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GoodUML.cpp" />
     <ClCompile Include="GoodUMLVisitor.cpp" />
