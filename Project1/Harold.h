@@ -31,10 +31,13 @@ public:
 	* \returns Y location in pixels */
 	double GetY() const { return mY; }
 
+	/* Get Angle of Harold*/
+	double GetAngle() const { return mAngle; }
+
 	/// Set the item location
 	/// \param x X location
 	/// \param y Y location
-	void SetLocation(double x, double y, double angle) { mX = x; mY = y; mAngle = angle; }
+	void SetLocation(double x, double y) { mX = x; mY = y;}
 
 	/// Set angle for player rotation
 	/// \param angle The new angle
