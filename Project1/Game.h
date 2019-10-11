@@ -72,7 +72,9 @@ public:
 
 	void RotatePen(double x, double y);
 
-	
+	int GetHeight() { return Height; }
+	int GetWidth() { return Width; }
+
 
 	void AddItem(std::shared_ptr<CItem> item);
 
