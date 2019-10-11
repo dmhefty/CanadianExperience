@@ -1,5 +1,5 @@
 /**
- * \file PowerAllBad.h
+ * \file PowerAllGood.h
  *
  * \author Jaideep Prasad
  *

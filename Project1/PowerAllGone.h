@@ -1,5 +1,5 @@
 /**
- * \file PowerAllBad.h
+ * \file PowerAllGone.h
  *
  * \author Jaideep Prasad
  *
@@ -12,7 +12,7 @@
 #include "PowerItem.h"
 
  /**
-  * All Bad power item class
+  * All Gone power item class
   */
 class CPowerAllGone : public CPowerItem
 {
