@@ -3,12 +3,15 @@
 #include "IsHaroldPenVisitor.h"
 #include "HaroldPen.h"
 #include "PowerItem.h"
+#include "PowerAllGone.h"
 #include "Vector.h"
 #include <string>
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
+
+const wstring PowerItemImageName = L"poweritem/SlowFall.png";
 
 namespace Testing
 {
@@ -35,7 +38,7 @@ namespace Testing
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
 			CHaroldPen hPen(position, velocity);
-			CPowerItem pItem(position, velocity);
+			CPowerAllGone pItem(position, velocity);
 			CIsHaroldPenVisitor visitor1;
 			CIsHaroldPenVisitor visitor2;
 

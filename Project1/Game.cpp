@@ -314,7 +314,7 @@ void CGame::Load(const std::wstring &filePath)
 		tempPosX = CGame::Width/2 - (tempSpeedX * (CGame::Height / tempSpeedY));
 	}
 
-	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), L"");
+	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY));
 	mItems.push_back(mUML);
 
 	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY

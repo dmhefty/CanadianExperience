@@ -12,6 +12,9 @@
 #include "Item.h"
 #include "ItemVisitor.h"
 #include "Vector.h"
+#include <string>
+#include <memory>
+
 /* Describes PowerItem class */
 class CPowerItem :
 	public CItem
@@ -23,6 +26,9 @@ public:
 	/// Copy constructor (disabled)
 	CPowerItem(const CItem&) = delete;
 
+	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
+	virtual void Update(double elapsedTime) override;
+
 	/// Basic Destructor
 	~CPowerItem() {};
 
@@ -30,7 +36,10 @@ public:
 	virtual void Accept(CItemVisitor* visitor) {}
 
 protected:
-	CPowerItem(CVector position, CVector velocity, const std::wstring &imageName);
+	CPowerItem(CVector position, CVector velocity, std::wstring PowerItemImageName);
+
+private:
+	std::unique_ptr<Gdiplus::Bitmap> mPowerItemImage;
 
 };
 

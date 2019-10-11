@@ -12,11 +12,9 @@
 
 using namespace std;
 using namespace Gdiplus;
-/* PowerItem image name*/
-const wstring PowerItemImageName = L"poweritem/SlowFall.png";
 
 /* Constructor */
-CPowerItem::CPowerItem(CVector position, CVector velocity) : CItem(position, velocity)
+CPowerItem::CPowerItem(CVector position, CVector velocity, wstring PowerItemImageName) : CItem(position, velocity)
 {
 	mPowerItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(PowerItemImageName.c_str()));
 	if (mPowerItemImage->GetLastStatus() != Ok)
@@ -39,11 +37,7 @@ void CPowerItem::Draw(Gdiplus::Graphics* graphics, CVector position)
 		wid, hit);
 	graphics->Restore(state);
 }
-/* Accept Visitor*/
-void CPowerItem::Accept(CItemVisitor* visitor)
-{
-	visitor->VisitPowerItem(this);
-}
+
 /* Update Image */
 void CPowerItem::Update(double elapsedTime)
 {

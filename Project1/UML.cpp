@@ -14,10 +14,6 @@ CUML::CUML(std::shared_ptr<CUMLAttribute> name,
 
 }
 
-void CUML::Accept(CItemVisitor* visitor)
-{
-	visitor->VisitUML(this);
-}
 
 //TODO -> implement drawing for uml items
 void CUML::Draw(Gdiplus::Graphics* graphics, CVector position) {

@@ -19,14 +19,10 @@ public:
 	* Visits an Item object and determines if it is a HaroldPen object
 	* \param HaroldPen the CHaroldPen object in question
 	*/
-	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override 
-	{ 
-		mIsHaroldPen = true; 
-		mPen = HaroldPen;
-	}
+	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; mAttachedState = HaroldPen->GetAttachedState(); }
 
 	CHaroldPen* GetPen() const { return mPen; }
-	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; mAttachedState = HaroldPen->GetAttachedState(); }
+	
 
 	/**
 	* Determines if a HaroldPen object has been visited
