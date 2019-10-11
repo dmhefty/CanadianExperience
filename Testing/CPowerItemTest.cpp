@@ -9,7 +9,7 @@
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-const wstring PowerItemImageName = L"poweritem/SlowFall.png";
+const wstring PowerItemImageName = L"poweritem/AllGone.png";
 
 namespace Testing
 {

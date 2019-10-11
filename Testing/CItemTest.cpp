@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "Item.h"
+#include "Game.h"
 #include "Vector.h"
 #include "HaroldPen.h"
 #include <string>
@@ -44,7 +45,26 @@ namespace Testing
 			CItemMock item(position, velocity);
 		}
 
-		
+		TEST_METHOD(TestCItemGettersSetters)
+		{
+			// Construct an item to test
+			CGame game;
+			CItemMock item(CVector(0,0), CVector(0,0));
+
+			// Test initial values
+			Assert::AreEqual(0, item.GetPosition().X(), 0);
+			Assert::AreEqual(0, item.GetPosition().Y(), 0);
+
+			// Test SetLocation, GetX, and GetY
+			item.SetLocation(CVector(10.5, 17.2));
+			Assert::AreEqual(10.5, item.GetPosition().X(), 0.0001);
+			Assert::AreEqual(17.2, item.GetPosition().Y(), 0.0001);
+
+			// Test a second with different values
+			item.SetLocation(CVector(-72, -107));
+			Assert::AreEqual(-72, item.GetPosition().X(), 0.0001);
+			Assert::AreEqual(-107, item.GetPosition().Y(), 0.0001);
+		}
 
 	};
 }

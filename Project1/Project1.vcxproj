@@ -217,8 +217,10 @@
     <ClInclude Include="PowerAllBad.h" />
     <ClInclude Include="PowerAllGone.h" />
     <ClInclude Include="PowerAllGood.h" />
+    <ClInclude Include="PowerFast.h" />
     <ClInclude Include="PowerItem.h" />
     <ClInclude Include="PowerRapidFire.h" />
+    <ClInclude Include="PowerSlow.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScoreBoard.h" />
@@ -262,8 +264,10 @@
     <ClCompile Include="PowerAllBad.cpp" />
     <ClCompile Include="PowerAllGone.cpp" />
     <ClCompile Include="PowerAllGood.cpp" />
+    <ClCompile Include="PowerFast.cpp" />
     <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="PowerRapidFire.cpp" />
+    <ClCompile Include="PowerSlow.cpp" />
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="UML.cpp" />
