@@ -21,7 +21,6 @@ using namespace Gdiplus;
 #define new DEBUG_NEW
 #endif
 
-
 /// Frame duration in milliseconds
 const int FrameDuration = 30;
 

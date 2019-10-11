@@ -80,7 +80,9 @@ void CItem::Draw(Gdiplus::Graphics* graphics, CVector position)
  */
 void CItem::Update(double elapsedTime)
 {
-	mPosition += mVelocity * elapsedTime;
+	CVector newPos = GetPosition() + mVelocity * elapsedTime;
+
+	SetLocation(newPos);
 }
 
 
