@@ -16,6 +16,12 @@
 #include "Item.h"
 #include "MakePenActiveVisitor.h"
 #include "IsHaroldPenVisitor.h"
+#include "PowerAllBad.h"
+#include "PowerAllGood.h"
+#include "PowerAllGone.h"
+#include "PowerRapidFire.h"
+#include "IsHaroldPenVisitor.h"
+#include "HaroldPen.h"
 
 
 using namespace Gdiplus;
@@ -106,6 +112,30 @@ void CGame::Update(double elapsedTime)
 	for (auto item : mItems)
 	{
 		item->Update(elapsedTime);
+	}
+
+	if (false) // If pen is fired (bool mFired in Game.h?) do the following
+	{
+		CIsHaroldPenVisitor isPenVisitor;
+		this->Accept(&isPenVisitor);
+		auto pen = isPenVisitor.GetPen();
+
+		/*
+		for (auto item : someFilteredListOfItems)
+		{
+			// Check if pen image intersects
+			// (check positions + image widths and heights)
+			// with other item images
+		}
+		*/
+	}
+}
+
+void CGame::Accept(CItemVisitor* visitor)
+{
+	for (auto item : mItems)
+	{
+		item->Accept(visitor);
 	}
 }
 
@@ -241,8 +271,57 @@ void CGame::Load(const std::wstring &filePath)
 	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
 	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
 
-	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(300, 60), CVector(0, 30));
+	// Code to randomize position and velocity of items. This should probably be moved to the item classes
+	// themselves and the position and vector parameters removed, but for now it'll be here.
+
+	/// Maximum speed in the X direction in
+	/// in pixels per second
+	const double MaxSpeedX = 20;
+
+	/// Maximum speed in the Y direction in
+	/// in pixels per second
+	const double MaxSpeedY = 40;
+
+	/// Minimum speed in the X direction in
+	/// in pixels per second
+	const double MinSpeedX = -20;
+
+	/// Minimum speed in the Y direction in
+	/// in pixels per second
+	const double MinSpeedY = 20;
+
+	/// Maximum starting position in the X direction
+	const double MaxPosX = CGame::Width/2;
+
+	/// Minimum starting position in the X direction
+	const double MinPosX = -1 * CGame::Width/2;
+
+	// Randomize X and Y speeds within limits
+	double tempSpeedX = MinSpeedX + ((double)rand() / RAND_MAX) * (MaxSpeedX - MinSpeedX);
+	double tempSpeedY = MinSpeedY + ((double)rand() / RAND_MAX) * (MaxSpeedY - MinSpeedY);
+
+	// Randomize X position within limits
+	double tempPosX = MinPosX + ((double)rand() / RAND_MAX) * (MaxPosX - MinPosX);
+
+	// Limit the X position so that it will not move off the screen with its set X velocity
+	if ((tempSpeedX < 0) && (-1 * CGame::Width/2 >= (tempPosX + tempSpeedX * (CGame::Height / tempSpeedY))))
+	{
+		tempPosX = -1 * CGame::Width/2 - (tempSpeedX * (CGame::Height / tempSpeedY));
+	}
+
+	if ((tempSpeedX > 0) && (CGame::Width/2 <= (tempPosX + tempSpeedX * (CGame::Height / tempSpeedY))))
+	{
+		tempPosX = CGame::Width/2 - (tempSpeedX * (CGame::Height / tempSpeedY));
+	}
+
+	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), L"");
 	mItems.push_back(mUML);
+
+	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY
+	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
+	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
+	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
+	mItems.push_back(make_shared<CPowerRapidFire>(CVector(0, 0), CVector(-3, 150)));
 }
 
 void CGame::AddItem(shared_ptr<CItem> item)

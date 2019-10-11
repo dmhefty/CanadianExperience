@@ -189,23 +189,35 @@
   <ItemGroup>
     <ClInclude Include="BadUML.h" />
     <ClInclude Include="BadUMLAttribute.h" />
+    <ClInclude Include="BadUMLVisitor.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GoodUML.h" />
+    <ClInclude Include="GoodUMLVisitor.h" />
     <ClInclude Include="Harold.h" />
     <ClInclude Include="HaroldPen.h" />
     <ClInclude Include="IsHaroldPenVisitor.h" />
     <ClInclude Include="IsPenVisitor.h" />
+    <ClInclude Include="IsPowerAllBadVisitor.h" />
+    <ClInclude Include="IsPowerAllGoneVisitor.h" />
+    <ClInclude Include="IsPowerAllGoodVisitor.h" />
+    <ClInclude Include="IsPowerFastVisitor.h" />
     <ClInclude Include="IsPowerItemVisitor.h" />
+    <ClInclude Include="IsPowerRapidFireVisitor.h" />
+    <ClInclude Include="IsPowerSlowVisitor.h" />
     <ClInclude Include="IsUMLItemVisitor.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemVisitor.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MakePenActiveVisitor.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PowerAllBad.h" />
+    <ClInclude Include="PowerAllGone.h" />
+    <ClInclude Include="PowerAllGood.h" />
     <ClInclude Include="PowerItem.h" />
+    <ClInclude Include="PowerRapidFire.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScoreBoard.h" />
@@ -218,14 +230,22 @@
   <ItemGroup>
     <ClCompile Include="BadUML.cpp" />
     <ClCompile Include="BadUMLAttribute.cpp" />
+    <ClCompile Include="BadUMLVisitor.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GoodUML.cpp" />
+    <ClCompile Include="GoodUMLVisitor.cpp" />
     <ClCompile Include="Harold.cpp" />
     <ClCompile Include="HaroldPen.cpp" />
     <ClCompile Include="IsHaroldPenVisitor.cpp" />
     <ClCompile Include="IsPenVisitor.cpp" />
+    <ClCompile Include="IsPowerAllBadVisitor.cpp" />
+    <ClCompile Include="IsPowerAllGoneVisitor.cpp" />
+    <ClCompile Include="IsPowerAllGoodVisitor.cpp" />
+    <ClCompile Include="IsPowerFastVisitor.cpp" />
     <ClCompile Include="IsPowerItemVisitor.cpp" />
+    <ClCompile Include="IsPowerRapidFireVisitor.cpp" />
+    <ClCompile Include="IsPowerSlowVisitor.cpp" />
     <ClCompile Include="IsUMLItemVisitor.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemVisitor.cpp" />
@@ -237,7 +257,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PowerAllBad.cpp" />
+    <ClCompile Include="PowerAllGone.cpp" />
+    <ClCompile Include="PowerAllGood.cpp" />
     <ClCompile Include="PowerItem.cpp" />
+    <ClCompile Include="PowerRapidFire.cpp" />
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="UML.cpp" />

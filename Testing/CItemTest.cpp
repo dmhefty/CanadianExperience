@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "Item.h"
 #include "Vector.h"
+#include "HaroldPen.h"
 #include <string>
 
 using namespace Gdiplus;

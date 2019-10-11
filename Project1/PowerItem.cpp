@@ -2,6 +2,7 @@
  * \file PowerItem.cpp
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  */
 
 #include "pch.h"

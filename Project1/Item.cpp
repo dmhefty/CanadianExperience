@@ -56,7 +56,9 @@ void CItem::SetVelocity(CVector velocity)
  */
 void CItem::Update(double elapsedTime)
 {
-	mPosition += mVelocity * elapsedTime;
+	CVector newPos = GetPosition() + mVelocity * elapsedTime;
+
+	SetLocation(newPos);
 }
 
 

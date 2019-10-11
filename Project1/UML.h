@@ -25,7 +25,7 @@ private:
 
 public:
 	//TODO -> Accept function to be added aftor visitors are implemented
-	//virtual void Accept(CVisitor visitor) = 0;
+	virtual void Accept(CItemVisitor* visitor) { visitor->VisitUML(this); }
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 

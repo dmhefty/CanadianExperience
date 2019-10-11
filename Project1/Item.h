@@ -8,9 +8,9 @@
 
 #pragma once
 #include "Vector.h"
+#include "ItemVisitor.h"
 #include <string>
 #include <memory>
-#include "ItemVisitor.h"
 
 
  /**
