@@ -45,7 +45,6 @@ private:
 
 	///List of all items on screen
 	std::vector<std::shared_ptr<CItem> > mItems;
-
 	//lists to store uml components
 	///list of possible good uml names
 	std::vector<std::shared_ptr<CUMLAttribute> > mNames;
