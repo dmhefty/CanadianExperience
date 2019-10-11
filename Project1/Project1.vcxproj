@@ -210,6 +210,9 @@
     <ClInclude Include="ItemVisitor.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PowerAllBad.h" />
+    <ClInclude Include="PowerAllGone.h" />
+    <ClInclude Include="PowerAllGood.h" />
     <ClInclude Include="PowerItem.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
@@ -247,6 +250,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PowerAllBad.cpp" />
+    <ClCompile Include="PowerAllGone.cpp" />
+    <ClCompile Include="PowerAllGood.cpp" />
     <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />

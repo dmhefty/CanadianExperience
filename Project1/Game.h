@@ -18,6 +18,8 @@
 #include "Item.h"
 #include "UMLAttribute.h"
 #include "BadUMLAttribute.h"
+#include "ItemVisitor.h"
+
 class CGame
 {
 private:
@@ -73,6 +75,8 @@ public:
 	void OnLButtonDown(double x, double y);
 	
 	void Update(double elapsedTime);
+
+	void Accept(CItemVisitor* visitor);
 
 	void RotatePlayer(double x, double y);
 

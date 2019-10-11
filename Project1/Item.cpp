@@ -22,12 +22,14 @@ using namespace Gdiplus;
  */
 CItem::CItem(CVector position, CVector velocity, wstring imageLocation) : mPosition(position), mVelocity(velocity)
 {
-	mItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(imageLocation.c_str()));
-	if (mItemImage->GetLastStatus() != Ok)
-	{
-		wstring msg(L"Failed to open ");
-		msg += imageLocation;
-		AfxMessageBox(msg.c_str());
+	if (imageLocation.size() > 0) {
+		mItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(imageLocation.c_str()));
+		if (mItemImage->GetLastStatus() != Ok)
+		{
+			wstring msg(L"Failed to open ");
+			msg += imageLocation;
+			AfxMessageBox(msg.c_str());
+		}
 	}
 }
 

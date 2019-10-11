@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "Item.h"
 #include "Vector.h"
+#include "HaroldPen.h"
 #include <string>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -26,7 +27,7 @@ namespace Testing
 		{
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
-			CItem item(position, velocity, PEN_IMAGE_NAME);
+			CHaroldPen item(position, velocity);
 		}
 
 		TEST_METHOD(TestItemSetAndMove)
@@ -34,7 +35,7 @@ namespace Testing
 			// testing base initialization
 			CVector position(0.0f, 0.0f);
 			CVector velocity(1.0f, 1.0f);
-			CItem item(position, velocity, PEN_IMAGE_NAME);
+			CHaroldPen item(position, velocity);
 			Assert::IsTrue(item.GetPosition().X() == 0.0f && item.GetPosition().Y() == 0.0f, L"Testing starting location 0, 0");
 
 			// testing getters and setters
