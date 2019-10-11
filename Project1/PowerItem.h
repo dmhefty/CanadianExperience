@@ -2,7 +2,7 @@
  * \file PowerItem.h
  *
  * \author Isaac Mayers
- * 
+ * \author Jaideep Prasad
  *
  * Class for the powerup, PowerItem
  */
@@ -23,17 +23,14 @@ public:
 	/// Copy constructor (disabled)
 	CPowerItem(const CItem&) = delete;
 
-	CPowerItem(CVector position, CVector velocity);
-
 	/// Basic Destructor
 	~CPowerItem() {};
 
 	/// Accept Visitor
-	void Accept(CItemVisitor visitor);
+	virtual void Accept(CItemVisitor* visitor) {}
 
-	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
-	virtual void Update(double elapsedTime) override;
-private:
-	std::unique_ptr<Gdiplus::Bitmap> mPowerItemImage;
+protected:
+	CPowerItem(CVector position, CVector velocity, const std::wstring &imageName);
+
 };
 

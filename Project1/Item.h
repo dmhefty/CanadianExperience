@@ -8,6 +8,7 @@
 
 #pragma once
 #include "Vector.h"
+#include "ItemVisitor.h"
 #include <string>
 #include <memory>
 
@@ -54,7 +55,7 @@ public:
 	virtual void Update(double elapsedTime);
 
 	// TODO -> implement acceptor once visitors are made
-	//virtual void Accept(Visitor visitor) = 0;
+	virtual void Accept(CItemVisitor* visitor) = 0;
 
 
 private:
@@ -63,7 +64,7 @@ private:
 	/// Current velocity of the item in pixels/sec
 	CVector mVelocity;
 	/// Image file for the object
-	std::unique_ptr<Gdiplus::Bitmap> mItemImage; 
+	std::unique_ptr<Gdiplus::Bitmap> mItemImage = nullptr;
 
 };
 

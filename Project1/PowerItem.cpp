@@ -2,6 +2,7 @@
  * \file PowerItem.cpp
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  */
 
 #include "pch.h"
@@ -15,29 +16,9 @@ using namespace Gdiplus;
 const wstring PowerItemImageName = L"poweritem/SlowFall.png";
 
 /* Constructor */
-CPowerItem::CPowerItem(CVector position, CVector velocity) : CItem(position, velocity, PowerItemImageName)
+CPowerItem::CPowerItem(CVector position, CVector velocity, const wstring &imageName) : 
+	CItem(position, velocity, imageName)
 {
-	mPowerItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(PowerItemImageName.c_str()));
-	if (mPowerItemImage->GetLastStatus() != Ok)
-	{
-		wstring msg(L"Failed to open ");
-		msg += PowerItemImageName;
-		AfxMessageBox(msg.c_str());
-	}
+
 }
 
-/* Draw power item*/
-void CPowerItem::Draw(Gdiplus::Graphics* graphics, CVector position)
-{
-	CItem::Draw(graphics, position);
-}
-/* Accept Visitor*/
-void CPowerItem::Accept(CItemVisitor visitor)
-{
-	visitor.VisitPowerItem(this);
-}
-/* Update Image */
-void CPowerItem::Update(double elapsedTime)
-{
-	CItem::Update(elapsedTime);
-}

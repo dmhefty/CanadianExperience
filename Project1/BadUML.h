@@ -7,7 +7,7 @@ private:
 	std::wstring mError;
 public:
 	//TODO -> Accept function to be added aftor visitors are implemented
-	//virtual void Accept(CVisitor visitor);
+	virtual void Accept(CItemVisitor* visitor) { visitor->VisitUML(this); }
 
 	void DisplayError() {}
 };

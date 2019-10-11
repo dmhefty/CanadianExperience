@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "PowerItem.h"
+#include "PowerAllGone.h"
 #include "Vector.h"
 #include <string>
 
@@ -26,7 +27,7 @@ namespace Testing
 		{
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
-			CPowerItem::CItem poweritem(position, velocity, PowerItemImageName);
+			CPowerAllGone poweritem(position, velocity);
 		}
 
 	};

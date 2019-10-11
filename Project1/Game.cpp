@@ -12,6 +12,10 @@
 #include "XmlNode.h"
 #include "UML.h"
 #include <vector>
+#include "PowerAllBad.h"
+#include "PowerAllGood.h"
+#include "PowerAllGone.h"
+#include "IsHaroldPenVisitor.h"
 
 
 using namespace Gdiplus;
@@ -83,6 +87,22 @@ void CGame::Update(double elapsedTime)
 	for (auto item : mItems)
 	{
 		item->Update(elapsedTime);
+	}
+
+	CIsHaroldPenVisitor isPenVisitor;
+
+
+	if (false)
+	{
+
+	}
+}
+
+void CGame::Accept(CItemVisitor* visitor)
+{
+	for (auto item : mItems)
+	{
+		item->Accept(visitor);
 	}
 }
 
@@ -189,6 +209,11 @@ void CGame::Load(const std::wstring &filePath)
 
 	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(300, 60), CVector(0, 30), L"");
 	mItems.push_back(mUML);
+
+	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY
+	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
+	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
+	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
 }
 
 /**
