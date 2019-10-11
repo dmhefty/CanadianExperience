@@ -16,6 +16,7 @@
 #include "PowerAllGood.h"
 #include "PowerAllGone.h"
 #include "IsHaroldPenVisitor.h"
+#include "HaroldPen.h"
 
 
 using namespace Gdiplus;
@@ -89,12 +90,20 @@ void CGame::Update(double elapsedTime)
 		item->Update(elapsedTime);
 	}
 
-	CIsHaroldPenVisitor isPenVisitor;
-
-
-	if (false)
+	if (false) // If pen is fired (bool mFired in Game.h?) do the following
 	{
+		CIsHaroldPenVisitor isPenVisitor;
+		this->Accept(&isPenVisitor);
+		auto pen = isPenVisitor.GetPen();
 
+		/*
+		for (auto item : someFilteredListOfItems)
+		{
+			// Check if pen image intersects
+			// (check positions + image widths and heights)
+			// with other item images
+		}
+		*/
 	}
 }
 

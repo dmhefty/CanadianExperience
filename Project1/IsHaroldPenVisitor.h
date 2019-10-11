@@ -18,7 +18,13 @@ public:
 	* Visits an Item object and determines if it is a HaroldPen object
 	* \param HaroldPen the CHaroldPen object in question
 	*/
-	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; }
+	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override 
+	{ 
+		mIsHaroldPen = true; 
+		mPen = HaroldPen;
+	}
+
+	CHaroldPen* GetPen() const { return mPen; }
 
 	/**
 	* Determines if a HaroldPen object has been visited
@@ -28,4 +34,5 @@ public:
 
 private:
 	bool mIsHaroldPen = false;
+	CHaroldPen* mPen = nullptr;
 };
