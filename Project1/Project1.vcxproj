@@ -216,6 +216,7 @@
     <ClInclude Include="PowerAllGone.h" />
     <ClInclude Include="PowerAllGood.h" />
     <ClInclude Include="PowerItem.h" />
+    <ClInclude Include="PowerRapidFire.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScoreBoard.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="PowerAllGone.cpp" />
     <ClCompile Include="PowerAllGood.cpp" />
     <ClCompile Include="PowerItem.cpp" />
+    <ClCompile Include="PowerRapidFire.cpp" />
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="UML.cpp" />

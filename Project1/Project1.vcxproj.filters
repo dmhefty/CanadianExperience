@@ -126,6 +126,9 @@
     <ClInclude Include="BadUMLVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PowerRapidFire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -225,6 +228,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BadUMLVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerRapidFire.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

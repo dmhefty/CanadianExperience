@@ -15,6 +15,7 @@
 #include "PowerAllBad.h"
 #include "PowerAllGood.h"
 #include "PowerAllGone.h"
+#include "PowerRapidFire.h"
 #include "IsHaroldPenVisitor.h"
 #include "HaroldPen.h"
 
@@ -266,6 +267,7 @@ void CGame::Load(const std::wstring &filePath)
 	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
 	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
 	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
+	mItems.push_back(make_shared<CPowerRapidFire>(CVector(0, 0), CVector(-3, 150)));
 }
 
 /**
