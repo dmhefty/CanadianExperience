@@ -189,11 +189,13 @@
   <ItemGroup>
     <ClInclude Include="BadUML.h" />
     <ClInclude Include="BadUMLAttribute.h" />
+    <ClInclude Include="BadUMLVisitor.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GoodUML.h" />
+    <ClInclude Include="GoodUMLVisitor.h" />
     <ClInclude Include="Harold.h" />
     <ClInclude Include="HaroldPen.h" />
     <ClInclude Include="IsHaroldPenVisitor.h" />
@@ -226,9 +228,11 @@
   <ItemGroup>
     <ClCompile Include="BadUML.cpp" />
     <ClCompile Include="BadUMLAttribute.cpp" />
+    <ClCompile Include="BadUMLVisitor.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GoodUML.cpp" />
+    <ClCompile Include="GoodUMLVisitor.cpp" />
     <ClCompile Include="Harold.cpp" />
     <ClCompile Include="HaroldPen.cpp" />
     <ClCompile Include="IsHaroldPenVisitor.cpp" />

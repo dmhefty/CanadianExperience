@@ -11,6 +11,8 @@
 
  // Forward references to all Item types
 class CUML;
+class CGoodUML;
+class CBadUML;
 class CPowerItem;
 class CHaroldPen;
 class CPowerAllGood;
@@ -29,6 +31,14 @@ public:
 	/** Visit a CUML object
 	 * \param UML UML item we are visiting */
 	virtual void VisitUML(CUML* uml) {}
+
+	/** Visit a CUML object
+	 * \param UML Good UML item we are visiting */
+	virtual void VisitGoodUML(CGoodUML* goodUML) {}
+
+	/** Visit a CUML object
+	 * \param UML Bad UML item we are visiting */
+	virtual void VisitBadUML(CBadUML* badUML) {}
 
 	/** Visit a CPowerItem object
 	 * \param poweritem specific item we are visiting */
