@@ -2,6 +2,7 @@
  * \file HaroldPen.cpp
  *
  * \author David Hefty
+ * \author Jaideep Prasad
  */
 
 #pragma once
@@ -15,10 +16,14 @@ using namespace std;
 using namespace Gdiplus;
 
 /// Pen filename 
-const wstring PEN_IMAGE_NAME = L"images/redpen.png";
+const wstring PenImageName = L"images/redpen.png";
 
 /// Constant ratio to convert radians to degrees
 const double RtoD = 57.295779513;
+
+
+/// One second
+const double OneSecond = 1;
 
  /**
   * \brief Constructor for CHaroldPen class
@@ -29,11 +34,12 @@ const double RtoD = 57.295779513;
 CHaroldPen::CHaroldPen(CVector position, CVector velocity) : CItem(position, velocity)
 {
 	mIsAttached = true; // false for now since we dont have a real attachment to Harold
-	mHaroldPenImage = unique_ptr<Bitmap>(Bitmap::FromFile(PEN_IMAGE_NAME.c_str()));
+	mTravelTime = 0;
+	mHaroldPenImage = unique_ptr<Bitmap>(Bitmap::FromFile(PenImageName.c_str()));
 	if (mHaroldPenImage->GetLastStatus() != Ok)
 	{
 		wstring msg(L"Failed to open ");
-		msg += PEN_IMAGE_NAME;
+		msg += PenImageName;
 		AfxMessageBox(msg.c_str());
 	}
 }
@@ -47,44 +53,43 @@ CHaroldPen::CHaroldPen(CVector position, CVector velocity) : CItem(position, vel
 */
 void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 {
-	if (!mIsAttached)
-	{
-		float wid = (float)mHaroldPenImage->GetWidth();
-		float hit = (float)mHaroldPenImage->GetHeight();
+	float wid = (float)mHaroldPenImage->GetWidth();
+	float hit = (float)mHaroldPenImage->GetHeight();
 
-		auto state = graphics->Save();
-		graphics->TranslateTransform((float)position.X(), (float)position.Y());
-		graphics->DrawImage(mHaroldPenImage.get(), -wid / 2, -hit / 2,
-			wid, hit);
-		graphics->Restore(state);
-	}
-	else
-	{
-		float wid = (float)mHaroldPenImage->GetWidth();
-		float hit = (float)mHaroldPenImage->GetHeight();
+	auto state = graphics->Save();
 
-		auto state = graphics->Save();
-		graphics->TranslateTransform((float)position.X(), (float)(position.Y() - (hit / 1.5f)));
-		graphics->RotateTransform((float)(-mAngle * RtoD));
-		graphics->DrawImage(mHaroldPenImage.get(), -wid / 2, -hit / 2,
-			wid, hit);
-		graphics->Restore(state);
-	}
+	graphics->TranslateTransform((float)position.X(), (float)(position.Y() - (hit / 1.5f)));
+	graphics->RotateTransform((float)(-mAngle * RtoD));
+	graphics->DrawImage(mHaroldPenImage.get(), -wid / 2, -hit / 2,
+		wid, hit);
+	graphics->Restore(state);
 }
 
 
 void CHaroldPen::Update(double elapsedTime)
 {
-	CItem::Update(elapsedTime);
+	if (!mIsAttached)
+	{
+		mTravelTime += elapsedTime;
+		if (mTravelTime < OneSecond)
+		{
+			CItem::Update(elapsedTime);
+		}
+		else
+		{
+			ResetPen();
+		}
+		
+	}
 }
 
 
 
 void CHaroldPen::ResetPen()
 {
-	mAngle = 25.0f;
 	mIsAttached = true;
-	CItem::SetLocation(CVector(29.0f, 1000.0 - 154.0f));
+	mTravelTime = 0;
+	CItem::SetLocation(CVector(61.29437 * sin(mAngle) - 10.0f, 61.29437f * cos(mAngle) + (float)(1000.0 - 105.0)));
 	CItem::SetVelocity(CVector(0.0f, 0.0f));
 }
 

@@ -2,6 +2,7 @@
  * \file HaroldPen.h
  *
  * \author David Hefty
+ * \author Jaideep Prasad
  *
  * Class for the HaroldPen item
  */
@@ -41,6 +42,7 @@ public:
 
 private:
 	bool mIsAttached;
+	double mTravelTime;
 	std::unique_ptr<Gdiplus::Bitmap> mHaroldPenImage;
 	double mAngle = 25.0f;
 	

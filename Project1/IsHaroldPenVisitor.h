@@ -2,6 +2,7 @@
  * \file IsHaroldPenVisitor.h
  *
  * \author David Hefty
+ * \author Jaideep Prasad
  *
  * Item visitor to determine if an Item is a HaroldPen
  */
@@ -20,9 +21,11 @@ public:
 	* \param HaroldPen the CHaroldPen object in question
 	*/
 	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; mAttachedState = HaroldPen->GetAttachedState(); }
-
-	CHaroldPen* GetPen() const { return mPen; }
 	
+	/**
+	* Resets the state of this visitor
+	*/
+	void Reset() { mIsHaroldPen = false; mAttachedState = false; }
 
 	/**
 	* Determines if a HaroldPen object has been visited
@@ -33,6 +36,5 @@ public:
 
 private:
 	bool mIsHaroldPen = false;
-	CHaroldPen* mPen = nullptr;
 	bool mAttachedState = false;
 };

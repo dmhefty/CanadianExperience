@@ -96,6 +96,8 @@ void CGame::OnLButtonDown(double x, double y)
 		if (visitPen.IsHaroldPen() && visitPen.IsAttached())
 		{
 			item->Accept(&changer);
+			visitPen.Reset();
+			break;
 		}
 
 	}
@@ -117,9 +119,9 @@ void CGame::Update(double elapsedTime)
 
 	if (false) // If pen is fired (bool mFired in Game.h?) do the following
 	{
-		CIsHaroldPenVisitor isPenVisitor;
-		this->Accept(&isPenVisitor);
-		auto pen = isPenVisitor.GetPen();
+		// CIsHaroldPenVisitor isPenVisitor;
+		// this->Accept(&isPenVisitor);
+		// auto pen = isPenVisitor.GetPen();
 
 		/*
 		for (auto item : someFilteredListOfItems)
@@ -167,22 +169,22 @@ void CGame::RotatePen(double x, double y)
 	double oY = (y - mYOffset) / mScale;
 	// Determine and set the new angle
 	double angle = (atan2(Height - oY, oX) - AngleOffset) + (3.1415926535f)*3/4;
-	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle)+(1000.0f-105.0f));
+	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle) + (float)(1000.0 - 105.0));
 	
-	shared_ptr<CItem> currentPen;
 	CIsHaroldPenVisitor visitPen;
 	for (auto item : mItems)
 	{
 		item->Accept(&visitPen);
 		if (visitPen.IsHaroldPen())
 		{
-			currentPen = item;
+			if (visitPen.IsAttached())
+			{
+				item->SetLocation(pos);
+				item->SetAngle(angle);
+			}
+			visitPen.Reset();
+			break;
 		}
-	}
-	if (visitPen.IsAttached())
-	{
-		currentPen->SetLocation(pos);
-		currentPen->SetAngle(angle);
 	}
 }
 

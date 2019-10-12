@@ -2,6 +2,7 @@
  * \file Item.cpp
  *
  * \author David Hefty
+ * \author Jaideep Prasad
  */
 
 #pragma once
@@ -56,7 +57,7 @@ void CItem::SetVelocity(CVector velocity)
  */
 void CItem::Update(double elapsedTime)
 {
-	CVector newPos = GetPosition() + mVelocity * elapsedTime;
+	CVector newPos = GetPosition() + mVelocity * mVelocityMultiplier * elapsedTime;
 
 	SetLocation(newPos);
 }

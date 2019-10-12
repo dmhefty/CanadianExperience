@@ -11,7 +11,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 
 /// Pen filename 
-const wstring PEN_IMAGE_NAME = L"images/redpen.png";
+const wstring PenImageName = L"images/redpen.png";
 
 /** Mock class for testing CItem */
 class CItemMock : public CItem

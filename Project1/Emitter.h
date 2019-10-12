@@ -1,12 +1,24 @@
 #pragma once
+
 #include <vector>
 #include <memory>
 #include <string>
+
 #include "UMLAttribute.h"
 #include "BadUMLAttribute.h"
 
-#include "UML.h"
 #include "Item.h"
+#include "UML.h"
+#include "BadUML.h"
+#include "GoodUML.h"
+
+#include "PowerItem.h"
+#include "PowerSlow.h"
+#include "PowerFast.h"
+#include "PowerAllBad.h"
+#include "PowerAllGood.h"
+#include "PowerAllGone.h"
+#include "PowerRapidFire.h"
 
 
 class CEmitter

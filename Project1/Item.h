@@ -57,12 +57,20 @@ public:
 
 	virtual void SetAngle(double angle) {}
 
+	/**
+	 * Sets the item velocity multiplier
+	 * \param multiplier The new multiplier (default value is 1)
+	 */
+	void SetVelocityMultiplier(double multiplier = 1) { mVelocityMultiplier = multiplier; }
+
 
 private:
 	/// Current position of the item on the screen
 	CVector mPosition;
 	/// Current velocity of the item in pixels/sec
 	CVector mVelocity;
+	/// Velocity multiplier for the item. Default is 1.
+	double mVelocityMultiplier = 1;
 	
 
 };
