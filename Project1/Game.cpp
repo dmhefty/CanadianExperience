@@ -100,6 +100,7 @@ void CGame::OnLButtonDown(double x, double y)
 
 	}
 
+	AddItem(mEmitter.AddUML());
 	
 }
 

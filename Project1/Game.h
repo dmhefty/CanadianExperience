@@ -21,6 +21,8 @@
 #include "ItemVisitor.h"
 #include "Emitter.h"
 
+
+
 class CGame
 {
 private:
@@ -43,7 +45,6 @@ private:
 	CScoreBoard mScoreBoard;
 
 	CEmitter mEmitter;
-	
 
 	///List of all items on screen
 	std::vector<std::shared_ptr<CItem> > mItems;

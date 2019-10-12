@@ -14,7 +14,7 @@ using namespace xmlnode;
 
 void CEmitter::Load(const std::wstring& filePath)
 {
-
+	
 
 	std::shared_ptr<CUMLAttribute> attribute;
 	try
@@ -89,7 +89,24 @@ void CEmitter::Load(const std::wstring& filePath)
 	{
 		AfxMessageBox(ex.Message().c_str());
 	}
-	/*
+	
+
+/*
+	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY
+	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
+	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
+	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
+	mItems.push_back(make_shared<CPowerRapidFire>(CVector(0, 0), CVector(-3, 150)));
+*/
+}
+
+std::shared_ptr<CUML> CEmitter::AddUML() {
+
+	/// Game area width in virtual pixels
+	const static int Width = 1250;
+	/// Game area height in virtual pixels
+	const static int Height = 1000;
+
 	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 2);
 	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
 	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
@@ -114,10 +131,10 @@ void CEmitter::Load(const std::wstring& filePath)
 	const double MinSpeedY = 20;
 
 	/// Maximum starting position in the X direction
-	const double MaxPosX = CGame::Width / 2;
+	const double MaxPosX = Width / 2;
 
 	/// Minimum starting position in the X direction
-	const double MinPosX = -1 * CGame::Width / 2;
+	const double MinPosX = -1 * Width / 2;
 
 	// Randomize X and Y speeds within limits
 	double tempSpeedX = MinSpeedX + ((double)rand() / RAND_MAX) * (MaxSpeedX - MinSpeedX);
@@ -127,23 +144,16 @@ void CEmitter::Load(const std::wstring& filePath)
 	double tempPosX = MinPosX + ((double)rand() / RAND_MAX) * (MaxPosX - MinPosX);
 
 	// Limit the X position so that it will not move off the screen with its set X velocity
-	if ((tempSpeedX < 0) && (-1 * CGame::Width / 2 >= (tempPosX + tempSpeedX * (CGame::Height / tempSpeedY))))
+	if ((tempSpeedX < 0) && (-1 * Width / 2 >= (tempPosX + tempSpeedX * (Height / tempSpeedY))))
 	{
-		tempPosX = -1 * CGame::Width / 2 - (tempSpeedX * (CGame::Height / tempSpeedY));
+		tempPosX = -1 * Width / 2 - (tempSpeedX * (Height / tempSpeedY));
 	}
 
-	if ((tempSpeedX > 0) && (CGame::Width / 2 <= (tempPosX + tempSpeedX * (CGame::Height / tempSpeedY))))
+	if ((tempSpeedX > 0) && (Width / 2 <= (tempPosX + tempSpeedX * (Height / tempSpeedY))))
 	{
-		tempPosX = CGame::Width / 2 - (tempSpeedX * (CGame::Height / tempSpeedY));
+		tempPosX = Width / 2 - (tempSpeedX * (Height / tempSpeedY));
 	}
 
 	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY));
-	mItems.push_back(mUML);
-
-	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY
-	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
-	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
-	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
-	mItems.push_back(make_shared<CPowerRapidFire>(CVector(0, 0), CVector(-3, 150)));
-*/
-}
+	return mUML;
+	}
