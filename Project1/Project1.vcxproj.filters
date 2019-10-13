@@ -132,10 +132,16 @@
     <ClInclude Include="MakePenActiveVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PowerSlow.h">
+    <ClInclude Include="Emitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PowerFast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerSlow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDimensionVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -245,10 +251,16 @@
     <ClCompile Include="MakePenActiveVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PowerSlow.cpp">
+    <ClCompile Include="Emitter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PowerFast.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerSlow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDimensionVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -88,8 +88,6 @@ void CChildView::OnPaint()
 	CRect rect;
 	GetClientRect(&rect); //Determine window size automatically
 
-	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
-
 	if (mFirstDraw)
 	{
 		mFirstDraw = false;
@@ -117,7 +115,7 @@ void CChildView::OnPaint()
 
 	mGame.Update(elapsed);
 
-
+	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 }
 
 /**

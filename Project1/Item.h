@@ -7,10 +7,14 @@
  */
 
 #pragma once
-#include "Vector.h"
-#include "ItemVisitor.h"
+
 #include <string>
 #include <memory>
+#include "Vector.h"
+#include "ItemVisitor.h"
+
+class CGame;
+
 
 
  /**
@@ -28,7 +32,7 @@ public:
 	/// Copy constructor (disabled)
 	CItem(const CItem&) = delete;
 
-	CItem(CVector position, CVector velocity);
+	CItem(CVector position, CVector velocity, CGame* game);
 
 	/// Basic Destructor
 	virtual ~CItem() {};
@@ -38,11 +42,15 @@ public:
 
 	/** The location of the item
 	* \returns position Item's position as a vector in pixels */
-	CVector GetPosition() { return mPosition; }
+	CVector GetPosition() const { return mPosition; }
 	
 	/** The velocity of the item
 	* \returns velocity Item's velocity as a vector in pixels */
-	CVector GetVelocity() { return mVelocity; }
+	CVector GetVelocity() const { return mVelocity; }
+
+	virtual CVector GetDimensions() const = 0;
+
+	virtual void Effect() = 0; // Item effect when hit with pen
 
 	/** 
 	 * \brief Meant to display the graphic for the object using gdiplus
@@ -57,12 +65,26 @@ public:
 
 	virtual void SetAngle(double angle) {}
 
+	/**
+	 * Sets the item velocity multiplier
+	 * \param multiplier The new multiplier (default value is 1)
+	 */
+	void SetVelocityMultiplier(double multiplier = 1) { mVelocityMultiplier = multiplier; }
+
+	double GetVelocityMultiplier() const { return mVelocityMultiplier; }
+
+	CGame* GetGame() { return mGame; }
 
 private:
+	/// The game the item exists in
+	CGame* mGame;
+
 	/// Current position of the item on the screen
 	CVector mPosition;
 	/// Current velocity of the item in pixels/sec
 	CVector mVelocity;
+	/// Velocity multiplier for the item. Default is 1.
+	double mVelocityMultiplier = 1;
 	
 
 };

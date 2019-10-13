@@ -18,8 +18,8 @@ const wstring PowerSlowImageName = L"poweritem/SlowFall.png";
  * \param position Position vector of item
  * \param velocity Velocity vector of item
  */
-CPowerSlow::CPowerSlow(CVector position, CVector velocity) :
-	CPowerItem(position, velocity, PowerSlowImageName)
+CPowerSlow::CPowerSlow(CVector position, CVector velocity, CGame* game) :
+	CPowerItem(position, velocity, game, PowerSlowImageName)
 {
 
 }
