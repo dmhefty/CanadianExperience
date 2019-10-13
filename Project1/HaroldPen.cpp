@@ -5,13 +5,13 @@
  * \author Jaideep Prasad
  */
 
-#pragma once
 #include "pch.h"
 #include "HaroldPen.h"
 #include "ItemVisitor.h"
 #include <string>
 #include <vector>
 #include <memory>
+
 using namespace std;
 using namespace Gdiplus;
 
@@ -59,7 +59,11 @@ void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 	auto state = graphics->Save();
 
 	graphics->TranslateTransform((float)position.X(), (float)(position.Y() - (hit / 1.5f)));
-	graphics->RotateTransform((float)(-mAngle * RtoD));
+
+	double angle = mIsAttached ? mAngle : mFiredAngle;
+
+	graphics->RotateTransform((float)(-angle * RtoD));
+
 	graphics->DrawImage(mHaroldPenImage.get(), -wid / 2, -hit / 2,
 		wid, hit);
 	graphics->Restore(state);
@@ -80,6 +84,10 @@ void CHaroldPen::Update(double elapsedTime)
 			ResetPen();
 		}
 		
+	}
+	else
+	{
+		CItem::Update(elapsedTime);
 	}
 }
 

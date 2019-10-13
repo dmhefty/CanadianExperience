@@ -7,6 +7,7 @@
  */
 
 #pragma once
+
 #include "Vector.h"
 #include "ItemVisitor.h"
 #include <string>

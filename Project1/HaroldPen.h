@@ -8,6 +8,7 @@
  */
 
 #pragma once
+
 #include "Item.h"
 #include "Vector.h"
 #include "ItemVisitor.h"
@@ -32,7 +33,7 @@ public:
 	/// \param angle The new angle
 	void SetAngle(double angle) { mAngle = angle; }
 
-	void UnAttach() { mIsAttached = false; }
+	void UnAttach() { mIsAttached = false; mFiredAngle = mAngle; }
 	
 	bool GetAttachedState() { return mIsAttached; }
 
@@ -45,5 +46,5 @@ private:
 	double mTravelTime;
 	std::unique_ptr<Gdiplus::Bitmap> mHaroldPenImage;
 	double mAngle = 25.0f;
-	
+	double mFiredAngle = 25.0f;
 };

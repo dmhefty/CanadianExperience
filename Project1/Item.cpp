@@ -5,7 +5,6 @@
  * \author Jaideep Prasad
  */
 
-#pragma once
 #include "pch.h"
 #include "Item.h"
 #include <string>

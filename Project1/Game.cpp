@@ -180,8 +180,8 @@ void CGame::RotatePen(double x, double y)
 			if (visitPen.IsAttached())
 			{
 				item->SetLocation(pos);
-				item->SetAngle(angle);
 			}
+			item->SetAngle(angle);
 			visitPen.Reset();
 			break;
 		}
