@@ -15,7 +15,7 @@ class CPowerSlow :
 	public CPowerItem
 {
 public:
-	CPowerSlow(CVector position, CVector velocity, CGame* game);
+	CPowerSlow(CVector position, CVector velocity);
 
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerSlow(this); }
 };

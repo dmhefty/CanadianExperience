@@ -16,7 +16,7 @@ class CPowerFast :
 	public CPowerItem
 {
 public:
-	CPowerFast(CVector position, CVector velocity, CGame* game);
+	CPowerFast(CVector position, CVector velocity);
 
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerFast(this); }
 };

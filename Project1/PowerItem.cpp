@@ -14,8 +14,7 @@ using namespace std;
 using namespace Gdiplus;
 
 /* Constructor */
-CPowerItem::CPowerItem(CVector position, CVector velocity, CGame* game, wstring PowerItemImageName) :
-	CItem(position, velocity, game)
+CPowerItem::CPowerItem(CVector position, CVector velocity, wstring PowerItemImageName) : CItem(position, velocity)
 {
 	mPowerItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(PowerItemImageName.c_str()));
 	if (mPowerItemImage->GetLastStatus() != Ok)

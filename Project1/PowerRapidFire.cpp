@@ -17,10 +17,9 @@ const wstring PowerRapidFireImageName = L"poweritem/RapidFire.png";
  * Rapid Fire power item constructor
  * \param position Position vector of item
  * \param velocity Velocity vector of item
- * \param game The game pointer
  */
-CPowerRapidFire::CPowerRapidFire(CVector position, CVector velocity, CGame* game) :
-	CPowerItem(position, velocity, game, PowerRapidFireImageName)
+CPowerRapidFire::CPowerRapidFire(CVector position, CVector velocity) :
+	CPowerItem(position, velocity, PowerRapidFireImageName)
 {
 
 }

@@ -17,7 +17,7 @@
 class CPowerRapidFire : public CPowerItem
 {
 public:
-	CPowerRapidFire(CVector position, CVector velocity, CGame* game);
+	CPowerRapidFire(CVector position, CVector velocity);
 
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerRapidFire(this); }
 };

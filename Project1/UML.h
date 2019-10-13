@@ -27,15 +27,8 @@ public:
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 
-	virtual CVector GetDimensions() const override
-	{
-		return CVector(111, 59); // TODO: GET RECTANGLE SiZE. THIS IS JUST A PLACEHOLDER.
-	}
-
-	virtual void Effect() override { CItem::SetVelocity(CVector(0, 0)); } // TODO: UML disappear and message (good/bad)
-
 	CUML(std::shared_ptr<CUMLAttribute> name, std::vector<std::shared_ptr<CUMLAttribute> > attributes, 
-		std::vector<std::shared_ptr<CUMLAttribute> > operations, CVector position, CVector velocity, CGame* game);
+		std::vector<std::shared_ptr<CUMLAttribute> > operations, CVector position, CVector velocity);
 
 };
 

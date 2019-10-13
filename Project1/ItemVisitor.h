@@ -10,7 +10,6 @@
 #pragma once
 
  // Forward references to all Item types
-class CItem;
 class CUML;
 class CGoodUML;
 class CBadUML;
@@ -28,10 +27,6 @@ class CItemVisitor
 {
 public:
 	virtual ~CItemVisitor() {}
-
-	/** Visit a general Item object
-	 * \param item The item we are visiting */
-	virtual void VisitItem(CItem* item) {}
 
 	/** Visit a CUML object
 	 * \param UML UML item we are visiting */

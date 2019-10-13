@@ -2,9 +2,9 @@
  * \file Item.cpp
  *
  * \author David Hefty
- * \author Jaideep Prasad
  */
 
+#pragma once
 #include "pch.h"
 #include "Item.h"
 #include <string>
@@ -19,10 +19,8 @@ using namespace Gdiplus;
  *
  * \param position takes in a position in the form of a CVector
  * \param velocity takes in a velocity in the form of a CVector
- * \param game takes in the game pointer
  */
-CItem::CItem(CVector position, CVector velocity, CGame* game) : 
-	mPosition(position), mVelocity(velocity), mGame(game)
+CItem::CItem(CVector position, CVector velocity) : mPosition(position), mVelocity(velocity)
 {
 }
 
@@ -58,7 +56,7 @@ void CItem::SetVelocity(CVector velocity)
  */
 void CItem::Update(double elapsedTime)
 {
-	CVector newPos = GetPosition() + mVelocity * mVelocityMultiplier * elapsedTime;
+	CVector newPos = GetPosition() + mVelocity * elapsedTime;
 
 	SetLocation(newPos);
 }
