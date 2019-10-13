@@ -17,7 +17,7 @@
 class CPowerAllBad : public CPowerItem
 {
 public:
-	CPowerAllBad(CVector position, CVector velocity);
+	CPowerAllBad(CVector position, CVector velocity, CGame* game);
 
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerAllBad(this); }
 };

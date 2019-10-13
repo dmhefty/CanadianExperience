@@ -9,11 +9,11 @@
 #include "pch.h"
 #include <memory>
 #include "Game.h"
+#include "Item.h"
 #include "XmlNode.h"
-#include "UML.h"
 #include <vector>
 #include "HaroldPen.h"
-#include "Item.h"
+#include "ItemDimensionVisitor.h"
 #include "MakePenActiveVisitor.h"
 #include "IsHaroldPenVisitor.h"
 #include "PowerAllBad.h"
@@ -22,6 +22,7 @@
 #include "PowerRapidFire.h"
 #include "IsHaroldPenVisitor.h"
 #include "HaroldPen.h"
+#include "UML.h"
 
 
 using namespace Gdiplus;
@@ -117,21 +118,52 @@ void CGame::Update(double elapsedTime)
 		item->Update(elapsedTime);
 	}
 
-	if (false) // If pen is fired (bool mFired in Game.h?) do the following
+	CIsHaroldPenVisitor visitPen;
+	CVector penPosition;
+	CVector penDimensions;
+	CHaroldPen* pen = nullptr;
+	for (auto item : mItems)
 	{
-		// CIsHaroldPenVisitor isPenVisitor;
-		// this->Accept(&isPenVisitor);
-		// auto pen = isPenVisitor.GetPen();
-
-		/*
-		for (auto item : someFilteredListOfItems)
+		item->Accept(&visitPen);
+		if (visitPen.IsHaroldPen())
 		{
-			// Check if pen image intersects
-			// (check positions + image widths and heights)
-			// with other item images
+			penPosition = item->GetPosition();
+			penDimensions = item->GetDimensions();
+			visitPen.Reset();
+			pen = visitPen.GetPen();
+			break;
 		}
-		*/
 	}
+	Rect penRect(penPosition.X() - penDimensions.X() / 2,
+		penPosition.Y() - penDimensions.X() / 2,
+		penDimensions.X(), penDimensions.Y());
+
+	CVector itemPosition;
+	CVector itemDimensions;
+
+	for (auto item : mItems)
+	{
+		item->Accept(&visitPen);
+		if (visitPen.IsHaroldPen())
+		{
+			visitPen.Reset();
+			continue;
+		}
+
+		itemPosition = item->GetPosition();
+		itemDimensions = item->GetDimensions();
+		Rect itemRect(itemPosition.X() - itemDimensions.X() / 2,
+			itemPosition.Y() - itemDimensions.Y() / 2,
+			itemDimensions.X(), itemDimensions.Y());
+
+		if (penRect.IntersectsWith(itemRect))
+		{
+			item->Effect();
+			pen->Effect();
+			break;
+		}
+	}
+
 }
 
 void CGame::Accept(CItemVisitor* visitor)
@@ -196,12 +228,12 @@ void CGame::AddItem(shared_ptr<CItem> item)
 /**
  * Constructor loads UML data file
  */
-CGame::CGame() 
+CGame::CGame() : mEmitter(this)
 {
 	std::wstring filename = L"uml.xml";
 	mEmitter.Load(filename);
 
-	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f,1000.0-154.0f), CVector(0.0f,0.0f));
+	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f,1000.0-154.0f), CVector(0.0f,0.0f), this);
 	AddItem(hPen);
 }
 

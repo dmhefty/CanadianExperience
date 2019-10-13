@@ -17,7 +17,7 @@
 class CPowerAllGone : public CPowerItem
 {
 public:
-	CPowerAllGone(CVector position, CVector velocity);
+	CPowerAllGone(CVector position, CVector velocity, CGame* game);
 
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerAllGone(this); }
 };

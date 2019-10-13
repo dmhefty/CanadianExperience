@@ -31,7 +31,8 @@ const double OneSecond = 1;
   * \param position takes in a position in the form of a CVector
   * \param velocity takes in a velocity in the form of a CVector
   */
-CHaroldPen::CHaroldPen(CVector position, CVector velocity) : CItem(position, velocity)
+CHaroldPen::CHaroldPen(CVector position, CVector velocity, CGame* game) : 
+	CItem(position, velocity, game)
 {
 	mIsAttached = true; // false for now since we dont have a real attachment to Harold
 	mTravelTime = 0;
@@ -75,7 +76,7 @@ void CHaroldPen::Update(double elapsedTime)
 	if (!mIsAttached)
 	{
 		mTravelTime += elapsedTime;
-		if (mTravelTime < OneSecond)
+		if (mTravelTime < (OneSecond/CItem::GetVelocityMultiplier()))
 		{
 			CItem::Update(elapsedTime);
 		}

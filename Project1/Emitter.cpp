@@ -154,6 +154,6 @@ std::shared_ptr<CUML> CEmitter::AddUML() {
 		tempPosX = Width / 2 - (tempSpeedX * (Height / tempSpeedY));
 	}
 
-	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY));
+	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame);
 	return mUML;
 	}

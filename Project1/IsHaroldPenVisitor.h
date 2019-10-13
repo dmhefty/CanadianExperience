@@ -20,12 +20,19 @@ public:
 	* Visits an Item object and determines if it is a HaroldPen object
 	* \param HaroldPen the CHaroldPen object in question
 	*/
-	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override { mIsHaroldPen = true; mAttachedState = HaroldPen->GetAttachedState(); }
+	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override 
+	{ 
+		mIsHaroldPen = true; 
+		mAttachedState = HaroldPen->GetAttachedState(); 
+		mHaroldPen = HaroldPen;
+	}
 	
 	/**
 	* Resets the state of this visitor
 	*/
 	void Reset() { mIsHaroldPen = false; mAttachedState = false; }
+
+	CHaroldPen* GetPen() { return mHaroldPen; }
 
 	/**
 	* Determines if a HaroldPen object has been visited
@@ -35,6 +42,7 @@ public:
 	bool IsAttached() { return mAttachedState; }
 
 private:
+	CHaroldPen* mHaroldPen = nullptr;
 	bool mIsHaroldPen = false;
 	bool mAttachedState = false;
 };

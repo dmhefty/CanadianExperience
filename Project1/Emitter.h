@@ -24,11 +24,14 @@
 class CEmitter
 {
 public:
-	CEmitter() {};
+	CEmitter(CGame* game) : mGame(game) {};
 	void Load(const std::wstring& filePath);
 	std::shared_ptr<CUML> AddUML();
 
 private:
+	/// The game the emitter is a part of
+	CGame* mGame;
+
 	//pointer to the game this emitter is a part of
 	//std::shared_ptr<CGame> mGame;
 	//lists to store uml components

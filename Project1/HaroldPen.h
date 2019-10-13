@@ -24,7 +24,7 @@ public:
 	/// Copy constructor (disabled)
 	CHaroldPen(const CHaroldPen&) = delete;
 
-	CHaroldPen(CVector position, CVector velocity);
+	CHaroldPen(CVector position, CVector velocity, CGame* game);
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 	virtual void Update(double elapsedTime) override;
@@ -40,6 +40,14 @@ public:
 	void ResetPen();
 
 	virtual void Accept(CItemVisitor* visitor) override;
+
+	virtual void Effect() override { CItem::SetVelocity(CVector(0, 0)); }
+
+	virtual CVector GetDimensions() const override
+	{
+		return CVector((double)mHaroldPenImage->GetWidth(),
+			(double)mHaroldPenImage->GetHeight());
+	}
 
 private:
 	bool mIsAttached;

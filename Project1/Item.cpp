@@ -19,8 +19,10 @@ using namespace Gdiplus;
  *
  * \param position takes in a position in the form of a CVector
  * \param velocity takes in a velocity in the form of a CVector
+ * \param game takes in the game pointer
  */
-CItem::CItem(CVector position, CVector velocity) : mPosition(position), mVelocity(velocity)
+CItem::CItem(CVector position, CVector velocity, CGame* game) : 
+	mPosition(position), mVelocity(velocity), mGame(game)
 {
 }
 

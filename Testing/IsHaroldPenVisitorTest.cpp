@@ -5,6 +5,7 @@
 #include "PowerItem.h"
 #include "PowerAllGone.h"
 #include "Vector.h"
+#include "Game.h"
 #include <string>
 
 
@@ -27,18 +28,20 @@ namespace Testing
 		
 		TEST_METHOD(ConstructorTest)
 		{
+			CGame game;
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
-			CHaroldPen hPen(position, velocity);
+			CHaroldPen hPen(position, velocity, &game);
 			CIsHaroldPenVisitor visitor;
 		}
 
 		TEST_METHOD(TestPositiveAndNegative)
 		{
+			CGame game;
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
-			CHaroldPen hPen(position, velocity);
-			CPowerAllGone pItem(position, velocity);
+			CHaroldPen hPen(position, velocity, &game);
+			CPowerAllGone pItem(position, velocity, &game);
 			CIsHaroldPenVisitor visitor1;
 			CIsHaroldPenVisitor visitor2;
 

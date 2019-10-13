@@ -17,9 +17,10 @@ const wstring PowerAllGoodImageName = L"poweritem/AllGood.png";
  * All Good power item constructor
  * \param position Position vector of item
  * \param velocity Velocity vector of item
+ * \param game The game pointer
  */
-CPowerAllGood::CPowerAllGood(CVector position, CVector velocity) :
-	CPowerItem(position, velocity, PowerAllGoodImageName)
+CPowerAllGood::CPowerAllGood(CVector position, CVector velocity, CGame* game) :
+	CPowerItem(position, velocity, game, PowerAllGoodImageName)
 {
 
 }
