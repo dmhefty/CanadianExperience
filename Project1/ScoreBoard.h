@@ -38,6 +38,24 @@ public:
 	 */
 	void IncrementUnfair() { mUnfair++; }
 
+	/*
+	 * Gets the correct hits score
+	 * \returns int value for correct hits score
+	 */
+	int GetCorrect() const { return mCorrect; }
+
+	/*
+	 * Gets the missed score
+	 * \returns int value for missed score
+	 */
+	int GetMissed() const { return mMissed; }
+
+	/*
+	 * Gets the unfair hits score
+	 * \returns int value for unfair hits score
+	 */
+	int GetUnfair() const { return mUnfair; }
+
 private:
 	/// Number of hits on good UML objects by the player
 	int mCorrect = 0;

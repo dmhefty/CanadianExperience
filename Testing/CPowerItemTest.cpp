@@ -3,6 +3,7 @@
 #include "PowerItem.h"
 #include "PowerAllGone.h"
 #include "Vector.h"
+#include "Game.h"
 #include <string>
 
 
@@ -25,9 +26,10 @@ namespace Testing
 		
 		TEST_METHOD(TestPowerItemConstructor)
 		{
+			CGame game;
 			CVector position(0.0f, 0.0f);
 			CVector velocity(0.0f, 0.0f);
-			CPowerAllGone poweritem(position, velocity);
+			CPowerAllGone poweritem(position, velocity, &game);
 		}
 
 	};

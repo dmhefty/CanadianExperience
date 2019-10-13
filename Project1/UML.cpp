@@ -5,8 +5,8 @@
 CUML::CUML(std::shared_ptr<CUMLAttribute> name, 
 	std::vector<std::shared_ptr<CUMLAttribute> > attributes, 
 	std::vector<std::shared_ptr<CUMLAttribute> > operations, 
-	CVector position, CVector velocity) :
-	CItem(position, velocity) {
+	CVector position, CVector velocity, CGame* game) :
+	CItem(position, velocity, game) {
 	mName = name;
 	mAttributes = attributes;
 	mOperations = operations;

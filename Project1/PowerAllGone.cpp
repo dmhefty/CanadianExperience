@@ -17,9 +17,10 @@ const wstring PowerAllGoneImageName = L"poweritem/Nuke.png";
  * All Gone (nuke) power item constructor
  * \param position Position vector of item
  * \param velocity Velocity vector of item
+ * \param game The game pointer
  */
-CPowerAllGone::CPowerAllGone(CVector position, CVector velocity) :
-	CPowerItem(position, velocity, PowerAllGoneImageName)
+CPowerAllGone::CPowerAllGone(CVector position, CVector velocity, CGame* game) :
+	CPowerItem(position, velocity, game, PowerAllGoneImageName)
 {
 
 }

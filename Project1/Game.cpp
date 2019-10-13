@@ -9,11 +9,11 @@
 #include "pch.h"
 #include <memory>
 #include "Game.h"
+#include "Item.h"
 #include "XmlNode.h"
-#include "UML.h"
 #include <vector>
 #include "HaroldPen.h"
-#include "Item.h"
+#include "ItemDimensionVisitor.h"
 #include "MakePenActiveVisitor.h"
 #include "IsHaroldPenVisitor.h"
 #include "PowerAllBad.h"
@@ -22,6 +22,7 @@
 #include "PowerRapidFire.h"
 #include "IsHaroldPenVisitor.h"
 #include "HaroldPen.h"
+#include "UML.h"
 
 
 using namespace Gdiplus;
@@ -96,10 +97,13 @@ void CGame::OnLButtonDown(double x, double y)
 		if (visitPen.IsHaroldPen() && visitPen.IsAttached())
 		{
 			item->Accept(&changer);
+			visitPen.Reset();
+			break;
 		}
 
 	}
 
+	AddItem(mEmitter.AddUML());
 	
 }
 
@@ -114,21 +118,52 @@ void CGame::Update(double elapsedTime)
 		item->Update(elapsedTime);
 	}
 
-	if (false) // If pen is fired (bool mFired in Game.h?) do the following
+	CIsHaroldPenVisitor visitPen;
+	CVector penPosition;
+	CVector penDimensions;
+	CHaroldPen* pen = nullptr;
+	for (auto item : mItems)
 	{
-		CIsHaroldPenVisitor isPenVisitor;
-		this->Accept(&isPenVisitor);
-		auto pen = isPenVisitor.GetPen();
-
-		/*
-		for (auto item : someFilteredListOfItems)
+		item->Accept(&visitPen);
+		if (visitPen.IsHaroldPen())
 		{
-			// Check if pen image intersects
-			// (check positions + image widths and heights)
-			// with other item images
+			penPosition = item->GetPosition();
+			penDimensions = item->GetDimensions();
+			visitPen.Reset();
+			pen = visitPen.GetPen();
+			break;
 		}
-		*/
 	}
+	Rect penRect(penPosition.X() - penDimensions.X() / 2,
+		penPosition.Y() - penDimensions.X() / 2,
+		penDimensions.X(), penDimensions.Y());
+
+	CVector itemPosition;
+	CVector itemDimensions;
+
+	for (auto item : mItems)
+	{
+		item->Accept(&visitPen);
+		if (visitPen.IsHaroldPen())
+		{
+			visitPen.Reset();
+			continue;
+		}
+
+		itemPosition = item->GetPosition();
+		itemDimensions = item->GetDimensions();
+		Rect itemRect(itemPosition.X() - itemDimensions.X() / 2,
+			itemPosition.Y() - itemDimensions.Y() / 2,
+			itemDimensions.X(), itemDimensions.Y());
+
+		if (penRect.IntersectsWith(itemRect))
+		{
+			item->Effect();
+			pen->Effect();
+			break;
+		}
+	}
+
 }
 
 void CGame::Accept(CItemVisitor* visitor)
@@ -166,162 +201,23 @@ void CGame::RotatePen(double x, double y)
 	double oY = (y - mYOffset) / mScale;
 	// Determine and set the new angle
 	double angle = (atan2(Height - oY, oX) - AngleOffset) + (3.1415926535f)*3/4;
-	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle)+(1000.0f-105.0f));
+	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle) + (float)(1000.0 - 105.0));
 	
-	shared_ptr<CItem> currentPen;
 	CIsHaroldPenVisitor visitPen;
 	for (auto item : mItems)
 	{
 		item->Accept(&visitPen);
 		if (visitPen.IsHaroldPen())
 		{
-			currentPen = item;
-		}
-	}
-	if (visitPen.IsAttached())
-	{
-		currentPen->SetLocation(pos);
-		currentPen->SetAngle(angle);
-	}
-}
-
-/**
- * Loads a file containing characteristics for UML objects
- * \param filePath File path for UML data
- */
-void CGame::Load(const std::wstring &filePath)
-{
-	
-	
-	std::shared_ptr<CUMLAttribute> attribute;
-	try
-	{
-		//Open document to read
-		std::shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filePath);
-		
-		
-
-		for (auto node : root->GetChildren())
-		{
-			if (node->GetType() == NODE_ELEMENT)
+			if (visitPen.IsAttached())
 			{
-				
-				for (auto item : node->GetChildren()) 
-				{
-					if (item->GetType() == NODE_ELEMENT) {
-						std::wstring itemName = item->GetName();
-					//	
-						std::wstring error = item->GetAttributeValue(L"bad", L"");
-						std::wstring text;
-						if (item->GetNumChildren() > 0) {
-							text = item->GetChild(0)->GetValue();
-							
-						}
-						else {
-							text = L"";
-						}
-						
-						if (error == L"") {
-							attribute = make_shared<CUMLAttribute>(text);
-						}
-						else {
-							attribute = make_shared<CBadUMLAttribute>(text, error);
-						}
-
-						if (itemName == L"name") {
-							if (error == L"") {
-								mNames.push_back(attribute);
-							}
-							else {
-								mNamesBad.push_back(attribute);
-							}
-						}
-						else if (itemName == L"attribute") {
-							if (error == L"") {
-								mAttributes.push_back(attribute);
-							}
-							else {
-								mAttributesBad.push_back(attribute);
-							}
-						}
-						else if (itemName == L"operation") {
-							if (error == L"") {
-								mOperations.push_back(attribute);
-							}
-							else {
-								mOperationsBad.push_back(attribute);
-							}
-						}
-					}
-					
-				}
-
-				
-				
-				
+				item->SetLocation(pos);
 			}
+			item->SetAngle(angle);
+			visitPen.Reset();
+			break;
 		}
 	}
-	catch(CXmlNode::Exception ex)
-	{
-		AfxMessageBox(ex.Message().c_str());
-	}
-
-	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 2);	
-	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
-	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
-
-	// Code to randomize position and velocity of items. This should probably be moved to the item classes
-	// themselves and the position and vector parameters removed, but for now it'll be here.
-
-	/// Maximum speed in the X direction in
-	/// in pixels per second
-	const double MaxSpeedX = 20;
-
-	/// Maximum speed in the Y direction in
-	/// in pixels per second
-	const double MaxSpeedY = 40;
-
-	/// Minimum speed in the X direction in
-	/// in pixels per second
-	const double MinSpeedX = -20;
-
-	/// Minimum speed in the Y direction in
-	/// in pixels per second
-	const double MinSpeedY = 20;
-
-	/// Maximum starting position in the X direction
-	const double MaxPosX = CGame::Width/2;
-
-	/// Minimum starting position in the X direction
-	const double MinPosX = -1 * CGame::Width/2;
-
-	// Randomize X and Y speeds within limits
-	double tempSpeedX = MinSpeedX + ((double)rand() / RAND_MAX) * (MaxSpeedX - MinSpeedX);
-	double tempSpeedY = MinSpeedY + ((double)rand() / RAND_MAX) * (MaxSpeedY - MinSpeedY);
-
-	// Randomize X position within limits
-	double tempPosX = MinPosX + ((double)rand() / RAND_MAX) * (MaxPosX - MinPosX);
-
-	// Limit the X position so that it will not move off the screen with its set X velocity
-	if ((tempSpeedX < 0) && (-1 * CGame::Width/2 >= (tempPosX + tempSpeedX * (CGame::Height / tempSpeedY))))
-	{
-		tempPosX = -1 * CGame::Width/2 - (tempSpeedX * (CGame::Height / tempSpeedY));
-	}
-
-	if ((tempSpeedX > 0) && (CGame::Width/2 <= (tempPosX + tempSpeedX * (CGame::Height / tempSpeedY))))
-	{
-		tempPosX = CGame::Width/2 - (tempSpeedX * (CGame::Height / tempSpeedY));
-	}
-
-	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY));
-	mItems.push_back(mUML);
-
-	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY
-	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
-	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
-	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
-	mItems.push_back(make_shared<CPowerRapidFire>(CVector(0, 0), CVector(-3, 150)));
 }
 
 void CGame::AddItem(shared_ptr<CItem> item)
@@ -332,12 +228,12 @@ void CGame::AddItem(shared_ptr<CItem> item)
 /**
  * Constructor loads UML data file
  */
-CGame::CGame() 
+CGame::CGame() : mEmitter(this)
 {
 	std::wstring filename = L"uml.xml";
-	Load(filename);
+	mEmitter.Load(filename);
 
-	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f,1000.0-154.0f), CVector(0.0f,0.0f));
+	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f,1000.0-154.0f), CVector(0.0f,0.0f), this);
 	AddItem(hPen);
 }
 
