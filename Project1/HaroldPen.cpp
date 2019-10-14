@@ -76,7 +76,7 @@ void CHaroldPen::Update(double elapsedTime)
 	if (!mIsAttached)
 	{
 		mTravelTime += elapsedTime;
-		if (mTravelTime < (OneSecond/CItem::GetVelocityMultiplier()))
+		if (mTravelTime < (OneSecond / CItem::GetVelocityMultiplier()))
 		{
 			CItem::Update(elapsedTime);
 		}

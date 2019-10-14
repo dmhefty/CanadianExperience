@@ -2,6 +2,7 @@
  * \file PowerFast.h
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  *
  * Fast power item class
  */
@@ -11,13 +12,17 @@
 #include "PowerItem.h"
 
 
- /* Slow power-up class*/
+ /* Fast power-up class*/
 class CPowerFast :
 	public CPowerItem
 {
 public:
 	CPowerFast(CVector position, CVector velocity, CGame* game);
 
+	virtual void Effect() override;
+
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerFast(this); }
+
+	virtual void Update(double elapsedTime) override;
 };
 

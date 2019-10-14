@@ -2,16 +2,22 @@
  * \file PowerFast.cpp
  *
  * \author Isaac Mayers
+ * \author Jaideep Prasad
  */
 
 #include "pch.h"
 
 #include <string>
+#include "Game.h"
 #include "PowerFast.h"
+#include "IsHaroldPenVisitor.h"
 
 using namespace std;
 
 const wstring PowerFastImageName = L"poweritem/FastFall.png";
+
+// Time limit of 20 seconds
+const double TimeLimit = 20;
 
 /**
  * All Fast power item constructor
@@ -22,4 +28,52 @@ CPowerFast::CPowerFast(CVector position, CVector velocity, CGame* game) :
 	CPowerItem(position, velocity, game, PowerFastImageName)
 {
 
+}
+
+void CPowerFast::Effect()
+{
+	CGame* game = GetGame();
+	CIsHaroldPenVisitor isPenVisior;
+	for (auto item : *game)
+	{
+		item->Accept(&isPenVisior);
+		if (isPenVisior.IsHaroldPen())
+		{
+			isPenVisior.Reset();
+			continue;
+		}
+		item->SetVelocityMultiplier(2.5);
+	}
+	mIsActive = true;
+	CPowerItem::Effect();
+}
+
+void CPowerFast::Update(double elapsedTime)
+{
+	if (mIsActive)
+	{
+		mTimeActive += elapsedTime;
+		if (mTimeActive < TimeLimit)
+		{
+			Effect();
+		}
+		else
+		{
+			CGame* game = GetGame();
+			CIsHaroldPenVisitor isPenVisior;
+			for (auto item : *game)
+			{
+				item->Accept(&isPenVisior);
+				if (isPenVisior.IsHaroldPen())
+				{
+					isPenVisior.Reset();
+					continue;
+				}
+				item->SetVelocityMultiplier();
+			}
+			mIsActive = false;
+			mTimeActive = 0;
+		}
+	}
+	CPowerItem::Update(elapsedTime);
 }

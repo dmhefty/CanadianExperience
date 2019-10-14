@@ -1,6 +1,14 @@
+/**
+ * \file Emitter.cpp
+ *
+ * \author Akhil Alluri
+ * \author Jaideep Prasad
+ */
+
 #include "pch.h"
 #include "Emitter.h"
 #include "XmlNode.h"
+#include "Game.h"
 
 using namespace std;
 using namespace xmlnode;
@@ -89,18 +97,15 @@ void CEmitter::Load(const std::wstring& filePath)
 	{
 		AfxMessageBox(ex.Message().c_str());
 	}
-	
 
-/*
-	// TODO: EVENTUALLY REMOVE THE FOLLOWING LINES. FOR TESTING PURPOSES ONLY
-	mItems.push_back(make_shared<CPowerAllBad>(CVector(-600, 80), CVector(50, 60)));
-	mItems.push_back(make_shared<CPowerAllGood>(CVector(-500, 0), CVector(10, 90)));
-	mItems.push_back(make_shared<CPowerAllGone>(CVector(600, 0), CVector(-190, 280)));
-	mItems.push_back(make_shared<CPowerRapidFire>(CVector(0, 0), CVector(-3, 150)));
-*/
+
+	// TODO: DELETE THE FOLLOWING LINES. FOR TESTING PURSPOSES ONLY
+	mGame->AddItem(make_shared<CPowerSlow>(CVector(0, 0), CVector(-3, 100), mGame));
+	mGame->AddItem(make_shared<CPowerRapidFire>(CVector(-500, 0), CVector(40, 190), mGame));
 }
 
-std::shared_ptr<CUML> CEmitter::AddUML() {
+void CEmitter::AddUML() 
+{
 
 	/// Game area width in virtual pixels
 	const static int Width = 1250;
@@ -153,7 +158,5 @@ std::shared_ptr<CUML> CEmitter::AddUML() {
 	{
 		tempPosX = Width / 2 - (tempSpeedX * (Height / tempSpeedY));
 	}
-
-	std::shared_ptr<CUML> mUML = make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame);
-	return mUML;
-	}
+	mGame->AddItem(make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
+}

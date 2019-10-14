@@ -41,17 +41,21 @@ public:
 			(double)mPowerItemImage->GetHeight());
 	}
 
-	virtual void Effect() override { CItem::SetLocation(CVector(-1000, -1000)); }
+	virtual void Effect() override 
+	{ 
+		CItem::SetLocation(CVector(-1000, -1000));
+		CItem::SetVelocity(CVector(0, 0));
+	}
 
 	bool IsActive() const { return mIsActive; }
 
 protected:
 	CPowerItem(CVector position, CVector velocity, CGame* game,
 		std::wstring PowerItemImageName);
+	bool mIsActive = false;
+	double mTimeActive = 0;
 
 private:
 	std::unique_ptr<Gdiplus::Bitmap> mPowerItemImage;
-	bool mIsActive = false;
-	double mTimeActive = 0;
 };
 

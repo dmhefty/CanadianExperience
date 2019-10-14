@@ -1,3 +1,12 @@
+/**
+ * \file Emitter.h
+ *
+ * \author Akhil Alluri
+ * \author Jaideep Prasad
+ *
+ * Class for emitting items to the game
+ */
+
 #pragma once
 
 #include <vector>
@@ -21,12 +30,19 @@
 #include "PowerRapidFire.h"
 
 
+/**
+ * Class for emitting items to the game
+ */
 class CEmitter
 {
 public:
-	CEmitter(CGame* game) : mGame(game) {};
+	CEmitter() = delete;
+
+	CEmitter(const CEmitter&) = delete;
+
+	CEmitter(CGame* game) : mGame(game) {}
 	void Load(const std::wstring& filePath);
-	std::shared_ptr<CUML> AddUML();
+	void AddUML();
 
 private:
 	/// The game the emitter is a part of

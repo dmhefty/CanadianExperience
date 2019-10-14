@@ -7,11 +7,16 @@
 #include "pch.h"
 
 #include <string>
+#include "Game.h"
 #include "PowerRapidFire.h"
+#include "IsHaroldPenVisitor.h"
 
 using namespace std;
 
 const wstring PowerRapidFireImageName = L"poweritem/RapidFire.png";
+
+// Time limit of 15 seconds
+const double TimeLimit = 15;
 
 /**
  * Rapid Fire power item constructor
@@ -23,4 +28,46 @@ CPowerRapidFire::CPowerRapidFire(CVector position, CVector velocity, CGame* game
 	CPowerItem(position, velocity, game, PowerRapidFireImageName)
 {
 
+}
+
+void CPowerRapidFire::Effect()
+{
+	CGame* game = GetGame();
+	CIsHaroldPenVisitor isPenVisior;
+	for (auto item : *game)
+	{
+		item->Accept(&isPenVisior);
+		if (isPenVisior.IsHaroldPen())
+		{
+			isPenVisior.GetPen()->SetVelocityMultiplier(2.5);
+			break;
+		}
+	}
+	mIsActive = true;
+	CPowerItem::Effect();
+}
+
+void CPowerRapidFire::Update(double elapsedTime)
+{
+	if (mIsActive)
+	{
+		mTimeActive += elapsedTime;
+		if (mTimeActive >= TimeLimit)
+		{
+			CGame* game = GetGame();
+			CIsHaroldPenVisitor isPenVisior;
+			for (auto item : *game)
+			{
+				item->Accept(&isPenVisior);
+				if (isPenVisior.IsHaroldPen())
+				{
+					isPenVisior.GetPen()->SetVelocityMultiplier();
+					break;
+				}
+			}
+			mIsActive = false;
+			mTimeActive = 0;
+		}
+	}
+	CPowerItem::Update(elapsedTime);
 }

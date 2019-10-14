@@ -103,8 +103,7 @@ void CGame::OnLButtonDown(double x, double y)
 
 	}
 
-	AddItem(mEmitter.AddUML());
-	
+	mEmitter.AddUML();
 }
 
 /**
@@ -156,7 +155,7 @@ void CGame::Update(double elapsedTime)
 			itemPosition.Y() - itemDimensions.Y() / 2,
 			itemDimensions.X(), itemDimensions.Y());
 
-		if (penRect.IntersectsWith(itemRect))
+		if (!(pen->GetAttachedState()) && penRect.IntersectsWith(itemRect))
 		{
 			item->Effect();
 			pen->Effect();
@@ -243,5 +242,5 @@ CGame::CGame() : mEmitter(this)
  */
 CGame::~CGame() 
 {
-
+	mItems.clear();
 }

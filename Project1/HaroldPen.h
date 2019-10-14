@@ -41,7 +41,11 @@ public:
 
 	virtual void Accept(CItemVisitor* visitor) override;
 
-	virtual void Effect() override { CItem::SetVelocity(CVector(0, 0)); }
+	virtual void Effect() override 
+	{
+		CItem::SetVelocity(CVector(0, 0)); 
+		CItem::SetLocation(CVector(1000, -1000));
+	}
 
 	virtual CVector GetDimensions() const override
 	{
