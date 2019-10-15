@@ -109,6 +109,9 @@ void CChildView::OnPaint()
 	 */
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
+	LARGE_INTEGER clockPerfomance;
+	QueryPerformanceFrequency(&clockPerfomance);
+
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
@@ -116,6 +119,33 @@ void CChildView::OnPaint()
 	mGame.Update(elapsed);
 
 	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
+
+	// Emit a UML every 5 seconds
+	if (mEmitUML)
+	{
+		// emit boolean
+		QueryPerformanceCounter(&mStartUMLCounter);
+		//LARGE_INTEGER reset;
+		//mEndUMLCounter = reset;
+		mEmitUML = false;
+	}
+	else
+	{
+		QueryPerformanceCounter(&mEndUMLCounter);
+		LARGE_INTEGER change;
+		change.QuadPart = mEndUMLCounter.QuadPart - mStartUMLCounter.QuadPart;
+		double changeSeconds = ((double)change.QuadPart) / ((double) clockPerfomance.QuadPart);
+
+		if (changeSeconds > 5.0f)
+		{
+			mEmitUML = true;
+			mGame.EmmitUML();
+		}
+
+	}
+	
+
+
 }
 
 /**

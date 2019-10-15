@@ -51,6 +51,11 @@ private:
 
 	long long mLastTime = 0;    ///< Last time we read the timer
 	double mTimeFreq = 0.0;       ///< Rate the timer updates
+	
+	bool mEmitUML = true;
+	LARGE_INTEGER mStartUMLCounter;
+	LARGE_INTEGER mEndUMLCounter;
+
 
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);

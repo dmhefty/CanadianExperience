@@ -52,6 +52,7 @@ public:
 	int GetWidth() { return Width; }
 
 
+	void EmmitUML() { mEmitter.AddUML(); };
 	void AddItem(std::shared_ptr<CItem> item);
 
 	void RemoveItem(std::shared_ptr<CItem> item);
