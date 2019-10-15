@@ -7,7 +7,9 @@
 #include "pch.h"
 
 #include <string>
+#include "Game.h"
 #include "PowerAllBad.h"
+#include "IsGoodUMLVisitor.h"
 
 using namespace std;
 
@@ -23,4 +25,28 @@ CPowerAllBad::CPowerAllBad(CVector position, CVector velocity, CGame* game) :
 	CPowerItem(position, velocity, game, PowerAllBadImageName)
 {
 
+}
+
+void CPowerAllBad::Effect()
+{
+	CGame* game = GetGame();
+	CIsGoodUMLVisitor umlVisitor;
+	vector<shared_ptr<CItem> > goodUML;
+	for (auto item : *game)
+	{
+		item->Accept(&umlVisitor);
+		if (umlVisitor.IsGoodUML())
+		{
+			goodUML.push_back(item);
+			umlVisitor.Reset();
+		}
+
+	}
+	for (auto item : goodUML)
+	{
+		game->RemoveItem(item);
+	}
+	goodUML.clear();
+
+	CPowerItem::Effect();
 }

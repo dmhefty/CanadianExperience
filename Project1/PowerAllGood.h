@@ -19,6 +19,8 @@ class CPowerAllGood : public CPowerItem
 public:
 	CPowerAllGood(CVector position, CVector velocity, CGame* game);
 
+	virtual void Effect() override;
+
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerAllGood(this); }
 };
 

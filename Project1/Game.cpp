@@ -224,6 +224,50 @@ void CGame::AddItem(shared_ptr<CItem> item)
 	mItems.push_back(item);
 }
 
+void CGame::RemoveItem(std::shared_ptr<CItem> item)
+{
+	for (auto iter = mItems.begin(); iter != mItems.end(); iter++)
+	{
+		if (*iter == item)
+		{
+			mItems.erase(iter);
+			break;
+		}
+	}
+}
+
+void CGame::RemoveThisItem(CItem* item)
+{
+	for (auto sharedPtr : mItems)
+	{
+		if (sharedPtr.get() == item)
+		{
+			RemoveItem(sharedPtr);
+			break;
+		}
+	}
+}
+
+/**
+ * Updates the scoreboard by incrementing a score category.
+ * \param category Type of score to increment. -1: unfair, 0: missed, 1: correct 
+ */
+void CGame::IncrementScore(int category)
+{
+	switch (category)
+	{
+	case 0:
+		mScoreBoard.IncrementMissed();
+		break;
+	case 1:
+		mScoreBoard.IncrementCorrect();
+		break;
+	default:
+		mScoreBoard.IncrementUnfair();
+		break;
+	}
+}
+
 /**
  * Constructor loads UML data file
  */

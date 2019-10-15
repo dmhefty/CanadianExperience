@@ -144,6 +144,12 @@
     <ClInclude Include="ItemDimensionVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IsBadUMLVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IsGoodUMLVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -261,6 +267,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ItemDimensionVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IsBadUMLVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IsGoodUMLVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

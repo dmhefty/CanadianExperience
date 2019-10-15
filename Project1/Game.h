@@ -54,6 +54,12 @@ public:
 
 	void AddItem(std::shared_ptr<CItem> item);
 
+	void RemoveItem(std::shared_ptr<CItem> item);
+
+	void RemoveThisItem(CItem* item);
+
+	void IncrementScore(int category);
+
 	/** Iterator that iterates over the game items */
 	class Iter
 	{

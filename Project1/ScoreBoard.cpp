@@ -41,8 +41,4 @@ void CScoreBoard::Draw(Gdiplus::Graphics* graphics)
 	graphics->DrawString(L"Missed", -1, &font, PointF(-50, 100), &green);
 	graphics->DrawString(to_wstring(mUnfair).c_str(), -1, &font, PointF(500, 50), &green);
 	graphics->DrawString(L"Unfair", -1, &font, PointF(500, 100), &green);
-
-	mCorrect++;
-	mUnfair += 3;
-	mMissed += 10;
 }

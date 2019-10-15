@@ -199,6 +199,8 @@
     <ClInclude Include="GoodUMLVisitor.h" />
     <ClInclude Include="Harold.h" />
     <ClInclude Include="HaroldPen.h" />
+    <ClInclude Include="IsBadUMLVisitor.h" />
+    <ClInclude Include="IsGoodUMLVisitor.h" />
     <ClInclude Include="IsHaroldPenVisitor.h" />
     <ClInclude Include="IsPenVisitor.h" />
     <ClInclude Include="IsPowerAllBadVisitor.h" />
@@ -242,6 +244,8 @@
     <ClCompile Include="GoodUMLVisitor.cpp" />
     <ClCompile Include="Harold.cpp" />
     <ClCompile Include="HaroldPen.cpp" />
+    <ClCompile Include="IsBadUMLVisitor.cpp" />
+    <ClCompile Include="IsGoodUMLVisitor.cpp" />
     <ClCompile Include="IsHaroldPenVisitor.cpp" />
     <ClCompile Include="IsPenVisitor.cpp" />
     <ClCompile Include="IsPowerAllBadVisitor.cpp" />

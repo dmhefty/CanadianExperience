@@ -2,6 +2,7 @@
  * \file IsUMLItemVisitor.h
  *
  * \author David Hefty
+ * \author Jaideep Prasad
  *
  * Item visitor to determine if an Item is a CUML item
  */
@@ -25,6 +26,11 @@ public:
 	* \return bool for if an UML object was visited
 	*/
 	bool IsUML() { return mIsUML; }
+
+	/**
+	* Resets the visitor
+	*/
+	void Reset() { mIsUML = false; }
 
 private:
 	bool mIsUML = false;

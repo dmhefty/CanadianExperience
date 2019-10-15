@@ -102,6 +102,7 @@ void CEmitter::Load(const std::wstring& filePath)
 	// TODO: DELETE THE FOLLOWING LINES. FOR TESTING PURSPOSES ONLY
 	mGame->AddItem(make_shared<CPowerSlow>(CVector(0, 0), CVector(-3, 100), mGame));
 	mGame->AddItem(make_shared<CPowerRapidFire>(CVector(-500, 0), CVector(40, 190), mGame));
+	mGame->AddItem(make_shared<CPowerAllGone>(CVector(500, 0), CVector(-20, 80), mGame));
 }
 
 void CEmitter::AddUML() 
@@ -158,5 +159,8 @@ void CEmitter::AddUML()
 	{
 		tempPosX = Width / 2 - (tempSpeedX * (Height / tempSpeedY));
 	}
-	mGame->AddItem(make_shared<CUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
+
+	// Change these lines after randomization of good/bad UMLs
+	mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
+	mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
 }
