@@ -41,7 +41,7 @@ void CEmitter::Load(const std::wstring& filePath)
 				{
 					if (item->GetType() == NODE_ELEMENT) {
 						std::wstring itemName = item->GetName();
-						//	
+						//
 						std::wstring error = item->GetAttributeValue(L"bad", L"");
 						std::wstring text;
 						if (item->GetNumChildren() > 0) {
@@ -112,7 +112,7 @@ void CEmitter::AddUML()
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
 
-	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 2);
+	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin()+3, mAttributes.begin() + 4);
 	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
 	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
 

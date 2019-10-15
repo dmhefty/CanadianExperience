@@ -104,8 +104,7 @@ void CGame::OnLButtonDown(double x, double y)
 		}
 
 	}
-	// Emit UML
-	mEmitter.AddUML();
+	
 	
 }
 
