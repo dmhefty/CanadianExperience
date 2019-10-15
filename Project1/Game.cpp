@@ -70,6 +70,8 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height) {
 
 	// ScoreBoard must ALWAYS be drawn last (on top of everything)
 	mScoreBoard.Draw(graphics);
+
+
 }
 
 /**
@@ -102,8 +104,9 @@ void CGame::OnLButtonDown(double x, double y)
 		}
 
 	}
-
+	// Emit UML
 	mEmitter.AddUML();
+	
 }
 
 /**
