@@ -63,5 +63,6 @@ private:
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperations;
 	///list of possible bad uml operations
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperationsBad;
+	
 };
 
