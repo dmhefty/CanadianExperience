@@ -63,6 +63,9 @@ private:
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperations;
 	///list of possible bad uml operations
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperationsBad;
+
+	/// probability of a good item being spawned
+	double mProbability = 0.0;
 	
 };
 

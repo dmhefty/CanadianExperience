@@ -29,7 +29,7 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 	double textWidth = 0;
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
 	/* Draw Name */
-	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, origin, &white);
+	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, PointF(REAL(500), REAL(500)), &white);
 	for (auto att : mAttributes) {
 		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, origin, &size);
 		

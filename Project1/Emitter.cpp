@@ -9,11 +9,15 @@
 #include "Emitter.h"
 #include "XmlNode.h"
 #include "Game.h"
+#include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 using namespace xmlnode;
 
-
+/// 
+const double MAX_PROBABILITY = 0.50f;
+const double PROB_CHANGE_RATE = 0.02f;
 
 /**
  * Loads a file containing characteristics for UML objects
@@ -107,6 +111,9 @@ void CEmitter::Load(const std::wstring& filePath)
 
 void CEmitter::AddUML() 
 {
+	srand(time(NULL));
+	double randomGuess = (rand() % 100 + 1) / 100.0f;
+
 
 	/// Game area width in virtual pixels
 	const static int Width = 1250;
@@ -160,7 +167,24 @@ void CEmitter::AddUML()
 		tempPosX = Width / 2 - (tempSpeedX * (Height / tempSpeedY));
 	}
 
-	// Change these lines after randomization of good/bad UMLs
-	mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
+	// Generate a good or bad UML based on the probability
+
+	if (randomGuess > mProbability)
+	{
+		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
+	}
+	else
+	{
+		mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
+	}
+	
+	if (mProbability <= MAX_PROBABILITY)
+	{
+		mProbability += PROB_CHANGE_RATE;
+	}
+	else
+	{
+		mProbability = 50.0f;
+	}
+	
 }
