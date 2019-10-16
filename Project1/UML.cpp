@@ -26,7 +26,7 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 	double textHeight = 0;
 	double textWidth = 0;
 	FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+	Gdiplus::Font font(&fontFamily, 16, FontStyleRegular, UnitPixel);
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
 	textHeight = (double)size.Height;
 	textWidth = (double)size.Width;
@@ -38,29 +38,28 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 		if ((double)size.Width > textWidth) {
 			textWidth = (double)size.Width;
 		}
-		/*Draw Attributes*/
-		///graphics->DrawString(att->GetAtt().c_str(), -1, &font, PointF(0, textHeight), &black);
 	}
 
 	for (auto op : mOperations) {
 		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, origin, &size);
-		
-			textHeight += (double)size.Height;
-		
+
+		textHeight += (double)size.Height;
+
 		if ((double)size.Width > textWidth) {
 			textWidth = (double)size.Width;
 		}
-		/*Draw Operations*/
-		///graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(0, textHeight), &black);
+
 	}
-	Gdiplus::SolidBrush sb(Gdiplus::Color(255, 255, 193));
-	Gdiplus::Rect box((int)(position.X() - textWidth / 2), (int)(position.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
+	SolidBrush sb(Gdiplus::Color(255, 255, 193));
+	Rect box((int)(position.X() - textWidth / 2), (int)(position.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
 	graphics->FillRectangle(&sb, box );
 	PointF strloc(position.X(), position.Y());
 	strloc.Y = strloc.Y - textHeight / 2;
-	/*Draw Name*/
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, strloc, &size);
+	strloc.X = strloc.X - (double)size.Width / 2;
+	/*Draw Name*/
 	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, strloc, &black);
+	strloc.X = strloc.X + (double)size.Width / 2;
 	strloc.X = strloc.X - textWidth / 2;
 	for (auto att : mAttributes) {
 		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, strloc, &size);
