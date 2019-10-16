@@ -29,8 +29,11 @@ using namespace Gdiplus;
 using namespace std;
 using namespace xmlnode;
 
-// Half Pi radians
+/// Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
+
+///	5 seconds in seconds
+const double FIVE_SECONDS = 5.0;
 
 
 /**
@@ -164,6 +167,15 @@ void CGame::Update(double elapsedTime)
 			break;
 		}
 	}
+
+	// add a UML Item if it has been enough time.
+	mUMLTimeDelta += elapsedTime;
+	if (mUMLTimeDelta >= FIVE_SECONDS)
+	{
+		mUMLTimeDelta = 0;
+		mEmitter.AddUML();
+	}
+
 
 }
 

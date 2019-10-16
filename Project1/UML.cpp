@@ -51,7 +51,7 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Operations*/
-		graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textWidth, textHeight), &white);
+		//graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textWidth, textHeight), &white);
 	}
 	CVector pos = GetPosition();
 	Gdiplus::SolidBrush sb(Gdiplus::Color(255, 255, 193));
