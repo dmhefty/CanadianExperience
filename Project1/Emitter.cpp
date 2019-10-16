@@ -161,6 +161,6 @@ void CEmitter::AddUML()
 	}
 
 	// Change these lines after randomization of good/bad UMLs
-	mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(0, 0), mGame));
+	mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
 	//mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
 }
