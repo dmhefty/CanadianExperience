@@ -28,11 +28,10 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 	double textHeight = 0;
 	double textWidth = 0;
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
-	textHeight += (double)size.Height;
 	/* Draw Name */
 	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, origin, &white);
 	for (auto att : mAttributes) {
-		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &size);
+		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, origin, &size);
 		
 			textHeight += (double)size.Height;
 		
@@ -40,11 +39,11 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Attributes*/
-		graphics->DrawString(att->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
+		graphics->DrawString(att->GetAtt().c_str(), -1, &font, PointF(textWidth, textHeight), &white);
 	}
 
 	for (auto op : mOperations) {
-		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &size);
+		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, origin, &size);
 		
 			textHeight += (double)size.Height;
 		
@@ -52,7 +51,7 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Operations*/
-		graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
+		graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textWidth, textHeight), &white);
 	}
 	CVector pos = GetPosition();
 	Gdiplus::SolidBrush sb(Gdiplus::Color(255, 255, 193));
