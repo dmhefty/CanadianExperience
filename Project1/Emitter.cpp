@@ -17,7 +17,7 @@ using namespace xmlnode;
 
 /// 
 const double MAX_PROBABILITY = 0.50f;
-const double PROB_CHANGE_RATE = 0.02f;
+const double PROB_CHANGE_RATE = 0.035f;
 
 /**
  * Loads a file containing characteristics for UML objects
@@ -120,9 +120,13 @@ void CEmitter::AddUML()
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
 
-	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 3);
-	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin() + 3);
-	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
+
+	int numOfAttributes = rand() % 4;
+	int numOfOperations = rand() % 4;
+	int randName = rand() % 4;
+	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
+	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin() + numOfOperations);
+	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
 
 	// Code to randomize position and velocity of items. This should probably be moved to the item classes
 	// themselves and the position and vector parameters removed, but for now it'll be here.
