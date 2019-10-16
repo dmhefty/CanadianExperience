@@ -21,25 +21,25 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 	Pen drawPen(Color(255, 255, 193));
 	// Determine the text height
 	RectF size;
-	SolidBrush white(Color(255, 255, 255));
+	SolidBrush black(Color(0, 0, 0));
 	PointF origin(0.0f, 0.0f);
-	FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	double textHeight = 0;
 	double textWidth = 0;
+	FontFamily fontFamily(L"Arial");
+	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
-	/* Draw Name */
-	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, origin, &white);
+	textHeight = (double)size.Height;
+	textWidth = (double)size.Width;
 	for (auto att : mAttributes) {
 		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, origin, &size);
 		
 			textHeight += (double)size.Height;
 		
-		if ((double)size.Width != textWidth) {
+		if ((double)size.Width > textWidth) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Attributes*/
-		graphics->DrawString(att->GetAtt().c_str(), -1, &font, PointF(textWidth, textHeight), &white);
+		///graphics->DrawString(att->GetAtt().c_str(), -1, &font, PointF(0, textHeight), &black);
 	}
 
 	for (auto op : mOperations) {
@@ -47,14 +47,33 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 		
 			textHeight += (double)size.Height;
 		
-		if ((double)size.Width != textWidth) {
+		if ((double)size.Width > textWidth) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Operations*/
-		graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textWidth, textHeight), &white);
+		///graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(0, textHeight), &black);
 	}
-	CVector pos = GetPosition();
 	Gdiplus::SolidBrush sb(Gdiplus::Color(255, 255, 193));
-	Gdiplus::Rect box((int)(pos.X() - textWidth / 2), (int)(pos.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
+	Gdiplus::Rect box((int)(position.X() - textWidth / 2), (int)(position.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
 	graphics->FillRectangle(&sb, box );
+	PointF strloc(position.X(), position.Y());
+	strloc.Y = strloc.Y - textHeight / 2;
+	/*Draw Name*/
+	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, strloc, &size);
+	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, strloc, &black);
+	strloc.X = strloc.X - textWidth / 2;
+	for (auto att : mAttributes) {
+		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, strloc, &size);
+		strloc.Y = strloc.Y + (double)size.Height;
+		/*Draw Attributes*/
+		graphics->DrawString(att->GetAtt().c_str(), -1, &font, strloc, &black);
+	}
+
+	for (auto op : mOperations) {
+		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, strloc, &size);
+		strloc.Y = strloc.Y + (double)size.Height;
+		/*Draw Operations*/
+		graphics->DrawString(op->GetAtt().c_str(), -1, &font, strloc, &black);
+	}
 }
+
