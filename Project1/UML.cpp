@@ -27,12 +27,16 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	double textHeight = 0;
 	double textWidth = 0;
+	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
+	textHeight += (double)size.Height;
+	/* Draw Name */
+	graphics->DrawString(mName->GetAtt().c_str(), -1, &font, origin, &white);
 	for (auto att : mAttributes) {
-		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, origin, &size);
+		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &size);
 		
 			textHeight += (double)size.Height;
 		
-		if ((double)size.Width > textWidth) {
+		if ((double)size.Width != textWidth) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Attributes*/
@@ -40,21 +44,16 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 	}
 
 	for (auto op : mOperations) {
-		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, origin, &size);
+		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &size);
 		
 			textHeight += (double)size.Height;
 		
-		if ((double)size.Width > textWidth) {
+		if ((double)size.Width != textWidth) {
 			textWidth = (double)size.Width;
 		}
 		/*Draw Operations*/
-		///graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
+		graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
 	}
-
-	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
-	textHeight += (double)size.Height;
-	/* Draw Name */
-	///graphics->DrawString(mName->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
 	CVector pos = GetPosition();
 	Gdiplus::SolidBrush sb(Gdiplus::Color(255, 255, 193));
 	Gdiplus::Rect box((int)(pos.X() - textWidth / 2), (int)(pos.Y() - textHeight / 2), (int)textWidth, (int)textHeight);

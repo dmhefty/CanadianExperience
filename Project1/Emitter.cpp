@@ -113,8 +113,8 @@ void CEmitter::AddUML()
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
 
-	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin()+3, mAttributes.begin() + 4);
-	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin());
+	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + 3);
+	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin() + 3);
 	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[0]->GetAtt());
 
 	// Code to randomize position and velocity of items. This should probably be moved to the item classes
