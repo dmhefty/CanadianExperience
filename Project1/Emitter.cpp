@@ -11,6 +11,7 @@
 #include "Game.h"
 #include <time.h>
 #include <stdlib.h>
+#include <algorithm>
 
 using namespace std;
 using namespace xmlnode;
@@ -124,6 +125,15 @@ void CEmitter::AddUML()
 	int numOfAttributes = rand() % 4;
 	int numOfOperations = rand() % 4;
 	int randName = rand() % 4;
+	
+	// shuffle all the possible UML parts
+	random_shuffle(mAttributes.begin(), mAttributes.end());
+	random_shuffle(mAttributesBad.begin(), mAttributesBad.end());
+	random_shuffle(mOperations.begin(), mOperations.end());
+	random_shuffle(mOperationsBad.begin(), mOperationsBad.end());
+	random_shuffle(mNames.begin(), mNames.end());
+	random_shuffle(mNamesBad.begin(), mNamesBad.end());
+
 	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
 	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin() + numOfOperations);
 	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
@@ -133,19 +143,19 @@ void CEmitter::AddUML()
 
 	/// Maximum speed in the X direction in
 	/// in pixels per second
-	const double MaxSpeedX = 20;
+	const double MaxSpeedX = 40;
 
 	/// Maximum speed in the Y direction in
 	/// in pixels per second
-	const double MaxSpeedY = 40;
+	const double MaxSpeedY = 60;
 
 	/// Minimum speed in the X direction in
 	/// in pixels per second
-	const double MinSpeedX = -20;
+	const double MinSpeedX = -30;
 
 	/// Minimum speed in the Y direction in
 	/// in pixels per second
-	const double MinSpeedY = 20;
+	const double MinSpeedY = 30;
 
 	/// Maximum starting position in the X direction
 	const double MaxPosX = Width / 2;
