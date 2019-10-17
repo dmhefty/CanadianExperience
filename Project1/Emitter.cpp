@@ -18,7 +18,10 @@ using namespace xmlnode;
 
 /// 
 const double MAX_PROBABILITY = 0.50f;
-const double PROB_CHANGE_RATE = 0.035f;
+const double PROB_CHANGE_RATE = 0.025f;
+const int BAD_NAME = 1;
+const int BAD_ATTS = 2;
+const int BAD_OPS = 3;
 
 /**
  * Loads a file containing characteristics for UML objects
@@ -120,12 +123,18 @@ void CEmitter::AddUML()
 	const static int Width = 1250;
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
+	/// which issue is the case for the UML
+	int randIssue; // 0: no issue, goodUML; 1: name Issue; 2: Att issue; 3: Op issue
 
+	if (randomGuess > mProbability)
+	{
+		randIssue = rand() % 3 + 1; // decides Bad Issue
+	}
+	else
+	{
+		randIssue = 0;
+	}
 
-	int numOfAttributes = rand() % 4;
-	int numOfOperations = rand() % 4;
-	int randName = rand() % 4;
-	
 	// shuffle all the possible UML parts
 	random_shuffle(mAttributes.begin(), mAttributes.end());
 	random_shuffle(mAttributesBad.begin(), mAttributesBad.end());
@@ -134,9 +143,71 @@ void CEmitter::AddUML()
 	random_shuffle(mNames.begin(), mNames.end());
 	random_shuffle(mNamesBad.begin(), mNamesBad.end());
 
-	std::vector<std::shared_ptr<CUMLAttribute> > atts(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
-	std::vector<std::shared_ptr<CUMLAttribute> > ops(mOperations.begin(), mOperations.begin() + numOfOperations);
-	std::shared_ptr<CUMLAttribute> name = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
+
+	std::vector<std::shared_ptr<CUMLAttribute> > atts;
+	std::vector<std::shared_ptr<CUMLAttribute> > ops;
+	std::shared_ptr<CUMLAttribute> name;
+
+	// pick out attributes based on if it is good/bad
+	if (randomGuess > mProbability) // Bad Item
+	{
+		if (randIssue == BAD_NAME)
+		{
+			int numOfAttributes = rand() % 4;
+			int numOfOperations = rand() % 4;
+			int randName = rand() % 4;
+			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
+			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
+			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNamesBad[randName]->GetAtt());
+		
+			atts = attsTemp;
+			ops = opsTemp;
+			name = nameTemp;
+		}
+		else if (randIssue == BAD_ATTS)
+		{
+			int numOfAttributes = rand() % 3;
+			int numOfOperations = rand() % 4;
+			int randName = rand() % 4;
+			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
+			atts.push_back(mAttributesBad[0]);
+			random_shuffle(atts.begin(), atts.end());
+			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
+			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
+		
+			atts = attsTemp;
+			ops = opsTemp;
+			name = nameTemp;
+		}
+		else if (randIssue == BAD_OPS)
+		{
+			int numOfAttributes = rand() % 4;
+			int numOfOperations = rand() % 3;
+			int randName = rand() % 4;
+			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
+			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
+			ops.push_back(mOperationsBad[0]);
+			random_shuffle(ops.begin(), ops.end());
+			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
+
+			atts = attsTemp;
+			ops = opsTemp;
+			name = nameTemp;
+		}
+	} // end bad UML
+	else // good UML
+	{
+		int numOfAttributes = rand() % 4;
+		int numOfOperations = rand() % 4;
+		int randName = rand() % 4;
+		std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
+		std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
+		std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
+	
+		atts = attsTemp;
+		ops = opsTemp;
+		name = nameTemp;
+	}
 
 	// Code to randomize position and velocity of items. This should probably be moved to the item classes
 	// themselves and the position and vector parameters removed, but for now it'll be here.
@@ -183,11 +254,11 @@ void CEmitter::AddUML()
 
 	// Generate a good or bad UML based on the probability
 
-	if (randomGuess > mProbability)
+	if (randomGuess > mProbability) // Bad Item
 	{
 		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
 	}
-	else
+	else // Good Item
 	{
 		mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
 	}
