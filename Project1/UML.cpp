@@ -36,7 +36,7 @@ void CUML::Draw(Graphics* graphics, CVector position)
 	Gdiplus::Font namefont(&fontFamily, 20, FontStyleBold, UnitPixel);
 	Gdiplus::Font font(&fontFamily, 16, FontStyleRegular, UnitPixel);
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &namefont, origin, &size);
-	textHeight = (double)size.Height + 3;
+	textHeight = (double)size.Height + 6;
 	textWidth = (double)size.Width;
 	for (auto att : mAttributes) 
 	{
@@ -73,7 +73,6 @@ void CUML::Draw(Graphics* graphics, CVector position)
 		mWidth = box.Width;
 		mHeight = box.Height;
 	}
-	
 	//draw box
 	graphics->FillRectangle(&sb, box );
 	PointF strloc(position.X(), position.Y());
@@ -95,12 +94,9 @@ void CUML::Draw(Graphics* graphics, CVector position)
 		strloc.X += (double)size.Width / 2;
 		strloc.X -= box.Width / 2;
 	}
-	strloc.Y += (double)size.Height;
-	if ((mOperations.size() > 0 && mAttributes.size() > 0) || mAttributes.size() == 0 && mOperations.size() == 0 || mAttributes.size() > 0 && mOperations.size() == 0)
-	{
-		strloc.Y += 3;
-		graphics->DrawLine(&pen, strloc.X, strloc.Y, strloc.X + textWidth, strloc.Y);
-	}
+	strloc.Y += (double)size.Height + 3;
+	graphics->DrawLine(&pen, strloc.X, strloc.Y, strloc.X + textWidth, strloc.Y);
+	strloc.Y += 3;
 	for (auto att : mAttributes) 
 	{
 		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, strloc, &size);
@@ -108,7 +104,7 @@ void CUML::Draw(Graphics* graphics, CVector position)
 		graphics->DrawString(att->GetAtt().c_str(), -1, &font, strloc, &black);
 		strloc.Y += (double)size.Height;
 	}
-	if (mOperations.size() > 0)
+	if (mOperations.size() > 0 && mAttributes.size() > 0)
 	{
 		strloc.Y += 3;
 		graphics->DrawLine(&pen, strloc.X, strloc.Y, strloc.X + textWidth, strloc.Y);
