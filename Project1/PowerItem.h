@@ -43,7 +43,7 @@ public:
 
 	virtual void Effect() override 
 	{ 
-		CItem::SetLocation(CVector(-1000, -1000));
+		CItem::SetLocation(CVector(-100, -1000));
 		CItem::SetVelocity(CVector(0, 0));
 	}
 

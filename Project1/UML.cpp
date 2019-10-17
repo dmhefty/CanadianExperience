@@ -67,6 +67,13 @@ void CUML::Draw(Graphics* graphics, CVector position)
 	}
 	SolidBrush sb(Gdiplus::Color(255, 255, 193));
 	Rect box((int)(position.X() - textWidth / 2), (int)(position.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
+	
+	if (mWidth < 0 || mHeight < 0)
+	{
+		mWidth = box.Width;
+		mHeight = box.Height;
+	}
+	
 	//draw box
 	graphics->FillRectangle(&sb, box );
 	PointF strloc(position.X(), position.Y());

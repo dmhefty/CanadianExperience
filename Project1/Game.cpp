@@ -21,6 +21,8 @@
 #include "PowerAllGone.h"
 #include "PowerRapidFire.h"
 #include "IsHaroldPenVisitor.h"
+#include "IsUMLItemVisitor.h"
+#include "IsBadUMLVisitor.h"
 #include "HaroldPen.h"
 #include "UML.h"
 
@@ -117,14 +119,54 @@ void CGame::OnLButtonDown(double x, double y)
  */
 void CGame::Update(double elapsedTime)
 {
+	CIsHaroldPenVisitor visitPen;
+	CIsUMLItemVisitor umlVisitor;
+
+	CVector penPosition;
+	CVector penDimensions;
+
+	CVector itemPosition;
+	CVector itemDimensions;
+
+	vector<shared_ptr<CItem> > outOfBounds;
+
 	for (auto item : mItems)
 	{
 		item->Update(elapsedTime);
+		item->Accept(&visitPen);
+		item->Accept(&umlVisitor);
+
+		itemPosition = item->GetPosition();
+		itemDimensions = item->GetDimensions();
+
+		if (itemPosition.X() - itemDimensions.X() > Width / 2.0 ||
+			itemPosition.X() + itemDimensions.X() < -Width / 2.0 ||
+			itemPosition.Y() - itemDimensions.Y() > Height)
+		{
+			if (umlVisitor.IsUML())
+			{
+				outOfBounds.push_back(item);
+			}
+			else if (!visitPen.IsHaroldPen())
+			{
+				item->SetLocation(CVector(-1000, -1000));
+				item->SetVelocity(CVector(0, 0));
+			}
+		}
+		visitPen.Reset();
+		umlVisitor.Reset();
 	}
 
-	CIsHaroldPenVisitor visitPen;
-	CVector penPosition;
-	CVector penDimensions;
+	CIsBadUMLVisitor badUmlVisitor;
+	for (auto uml : outOfBounds)
+	{
+		uml->Accept(&badUmlVisitor);
+		if (badUmlVisitor.IsBadUML()) IncrementScore(0);
+		RemoveItem(uml);
+		badUmlVisitor.Reset();
+	}
+	outOfBounds.clear();
+
 	CHaroldPen* pen = nullptr;
 	for (auto item : mItems)
 	{
@@ -141,9 +183,6 @@ void CGame::Update(double elapsedTime)
 	Rect penRect(penPosition.X() - penDimensions.X() / 2,
 		penPosition.Y() - penDimensions.X() / 2,
 		penDimensions.X(), penDimensions.Y());
-
-	CVector itemPosition;
-	CVector itemDimensions;
 
 	for (auto item : mItems)
 	{

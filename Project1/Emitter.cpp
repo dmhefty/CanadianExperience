@@ -9,6 +9,12 @@
 #include "Emitter.h"
 #include "XmlNode.h"
 #include "Game.h"
+#include "IsPowerAllBadVisitor.h"
+#include "IsPowerAllGoodVisitor.h"
+#include "IsPowerAllGoneVisitor.h"
+#include "IsPowerFastVisitor.h"
+#include "IsPowerSlowVisitor.h"
+#include "IsPowerRapidFireVisitor.h"
 #include <time.h>
 #include <stdlib.h>
 #include <algorithm>
@@ -108,15 +114,17 @@ void CEmitter::Load(const std::wstring& filePath)
 
 
 	// TODO: DELETE THE FOLLOWING LINES. FOR TESTING PURSPOSES ONLY
-	mGame->AddItem(make_shared<CPowerSlow>(CVector(0, 0), CVector(-3, 100), mGame));
-	mGame->AddItem(make_shared<CPowerRapidFire>(CVector(-500, 0), CVector(40, 190), mGame));
-	mGame->AddItem(make_shared<CPowerAllGone>(CVector(500, 0), CVector(-20, 80), mGame));
+	//mGame->AddItem(make_shared<CPowerSlow>(CVector(0, 0), CVector(-3, 100), mGame));
+	//mGame->AddItem(make_shared<CPowerRapidFire>(CVector(-500, 0), CVector(40, 190), mGame));
+	//mGame->AddItem(make_shared<CPowerFast>(CVector(500, 0), CVector(-20, 80), mGame));
 }
 
 void CEmitter::AddUML() 
 {
 	srand(time(NULL));
 	double randomGuess = (rand() % 100 + 1) / 100.0f;
+	double powerGuess = (rand() % 100 + 1) / 100.0f;
+	double powerSelectionGuess = (rand() % 100 + 1) / 100.0f;
 
 
 	/// Game area width in virtual pixels
@@ -257,10 +265,171 @@ void CEmitter::AddUML()
 	if (randomGuess > mProbability) // Bad Item
 	{
 		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
+		
 	}
 	else // Good Item
 	{
 		mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
+	}
+
+	if (powerGuess <= 0.60)
+	{
+		double powerPosX = -tempPosX;
+		double powerSpeedX = tempSpeedX * 2;
+		double powerSpeedY = tempSpeedY * 2;
+
+		bool exists = false;
+		bool moving = false;
+		CVector powerVelocity;
+
+		if (powerSelectionGuess <= 0.16)
+		{
+			CIsPowerAllBadVisitor visitor;
+			for (auto item : *mGame)
+			{
+				item->Accept(&visitor);
+				if (visitor.IsPowerAllBad())
+				{
+					exists = true;
+					powerVelocity = item->GetVelocity();
+					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
+						moving = true;
+					else
+					{
+						item->SetLocation(CVector(powerPosX, 60));
+						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
+					}
+					break;
+				}
+			}
+
+			if (!exists)
+				mGame->AddItem(make_shared<CPowerAllBad>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
+
+		}
+		else if (powerSelectionGuess > 0.16 && powerSelectionGuess <= 0.32)
+		{
+			CIsPowerAllGoodVisitor visitor;
+			for (auto item : *mGame)
+			{
+				item->Accept(&visitor);
+				if (visitor.IsPowerAllGood())
+				{
+					exists = true;
+					powerVelocity = item->GetVelocity();
+					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
+						moving = true;
+					else
+					{
+						item->SetLocation(CVector(powerPosX, 60));
+						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
+					}
+					break;
+				}
+			}
+
+			if (!exists)
+				mGame->AddItem(make_shared<CPowerAllGood>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
+
+		}
+		else if (powerSelectionGuess > 0.32 && powerSelectionGuess <= 0.48)
+		{
+			CIsPowerAllGoneVisitor visitor;
+			for (auto item : *mGame)
+			{
+				item->Accept(&visitor);
+				if (visitor.IsPowerAllGone())
+				{
+					exists = true;
+					powerVelocity = item->GetVelocity();
+					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
+						moving = true;
+					else
+					{
+						item->SetLocation(CVector(powerPosX, 60));
+						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
+					}
+					break;
+				}
+			}
+
+			if (!exists)
+				mGame->AddItem(make_shared<CPowerAllGone>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
+
+		}
+		else if (powerSelectionGuess > 0.48 && powerSelectionGuess <= 0.64)
+		{
+			CIsPowerFastVisitor visitor;
+			for (auto item : *mGame)
+			{
+				item->Accept(&visitor);
+				if (visitor.IsPowerFast())
+				{
+					exists = true;
+					powerVelocity = item->GetVelocity();
+					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
+						moving = true;
+					else
+					{
+						item->SetLocation(CVector(powerPosX, 60));
+						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
+					}
+					break;
+				}
+			}
+
+			if (!exists)
+				mGame->AddItem(make_shared<CPowerFast>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
+		}
+		else if (powerSelectionGuess > 0.64 && powerSelectionGuess <= 0.80)
+		{
+			CIsPowerSlowVisitor visitor;
+			for (auto item : *mGame)
+			{
+				item->Accept(&visitor);
+				if (visitor.IsPowerSlow())
+				{
+					exists = true;
+					powerVelocity = item->GetVelocity();
+					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
+						moving = true;
+					else
+					{
+						item->SetLocation(CVector(powerPosX, 60));
+						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
+					}
+					break;
+				}
+			}
+
+			if (!exists)
+				mGame->AddItem(make_shared<CPowerSlow>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
+		}
+		else
+		{
+			CIsPowerRapidFireVisitor visitor;
+			for (auto item : *mGame)
+			{
+				item->Accept(&visitor);
+				if (visitor.IsPowerRapidFire())
+				{
+					exists = true;
+					powerVelocity = item->GetVelocity();
+					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
+						moving = true;
+					else
+					{
+						item->SetLocation(CVector(powerPosX, 60));
+						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
+					}
+					break;
+				}
+			}
+
+			if (!exists)
+				mGame->AddItem(make_shared<CPowerRapidFire>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
+
+		}
 	}
 	
 	if (mProbability <= MAX_PROBABILITY)
@@ -269,7 +438,7 @@ void CEmitter::AddUML()
 	}
 	else
 	{
-		mProbability = 50.0f;
+		mProbability = 0.50f;
 	}
 	
 }
