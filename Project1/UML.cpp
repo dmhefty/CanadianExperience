@@ -1,3 +1,9 @@
+/*
+* File : UML.cpp
+*
+* author : Isaac Mayers
+*
+*/
 #include "pch.h"
 #include "UML.h"
 
@@ -16,17 +22,20 @@ CUML::CUML(std::shared_ptr<CUMLAttribute> name,
 }
 
 
-//TODO -> implement drawing for uml items
+// draws uml items
 void CUML::Draw(Graphics* graphics, CVector position) {
-	Pen drawPen(Color(255, 255, 193));
-	// Determine the text height
+	// Determine the box dimesions based on number of attributes and operations
 	RectF size;
-	SolidBrush white(Color(255, 255, 255));
+	SolidBrush black(Color(0, 0, 0));
 	PointF origin(0.0f, 0.0f);
-	FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
 	double textHeight = 0;
 	double textWidth = 0;
+	FontFamily fontFamily(L"Arial");
+	Gdiplus::Font namefont(&fontFamily, 20, FontStyleBold, UnitPixel);
+	Gdiplus::Font font(&fontFamily, 16, FontStyleRegular, UnitPixel);
+	graphics->MeasureString(mName->GetAtt().c_str(), -1, &namefont, origin, &size);
+	textHeight = (double)size.Height;
+	textWidth = (double)size.Width;
 	for (auto att : mAttributes) {
 		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, origin, &size);
 		
@@ -35,35 +44,41 @@ void CUML::Draw(Graphics* graphics, CVector position) {
 		if ((double)size.Width > textWidth) {
 			textWidth = (double)size.Width;
 		}
-		/*Draw Attributes*/
-		graphics->DrawString(att->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
 	}
-
 	for (auto op : mOperations) {
 		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, origin, &size);
-		
-			textHeight += (double)size.Height;
-		
+
+		textHeight += (double)size.Height;
+
 		if ((double)size.Width > textWidth) {
 			textWidth = (double)size.Width;
 		}
-		/*Draw Operations*/
-		///graphics->DrawString(op->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
+
 	}
-
-	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, origin, &size);
-	textHeight += (double)size.Height;
-	/* Draw Name */
-	///graphics->DrawString(mName->GetAtt().c_str(), -1, &font, PointF(textHeight, textWidth), &white);
-	CVector pos = GetPosition();
-	Gdiplus::SolidBrush sb(Gdiplus::Color(255, 255, 193));
-	Gdiplus::Rect box((int)(pos.X() - textWidth / 2), (int)(pos.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
-
-	if (mWidth < 0 || mHeight < 0)
-	{
-		mWidth = box.Width;
-		mHeight = box.Height;
-	}
-
+	SolidBrush sb(Gdiplus::Color(255, 255, 193));
+	Rect box((int)(position.X() - textWidth / 2), (int)(position.Y() - textHeight / 2), (int)textWidth, (int)textHeight);
+	//draw box
 	graphics->FillRectangle(&sb, box );
+	PointF strloc(position.X(), position.Y());
+	strloc.Y = strloc.Y - textHeight / 2;
+	graphics->MeasureString(mName->GetAtt().c_str(), -1, &font, strloc, &size);
+	strloc.X = strloc.X - (double)size.Width / 2;
+	//Draw Name
+	graphics->DrawString(mName->GetAtt().c_str(), -1, &namefont, strloc, &black);
+	strloc.X = strloc.X + (double)size.Width / 2;
+	strloc.X = strloc.X - textWidth / 2;
+	for (auto att : mAttributes) {
+		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, strloc, &size);
+		strloc.Y = strloc.Y + (double)size.Height;
+		//Draw Attributes
+		graphics->DrawString(att->GetAtt().c_str(), -1, &font, strloc, &black);
+	}
+
+	for (auto op : mOperations) {
+		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, strloc, &size);
+		strloc.Y = strloc.Y + (double)size.Height;
+		//Draw Operations
+		graphics->DrawString(op->GetAtt().c_str(), -1, &font, strloc, &black);
+	}
 }
+

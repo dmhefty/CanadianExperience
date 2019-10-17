@@ -126,5 +126,8 @@ private:
 	///List of all items on screen
 	std::vector<std::shared_ptr<CItem> > mItems;
 
+	/// Time since last UML object was Emitted
+	double mUMLTimeDelta = 0;
+
 };
 
