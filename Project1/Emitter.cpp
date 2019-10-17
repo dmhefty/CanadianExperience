@@ -422,6 +422,7 @@ void CEmitter::AddUML()
 						item->SetLocation(CVector(powerPosX, 60));
 						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
 					}
+					break;
 				}
 			}
 
