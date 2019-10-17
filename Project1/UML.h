@@ -21,6 +21,10 @@ private:
 	//vector of 0-3 operations associated with this uml object
 	std::vector<std::shared_ptr<CUMLAttribute> > mOperations;
 
+	double mWidth = -1;
+
+	double mHeight = -1;
+
 public:
 	//TODO -> Accept function to be added aftor visitors are implemented
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitUML(this); }
@@ -29,13 +33,13 @@ public:
 
 	virtual CVector GetDimensions() const override
 	{
-		return CVector(111, 59); // TODO: GET RECTANGLE SiZE. THIS IS JUST A PLACEHOLDER.
+		return CVector(mWidth, mHeight);
 	}
 
 	virtual void Effect() override 
 	{ 
 		CItem::SetVelocity(CVector(0, 0));
-	} // TODO: UML disappear and message (good/bad)
+	}
 
 protected:
 
