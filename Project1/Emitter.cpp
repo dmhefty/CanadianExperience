@@ -3,6 +3,8 @@
  *
  * \author Akhil Alluri
  * \author Jaideep Prasad
+ * \author Isaac Mayers
+ * \author David Hefty
  */
 
 #include "pch.h"
@@ -178,8 +180,8 @@ void CEmitter::AddUML()
 			int numOfOperations = rand() % 4;
 			int randName = rand() % 4;
 			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
-			atts.push_back(mAttributesBad[0]);
-			random_shuffle(atts.begin(), atts.end());
+			attsTemp.push_back(mAttributesBad[0]);
+			random_shuffle(attsTemp.begin(), attsTemp.end());
 			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
 			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
 		
@@ -194,8 +196,8 @@ void CEmitter::AddUML()
 			int randName = rand() % 4;
 			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
 			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
-			ops.push_back(mOperationsBad[0]);
-			random_shuffle(ops.begin(), ops.end());
+			opsTemp.push_back(mOperationsBad[0]);
+			random_shuffle(opsTemp.begin(), opsTemp.end());
 			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
 
 			atts = attsTemp;
