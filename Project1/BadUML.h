@@ -21,6 +21,6 @@ public:
 
 	virtual void Effect() override;
 
-	void DisplayError() {}
+	std::wstring GetMessageOnHit() { return mError; }
 };
 

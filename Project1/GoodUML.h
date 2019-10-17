@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <string>
 #include "UML.h"
 
 /**
@@ -32,6 +33,6 @@ public:
 
 	virtual void Effect() override;
 
-	void DisplayUnfair() {} // TODO DISPLAY "UNFAIR" WHEN HIT
+	std::wstring GetMessageOnHit() { return L"Unfair!"; }
 };
 
