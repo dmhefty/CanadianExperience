@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "Item.h"
 #include "XmlNode.h"
+
 #include <vector>
 #include "HaroldPen.h"
 #include "ItemDimensionVisitor.h"
