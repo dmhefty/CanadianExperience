@@ -43,6 +43,7 @@ public:
 	CEmitter(CGame* game) : mGame(game) {}
 	void Load(const std::wstring& filePath);
 	void AddUML();
+	void AddPower();
 
 private:
 	/// The game the emitter is a part of
