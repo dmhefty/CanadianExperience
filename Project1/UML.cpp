@@ -33,7 +33,7 @@ void CUML::Update(double elapsedTime)
 	}
 }
 
-/** draws uml items
+/** Draws uml items
 * \param graphics Graphics Object
 * \param position Center position of UML object
 */
