@@ -29,7 +29,6 @@ const int FrameDuration = 30;
  */
 CChildView::CChildView()
 {
-	srand((unsigned int)time(nullptr));
 }
 
 /**
