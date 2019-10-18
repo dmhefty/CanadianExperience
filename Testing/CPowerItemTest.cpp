@@ -1,3 +1,9 @@
+/* file CPowerItemTest.cpp
+*
+* \author Isaac Mayers
+*/
+
+
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "PowerItem.h"
