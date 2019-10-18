@@ -31,22 +31,18 @@ void CPowerAllBad::Effect()
 {
 	CGame* game = GetGame();
 	CIsGoodUMLVisitor umlVisitor;
-	vector<shared_ptr<CItem> > goodUML;
+
 	for (auto item : *game)
 	{
 		item->Accept(&umlVisitor);
 		if (umlVisitor.IsGoodUML())
 		{
-			goodUML.push_back(item);
+			item->Effect();
+			game->DecrementUnfairScore();
 			umlVisitor.Reset();
 		}
 
 	}
-	for (auto item : goodUML)
-	{
-		game->RemoveItem(item);
-	}
-	goodUML.clear();
 
 	CPowerItem::Effect();
 }

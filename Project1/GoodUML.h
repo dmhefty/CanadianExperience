@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <string>
 #include "UML.h"
 
 /**
@@ -23,15 +24,20 @@ public:
 		std::vector<std::shared_ptr<CUMLAttribute> > operations,
 		CVector position, CVector velocity, CGame* game);
 
-	//TODO -> Accept function to be added aftor visitors are implemented
+	/* Accepts Visitor
+	* \param visitor Visitor to be Accepted
+	*/
 	virtual void Accept(CItemVisitor* visitor) 
 	{ 
 		CUML::Accept(visitor);
 		visitor->VisitGoodUML(this); 
 	}
 
+	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
+
 	virtual void Effect() override;
 
-	void DisplayUnfair() {} // TODO DISPLAY "UNFAIR" WHEN HIT
+	//Getter for Unfair message for Good UMLs
+	std::wstring GetMessageOnHit() const { return L"Unfair!"; }
 };
 

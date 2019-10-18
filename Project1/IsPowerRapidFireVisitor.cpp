@@ -5,6 +5,7 @@
  */
 
 #include "pch.h"
+#include "PowerRapidFire.h"
 #include "IsPowerRapidFireVisitor.h"
 
  /** \brief Visit a CPowerRapidFire object
@@ -12,4 +13,5 @@
 void CIsPowerRapidFireVisitor::VisitPowerRapidFire(CPowerRapidFire* rapidfire)
 {
 	mIsPowerRapidFire = true;
+	mIsActive = rapidfire->IsActive();
 }
