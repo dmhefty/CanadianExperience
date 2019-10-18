@@ -3,20 +3,12 @@
  *
  * \author Akhil Alluri
  * \author Jaideep Prasad
- * \author Isaac Mayers
- * \author David Hefty
  */
 
 #include "pch.h"
 #include "Emitter.h"
 #include "XmlNode.h"
 #include "Game.h"
-#include "IsPowerAllBadVisitor.h"
-#include "IsPowerAllGoodVisitor.h"
-#include "IsPowerAllGoneVisitor.h"
-#include "IsPowerFastVisitor.h"
-#include "IsPowerSlowVisitor.h"
-#include "IsPowerRapidFireVisitor.h"
 #include <time.h>
 #include <stdlib.h>
 #include <algorithm>
@@ -36,33 +28,6 @@ const int ALL_GOOD = 2;
 const int FAST = 3;
 const int RAPID_FIRE = 4;
 const int SLOW = 5;
-
-/// Game area width in virtual pixels
-const int Width = 1250;
-/// Game area height in virtual pixels
-const int Height = 1000;
-
- /// Maximum speed in the X direction in
- /// in pixels per second
-const double MaxSpeedX = 40;
-
- /// Maximum speed in the Y direction in
- /// in pixels per second
-const double MaxSpeedY = 60;
-
- /// Minimum speed in the X direction in
- /// in pixels per second
-const double MinSpeedX = -30;
-
- /// Minimum speed in the Y direction in
- /// in pixels per second
-const double MinSpeedY = 30;
-
-/// Maximum starting position in the X direction
-const double MaxPosX = Width / 2;
-
-/// Minimum starting position in the X direction
-const double MinPosX = -1 * Width / 2;
 
 /**
  * Loads a file containing characteristics for UML objects
@@ -147,16 +112,17 @@ void CEmitter::Load(const std::wstring& filePath)
 		AfxMessageBox(ex.Message().c_str());
 	}
 }
-/*
-* Emits Random UML and Random Power-Up
-*/
+
 void CEmitter::AddUML() 
 {
-	srand((unsigned int)time(NULL));
+	srand(time(NULL));
 	double randomGuess = (rand() % 100 + 1) / 100.0f;
-	double powerGuess = (rand() % 100 + 1) / 100.0f;
-	double powerSelectionGuess = (rand() % 100 + 1) / 100.0f;
 
+
+	/// Game area width in virtual pixels
+	const static int Width = 1250;
+	/// Game area height in virtual pixels
+	const static int Height = 1000;
 	/// which issue is the case for the UML
 	int randIssue; // 0: no issue, goodUML; 1: name Issue; 2: Att issue; 3: Op issue
 
@@ -182,8 +148,6 @@ void CEmitter::AddUML()
 	std::vector<std::shared_ptr<CUMLAttribute> > ops;
 	std::shared_ptr<CUMLAttribute> name;
 
-	std::wstring badUmlErrorMessage;
-
 	// pick out attributes based on if it is good/bad
 	if (randomGuess > mProbability) // Bad Item
 	{
@@ -199,8 +163,6 @@ void CEmitter::AddUML()
 			atts = attsTemp;
 			ops = opsTemp;
 			name = nameTemp;
-
-			badUmlErrorMessage = mNamesBad[randName]->GetErrorMessage();
 		}
 		else if (randIssue == BAD_ATTS)
 		{
@@ -208,11 +170,8 @@ void CEmitter::AddUML()
 			int numOfOperations = rand() % 4;
 			int randName = rand() % 4;
 			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
-			attsTemp.push_back(mAttributesBad[0]);
-
-			badUmlErrorMessage = mAttributesBad[0]->GetErrorMessage();
-
-			random_shuffle(attsTemp.begin(), attsTemp.end());
+			atts.push_back(mAttributesBad[0]);
+			random_shuffle(atts.begin(), atts.end());
 			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
 			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
 		
@@ -227,11 +186,8 @@ void CEmitter::AddUML()
 			int randName = rand() % 4;
 			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
 			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
-			opsTemp.push_back(mOperationsBad[0]);
-
-			badUmlErrorMessage = mOperationsBad[0]->GetErrorMessage();
-
-			random_shuffle(opsTemp.begin(), opsTemp.end());
+			ops.push_back(mOperationsBad[0]);
+			random_shuffle(ops.begin(), ops.end());
 			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
 
 			atts = attsTemp;
@@ -252,6 +208,31 @@ void CEmitter::AddUML()
 		ops = opsTemp;
 		name = nameTemp;
 	}
+
+	// Code to randomize position and velocity of items. This should probably be moved to the item classes
+	// themselves and the position and vector parameters removed, but for now it'll be here.
+
+	/// Maximum speed in the X direction in
+	/// in pixels per second
+	const double MaxSpeedX = 40;
+
+	/// Maximum speed in the Y direction in
+	/// in pixels per second
+	const double MaxSpeedY = 60;
+
+	/// Minimum speed in the X direction in
+	/// in pixels per second
+	const double MinSpeedX = -30;
+
+	/// Minimum speed in the Y direction in
+	/// in pixels per second
+	const double MinSpeedY = 30;
+
+	/// Maximum starting position in the X direction
+	const double MaxPosX = Width / 2;
+
+	/// Minimum starting position in the X direction
+	const double MinPosX = -1 * Width / 2;
 
 	// Randomize X and Y speeds within limits
 	double tempSpeedX = MinSpeedX + ((double)rand() / RAND_MAX) * (MaxSpeedX - MinSpeedX);
@@ -275,172 +256,11 @@ void CEmitter::AddUML()
 
 	if (randomGuess > mProbability) // Bad Item
 	{
-		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, badUmlErrorMessage, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-		
+		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
 	}
 	else // Good Item
 	{
 		mGame->AddItem(make_shared<CGoodUML>(name, atts, ops, CVector(-tempPosX, 60), CVector(-tempSpeedX, tempSpeedY), mGame));
-	}
-
-	if (powerGuess <= 0.60)
-	{
-		double powerPosX = -tempPosX;
-		double powerSpeedX = tempSpeedX * 2;
-		double powerSpeedY = tempSpeedY * 2;
-
-		bool exists = false;
-		bool moving = false;
-		CVector powerVelocity;
-
-		if (powerSelectionGuess <= 0.16)
-		{
-			CIsPowerAllBadVisitor visitor;
-			for (auto item : *mGame)
-			{
-				item->Accept(&visitor);
-				if (visitor.IsPowerAllBad())
-				{
-					exists = true;
-					powerVelocity = item->GetVelocity();
-					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
-						moving = true;
-					else
-					{
-						item->SetLocation(CVector(powerPosX, 60));
-						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
-					}
-					break;
-				}
-			}
-
-			if (!exists)
-				mGame->AddItem(make_shared<CPowerAllBad>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
-
-		}
-		else if (powerSelectionGuess > 0.16 && powerSelectionGuess <= 0.32)
-		{
-			CIsPowerAllGoodVisitor visitor;
-			for (auto item : *mGame)
-			{
-				item->Accept(&visitor);
-				if (visitor.IsPowerAllGood())
-				{
-					exists = true;
-					powerVelocity = item->GetVelocity();
-					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
-						moving = true;
-					else
-					{
-						item->SetLocation(CVector(powerPosX, 60));
-						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
-					}
-					break;
-				}
-			}
-
-			if (!exists)
-				mGame->AddItem(make_shared<CPowerAllGood>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
-
-		}
-		else if (powerSelectionGuess > 0.32 && powerSelectionGuess <= 0.48)
-		{
-			CIsPowerAllGoneVisitor visitor;
-			for (auto item : *mGame)
-			{
-				item->Accept(&visitor);
-				if (visitor.IsPowerAllGone())
-				{
-					exists = true;
-					powerVelocity = item->GetVelocity();
-					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
-						moving = true;
-					else
-					{
-						item->SetLocation(CVector(powerPosX, 60));
-						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
-					}
-					break;
-				}
-			}
-
-			if (!exists)
-				mGame->AddItem(make_shared<CPowerAllGone>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
-
-		}
-		else if (powerSelectionGuess > 0.48 && powerSelectionGuess <= 0.64)
-		{
-			CIsPowerFastVisitor visitor;
-			for (auto item : *mGame)
-			{
-				item->Accept(&visitor);
-				if (visitor.IsPowerFast())
-				{
-					exists = true;
-					powerVelocity = item->GetVelocity();
-					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
-						moving = true;
-					else if (!visitor.IsActive())
-					{
-						item->SetLocation(CVector(powerPosX, 60));
-						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
-					}
-					break;
-				}
-			}
-
-			if (!exists)
-				mGame->AddItem(make_shared<CPowerFast>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
-		}
-		else if (powerSelectionGuess > 0.64 && powerSelectionGuess <= 0.80)
-		{
-			CIsPowerSlowVisitor visitor;
-			for (auto item : *mGame)
-			{
-				item->Accept(&visitor);
-				if (visitor.IsPowerSlow())
-				{
-					exists = true;
-					powerVelocity = item->GetVelocity();
-					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
-						moving = true;
-					else if (!visitor.IsActive())
-					{
-						item->SetLocation(CVector(powerPosX, 60));
-						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
-					}
-					break;
-				}
-			}
-
-			if (!exists)
-				mGame->AddItem(make_shared<CPowerSlow>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
-		}
-		else
-		{
-			CIsPowerRapidFireVisitor visitor;
-			for (auto item : *mGame)
-			{
-				item->Accept(&visitor);
-				if (visitor.IsPowerRapidFire())
-				{
-					exists = true;
-					powerVelocity = item->GetVelocity();
-					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
-						moving = true;
-					else if (!visitor.IsActive())
-					{
-						item->SetLocation(CVector(powerPosX, 60));
-						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
-					}
-					break;
-				}
-			}
-
-			if (!exists)
-				mGame->AddItem(make_shared<CPowerRapidFire>(CVector(powerPosX, 60), CVector(powerSpeedX, powerSpeedY), mGame));
-
-		}
 	}
 	
 	if (mProbability <= MAX_PROBABILITY)
@@ -449,7 +269,7 @@ void CEmitter::AddUML()
 	}
 	else
 	{
-		mProbability = 0.50f;
+		mProbability = 50.0f;
 	}
 	
 }

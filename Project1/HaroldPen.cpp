@@ -70,10 +70,7 @@ void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 	graphics->Restore(state);
 }
 
-/**
-*Update Pen item
-* \param elapsedTime Real Time Elapsed
-*/
+
 void CHaroldPen::Update(double elapsedTime)
 {
 	if (!mIsAttached)
@@ -101,7 +98,7 @@ void CHaroldPen::ResetPen()
 {
 	mIsAttached = true;
 	mTravelTime = 0;
-	CItem::SetLocation(CVector(61.29437 * sin(mAngle), 61.29437f * cos(mAngle) + (float)(1000.0 - 95.0)));
+	CItem::SetLocation(CVector(61.29437 * sin(mAngle) - 10.0f, 61.29437f * cos(mAngle) + (float)(1000.0 - 105.0)));
 	CItem::SetVelocity(CVector(0.0f, 0.0f));
 }
 
