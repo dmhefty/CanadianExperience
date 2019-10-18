@@ -24,6 +24,7 @@ public:
 	/// Copy constructor (disabled)
 	CHaroldPen(const CHaroldPen&) = delete;
 
+	// New constructor
 	CHaroldPen(CVector position, CVector velocity, CGame* game);
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
@@ -33,8 +34,10 @@ public:
 	/// \param angle The new angle
 	void SetAngle(double angle) { mAngle = angle; }
 
+	//Unattach pen from Harold
 	void UnAttach() { mIsAttached = false; mFiredAngle = mAngle; }
 	
+	//Gets state of pen attached to Harold
 	bool GetAttachedState() { return mIsAttached; }
 
 	void ResetPen();

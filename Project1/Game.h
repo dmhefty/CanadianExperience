@@ -61,6 +61,8 @@ public:
 
 	void IncrementScore(int category);
 
+	void DecrementUnfairScore();
+
 	/** Iterator that iterates over the game items */
 	class Iter
 	{
@@ -121,6 +123,7 @@ private:
 	///The game scoreboard object
 	CScoreBoard mScoreBoard;
 
+	//Emitter
 	CEmitter mEmitter;
 
 	///List of all items on screen

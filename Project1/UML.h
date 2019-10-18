@@ -26,8 +26,9 @@ private:
 	double mHeight = -1;
 
 public:
-	//TODO -> Accept function to be added aftor visitors are implemented
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitUML(this); }
+
+	virtual void Update(double elapsedTime) override;
 
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 
@@ -39,12 +40,20 @@ public:
 	virtual void Effect() override 
 	{ 
 		CItem::SetVelocity(CVector(0, 0));
+		mDisplayLocation = CItem::GetPosition();
 	}
+
+	bool IsDeleted() const { return mDeleted; }
 
 protected:
 
 	CUML(std::shared_ptr<CUMLAttribute> name, std::vector<std::shared_ptr<CUMLAttribute> > attributes, 
 		std::vector<std::shared_ptr<CUMLAttribute> > operations, CVector position, CVector velocity, CGame* game);
+
+	bool mHit = false;
+	bool mDeleted = false;
+	double mTimeDisplayed = 0;
+	CVector mDisplayLocation;
 
 };
 

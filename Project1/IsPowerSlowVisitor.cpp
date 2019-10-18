@@ -5,6 +5,7 @@
  */
 
 #include "pch.h"
+#include "PowerSlow.h"
 #include "IsPowerSlowVisitor.h"
 
  /** \brief Visit a CPowerSlow object
@@ -12,4 +13,5 @@
 void CIsPowerSlowVisitor::VisitPowerSlow(CPowerSlow* slow)
 {
 	mIsPowerSlow = true;
+	mIsActive = slow->IsActive();
 }

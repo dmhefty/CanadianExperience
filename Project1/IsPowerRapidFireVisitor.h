@@ -23,7 +23,14 @@ public:
 	* \returns True if the item is an RapidFire power item */
 	bool IsPowerRapidFire() { return mIsPowerRapidFire; }
 
+	/** Tells the visitor if the power is active
+	* \returns True if the power is active */
+	bool IsActive() { return mIsActive; }
+
 private:
-	/// Bool for if this is a pen item or not
+	/// Bool for if this is a rapid fire item or not
 	bool mIsPowerRapidFire = false;
+
+	/// Bool for if the power is active or not
+	bool mIsActive = false;
 };
