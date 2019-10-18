@@ -29,13 +29,14 @@ void CBadUML::Draw(Gdiplus::Graphics* graphics, CVector position)
 	{
 		if (mTimeDisplayed <= OneSecond)
 		{
+			RectF size;
 			FontFamily fontFamily(L"Arial");
-			Gdiplus::Font font(&fontFamily, 16);
-
-			SolidBrush red(Color(255, 0, 0));
-
-			graphics->DrawString(GetMessageOnHit().c_str(), -1, &font, 
-				PointF((REAL) mDisplayLocation.X(), (REAL) mDisplayLocation.Y()), &red);
+			Gdiplus::Font font(&fontFamily, 20, FontStyleBold);
+			PointF origin((REAL)mDisplayLocation.X(), (REAL)mDisplayLocation.Y());
+			SolidBrush green(Color(0, 255, 0));
+			graphics->MeasureString(GetMessageOnHit().c_str(), -1, &font, origin, &size);
+			origin.X -= (REAL)((double)size.Width / 2.0);
+			graphics->DrawString(GetMessageOnHit().c_str(), -1, &font, origin, &green);
 		}
 		else
 		{
