@@ -23,42 +23,28 @@ public:
 
 	void Draw(Gdiplus::Graphics* graphics);
 
-	/*
-	 * Increases correct counter by 1.
-	 */
+	/// Increases correct counter by 1.
 	void IncrementCorrect() { mCorrect++; } 
 
-	/*
-	 * Increases missed counter by 1.
-	 */
+	/// Increases missed counter by 1.
 	void IncrementMissed() { mMissed++; }
 
-	/*
-	 * Increases unfair counter by 1.
-	 */
+	///Increases unfair counter by 1.
 	void IncrementUnfair() { mUnfair++; }
 
-	/*
-	 * Decreases unfair counter by 1. Used for certain power-up effects.
-	 */
+	/// Decreases unfair counter by 1. Used for certain power-up effects.
 	void DecrementUnfair() { mUnfair--; }
 
-	/*
-	 * Gets the correct hits score
-	 * \returns int value for correct hits score
-	 */
+	/// Gets the correct hits score
+	/// \returns int value for correct hits score
 	int GetCorrect() const { return mCorrect; }
 
-	/*
-	 * Gets the missed score
-	 * \returns int value for missed score
-	 */
+	/// Gets the missed score
+	/// \returns int value for missed score
 	int GetMissed() const { return mMissed; }
 
-	/*
-	 * Gets the unfair hits score
-	 * \returns int value for unfair hits score
-	 */
+	/// Gets the unfair hits score
+	/// \returns int value for unfair hits score
 	int GetUnfair() const { return mUnfair; }
 
 private:
