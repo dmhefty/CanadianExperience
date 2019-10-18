@@ -24,6 +24,6 @@ public:
 	virtual void Effect() override;
 
 	// TODO: replace code below with return mError after constructor is updated
-	std::wstring GetMessageOnHit() { return mError; } 
+	std::wstring GetMessageOnHit() const { return mError; } 
 };
 

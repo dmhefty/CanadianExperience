@@ -140,12 +140,6 @@ void CEmitter::Load(const std::wstring& filePath)
 	{
 		AfxMessageBox(ex.Message().c_str());
 	}
-
-
-	// TODO: DELETE THE FOLLOWING LINES. FOR TESTING PURSPOSES ONLY
-	//mGame->AddItem(make_shared<CPowerSlow>(CVector(0, 0), CVector(-3, 100), mGame));
-	//mGame->AddItem(make_shared<CPowerRapidFire>(CVector(-500, 0), CVector(40, 190), mGame));
-	//mGame->AddItem(make_shared<CPowerFast>(CVector(500, 0), CVector(-20, 80), mGame));
 }
 
 void CEmitter::AddUML() 
@@ -198,7 +192,7 @@ void CEmitter::AddUML()
 			ops = opsTemp;
 			name = nameTemp;
 
-			badUmlErrorMessage = nameTemp->GetErrorMessage();
+			badUmlErrorMessage = mNamesBad[randName]->GetErrorMessage();
 		}
 		else if (randIssue == BAD_ATTS)
 		{
@@ -207,6 +201,9 @@ void CEmitter::AddUML()
 			int randName = rand() % 4;
 			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
 			attsTemp.push_back(mAttributesBad[0]);
+
+			badUmlErrorMessage = mAttributesBad[0]->GetErrorMessage();
+
 			random_shuffle(attsTemp.begin(), attsTemp.end());
 			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
 			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
@@ -214,8 +211,6 @@ void CEmitter::AddUML()
 			atts = attsTemp;
 			ops = opsTemp;
 			name = nameTemp;
-
-			badUmlErrorMessage = mAttributesBad[0]->GetErrorMessage();
 		}
 		else if (randIssue == BAD_OPS)
 		{
@@ -225,14 +220,15 @@ void CEmitter::AddUML()
 			std::vector<std::shared_ptr<CUMLAttribute> > attsTemp(mAttributes.begin(), mAttributes.begin() + numOfAttributes);
 			std::vector<std::shared_ptr<CUMLAttribute> > opsTemp(mOperations.begin(), mOperations.begin() + numOfOperations);
 			opsTemp.push_back(mOperationsBad[0]);
+
+			badUmlErrorMessage = mOperationsBad[0]->GetErrorMessage();
+
 			random_shuffle(opsTemp.begin(), opsTemp.end());
 			std::shared_ptr<CUMLAttribute> nameTemp = make_shared<CUMLAttribute>(mNames[randName]->GetAtt());
 
 			atts = attsTemp;
 			ops = opsTemp;
 			name = nameTemp;
-
-			badUmlErrorMessage = mOperationsBad[0]->GetErrorMessage();
 		}
 	} // end bad UML
 	else // good UML

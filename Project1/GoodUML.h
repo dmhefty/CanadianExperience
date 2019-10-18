@@ -35,6 +35,6 @@ public:
 
 	virtual void Effect() override;
 
-	std::wstring GetMessageOnHit() { return L"Unfair!"; }
+	std::wstring GetMessageOnHit() const { return L"Unfair!"; }
 };
 
