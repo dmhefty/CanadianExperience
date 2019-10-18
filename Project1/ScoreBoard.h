@@ -39,11 +39,6 @@ public:
 	void IncrementUnfair() { mUnfair++; }
 
 	/*
-	 * Decreases unfair counter by 1. Used for certain power-up effects.
-	 */
-	void DecrementUnfair() { mUnfair--; }
-
-	/*
 	 * Gets the correct hits score
 	 * \returns int value for correct hits score
 	 */
