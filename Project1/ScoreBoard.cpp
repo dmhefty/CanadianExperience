@@ -32,9 +32,9 @@ CScoreBoard::~CScoreBoard()
 void CScoreBoard::Draw(Gdiplus::Graphics* graphics)
 {
 	FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 16);
+	Gdiplus::Font font(&fontFamily, 26);
 
-	SolidBrush green(Color(100, 150, 100));
+	SolidBrush green(Color(200, 250, 200));
 	graphics->DrawString(to_wstring(mCorrect).c_str(), -1, &font, PointF(-600, 50), &green);
 	graphics->DrawString(L"Correct", -1, &font, PointF(-600, 100), &green);
 	graphics->DrawString(to_wstring(mMissed).c_str(), -1, &font, PointF(-50, 50), &green);
