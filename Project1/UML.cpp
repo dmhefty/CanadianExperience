@@ -22,6 +22,15 @@ CUML::CUML(std::shared_ptr<CUMLAttribute> name,
 }
 
 
+void CUML::Update(double elapsedTime)
+{
+	CItem::Update(elapsedTime);
+	if (mHit && !mDeleted)
+	{
+		mTimeDisplayed += elapsedTime;
+	}
+}
+
 // draws uml items
 void CUML::Draw(Graphics* graphics, CVector position) 
 {
@@ -75,8 +84,8 @@ void CUML::Draw(Graphics* graphics, CVector position)
 	}
 	//draw box
 	graphics->FillRectangle(&sb, box );
-	PointF strloc(position.X(), position.Y());
-	strloc.Y -= textHeight / 2;
+	PointF strloc((REAL)position.X(), (REAL)position.Y());
+	strloc.Y -= (REAL)(textHeight / 2);
 	graphics->MeasureString(mName->GetAtt().c_str(), -1, &namefont, strloc, &size);
 	//if Name is longer or equal to box width print Name on left side of box
 	if (box.Width <= (double)size.Width) 
@@ -85,36 +94,36 @@ void CUML::Draw(Graphics* graphics, CVector position)
 	}
 	else
 	{
-		strloc.X -= (double)size.Width / 2;
+		strloc.X -= (REAL)((double)size.Width / 2.0);
 	}
 	//Draw Name
 	graphics->DrawString(mName->GetAtt().c_str(), -1, &namefont, strloc, &black);
 	if (box.Width > (double)size.Width)
 	{
-		strloc.X += (double)size.Width / 2;
+		strloc.X += (REAL)((double)size.Width / 2.0);
 		strloc.X -= box.Width / 2;
 	}
-	strloc.Y += (double)size.Height + 3;
-	graphics->DrawLine(&pen, strloc.X, strloc.Y, strloc.X + textWidth, strloc.Y);
+	strloc.Y += (REAL)((double)size.Height + 3);
+	graphics->DrawLine(&pen, strloc.X, strloc.Y, (REAL)(strloc.X + textWidth), strloc.Y);
 	strloc.Y += 3;
 	for (auto att : mAttributes) 
 	{
 		graphics->MeasureString(att->GetAtt().c_str(), -1, &font, strloc, &size);
 		//Draw Attributes
 		graphics->DrawString(att->GetAtt().c_str(), -1, &font, strloc, &black);
-		strloc.Y += (double)size.Height;
+		strloc.Y += (REAL)((double)size.Height);
 	}
 	if (mOperations.size() > 0 && mAttributes.size() > 0)
 	{
 		strloc.Y += 3;
-		graphics->DrawLine(&pen, strloc.X, strloc.Y, strloc.X + textWidth, strloc.Y);
+		graphics->DrawLine(&pen, strloc.X, strloc.Y, (REAL)(strloc.X + textWidth), strloc.Y);
 	}
 	for (auto op : mOperations) 
 	{
 		graphics->MeasureString(op->GetAtt().c_str(), -1, &font, strloc, &size);
 		//Draw Operations
 		graphics->DrawString(op->GetAtt().c_str(), -1, &font, strloc, &black);
-		strloc.Y += (double)size.Height;
+		strloc.Y += (REAL)((double)size.Height);
 	}
 }
 

@@ -8,6 +8,7 @@
  */
 
 #pragma once
+#include "UML.h"
 #include "ItemVisitor.h"
 
  /** visitor class for determining if a CItem object is a CCUML */
@@ -19,7 +20,10 @@ public:
 	* Visits an Item object and determines if it is a UML object
 	* \param uml the CUML object in question
 	*/
-	virtual void VisitUML(CUML* uml) override { mIsUML = true; }
+	virtual void VisitUML(CUML* uml) override 
+	{ 
+		mIsUML = true; mIsDeleted = uml->IsDeleted(); 
+	}
 
 	/**
 	* Determines if a UML object has been visited
@@ -28,10 +32,17 @@ public:
 	bool IsUML() { return mIsUML; }
 
 	/**
+	* Determines if a UML object has been hit and deleted
+	* \return bool for if an UML object was delted
+	*/
+	bool IsDelted() { return mIsDeleted; }
+
+	/**
 	* Resets the visitor
 	*/
-	void Reset() { mIsUML = false; }
+	void Reset() { mIsUML = false; mIsDeleted = false; }
 
 private:
 	bool mIsUML = false;
+	bool mIsDeleted = false;
 };

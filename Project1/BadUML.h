@@ -10,17 +10,20 @@ public:
 	CBadUML::CBadUML(std::shared_ptr<CUMLAttribute> name,
 		std::vector<std::shared_ptr<CUMLAttribute> > attributes,
 		std::vector<std::shared_ptr<CUMLAttribute> > operations,
+		std::wstring error,
 		CVector position, CVector velocity, CGame* game);
 
-	//TODO -> Accept function to be added aftor visitors are implemented
 	virtual void Accept(CItemVisitor* visitor) override 
 	{ 
 		CUML::Accept(visitor);
 		visitor->VisitBadUML(this); 
 	}
 
+	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
+
 	virtual void Effect() override;
 
-	std::wstring GetMessageOnHit() { return mError; }
+	// TODO: replace code below with return mError after constructor is updated
+	std::wstring GetMessageOnHit() { return mError; } 
 };
 

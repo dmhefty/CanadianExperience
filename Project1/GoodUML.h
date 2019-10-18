@@ -31,6 +31,8 @@ public:
 		visitor->VisitGoodUML(this); 
 	}
 
+	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
+
 	virtual void Effect() override;
 
 	std::wstring GetMessageOnHit() { return L"Unfair!"; }

@@ -35,7 +35,7 @@ using namespace xmlnode;
 const double AngleOffset = 3.14159 / 2.0;
 
 ///	5 seconds in seconds
-const double FIVE_SECONDS = 5.0;
+const double TwoSeconds = 2.0;
 
 
 /**
@@ -129,6 +129,22 @@ void CGame::Update(double elapsedTime)
 	CVector itemDimensions;
 
 	vector<shared_ptr<CItem> > outOfBounds;
+	vector<shared_ptr<CItem> > deletedUMLs;
+
+	for (auto item : mItems)
+	{
+		item->Accept(&umlVisitor);
+		if (umlVisitor.IsUML() && umlVisitor.IsDelted())
+		{
+			deletedUMLs.push_back(item);
+		}
+		umlVisitor.Reset();
+	}
+
+	for (auto uml : deletedUMLs)
+	{
+		RemoveItem(uml);
+	}
 
 	for (auto item : mItems)
 	{
@@ -180,9 +196,9 @@ void CGame::Update(double elapsedTime)
 			break;
 		}
 	}
-	Rect penRect(penPosition.X() - penDimensions.X() / 2,
-		penPosition.Y() - penDimensions.X() / 2,
-		penDimensions.X(), penDimensions.Y());
+	Rect penRect((INT)(penPosition.X() - penDimensions.X() / 2),
+		(INT)(penPosition.Y() - penDimensions.X() / 2),
+		(INT)penDimensions.X(), (INT)penDimensions.Y());
 
 	for (auto item : mItems)
 	{
@@ -195,9 +211,9 @@ void CGame::Update(double elapsedTime)
 
 		itemPosition = item->GetPosition();
 		itemDimensions = item->GetDimensions();
-		Rect itemRect(itemPosition.X() - itemDimensions.X() / 2,
-			itemPosition.Y() - itemDimensions.Y() / 2,
-			itemDimensions.X(), itemDimensions.Y());
+		Rect itemRect((INT)(itemPosition.X() - itemDimensions.X() / 2),
+			(INT)(itemPosition.Y() - itemDimensions.Y() / 2),
+			(INT)itemDimensions.X(), (INT)itemDimensions.Y());
 
 		if (!(pen->GetAttachedState()) && penRect.IntersectsWith(itemRect))
 		{
@@ -209,7 +225,7 @@ void CGame::Update(double elapsedTime)
 
 	// add a UML Item if it has been enough time.
 	mUMLTimeDelta += elapsedTime;
-	if (mUMLTimeDelta >= FIVE_SECONDS)
+	if (mUMLTimeDelta >= TwoSeconds)
 	{
 		mUMLTimeDelta = 0;
 		mEmitter.AddUML();
@@ -319,6 +335,11 @@ void CGame::IncrementScore(int category)
 		mScoreBoard.IncrementUnfair();
 		break;
 	}
+}
+
+void CGame::DecrementUnfairScore()
+{
+	mScoreBoard.DecrementUnfair();
 }
 
 /**

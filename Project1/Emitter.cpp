@@ -31,6 +31,33 @@ const int BAD_NAME = 1;
 const int BAD_ATTS = 2;
 const int BAD_OPS = 3;
 
+/// Game area width in virtual pixels
+const int Width = 1250;
+/// Game area height in virtual pixels
+const int Height = 1000;
+
+ /// Maximum speed in the X direction in
+ /// in pixels per second
+const double MaxSpeedX = 40;
+
+ /// Maximum speed in the Y direction in
+ /// in pixels per second
+const double MaxSpeedY = 60;
+
+ /// Minimum speed in the X direction in
+ /// in pixels per second
+const double MinSpeedX = -30;
+
+ /// Minimum speed in the Y direction in
+ /// in pixels per second
+const double MinSpeedY = 30;
+
+/// Maximum starting position in the X direction
+const double MaxPosX = Width / 2;
+
+/// Minimum starting position in the X direction
+const double MinPosX = -1 * Width / 2;
+
 /**
  * Loads a file containing characteristics for UML objects
  * \param filePath File path for UML data
@@ -123,16 +150,11 @@ void CEmitter::Load(const std::wstring& filePath)
 
 void CEmitter::AddUML() 
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	double randomGuess = (rand() % 100 + 1) / 100.0f;
 	double powerGuess = (rand() % 100 + 1) / 100.0f;
 	double powerSelectionGuess = (rand() % 100 + 1) / 100.0f;
 
-
-	/// Game area width in virtual pixels
-	const static int Width = 1250;
-	/// Game area height in virtual pixels
-	const static int Height = 1000;
 	/// which issue is the case for the UML
 	int randIssue; // 0: no issue, goodUML; 1: name Issue; 2: Att issue; 3: Op issue
 
@@ -158,6 +180,8 @@ void CEmitter::AddUML()
 	std::vector<std::shared_ptr<CUMLAttribute> > ops;
 	std::shared_ptr<CUMLAttribute> name;
 
+	std::wstring badUmlErrorMessage;
+
 	// pick out attributes based on if it is good/bad
 	if (randomGuess > mProbability) // Bad Item
 	{
@@ -173,6 +197,8 @@ void CEmitter::AddUML()
 			atts = attsTemp;
 			ops = opsTemp;
 			name = nameTemp;
+
+			badUmlErrorMessage = nameTemp->GetErrorMessage();
 		}
 		else if (randIssue == BAD_ATTS)
 		{
@@ -188,6 +214,8 @@ void CEmitter::AddUML()
 			atts = attsTemp;
 			ops = opsTemp;
 			name = nameTemp;
+
+			badUmlErrorMessage = mAttributesBad[0]->GetErrorMessage();
 		}
 		else if (randIssue == BAD_OPS)
 		{
@@ -203,6 +231,8 @@ void CEmitter::AddUML()
 			atts = attsTemp;
 			ops = opsTemp;
 			name = nameTemp;
+
+			badUmlErrorMessage = mOperationsBad[0]->GetErrorMessage();
 		}
 	} // end bad UML
 	else // good UML
@@ -218,31 +248,6 @@ void CEmitter::AddUML()
 		ops = opsTemp;
 		name = nameTemp;
 	}
-
-	// Code to randomize position and velocity of items. This should probably be moved to the item classes
-	// themselves and the position and vector parameters removed, but for now it'll be here.
-
-	/// Maximum speed in the X direction in
-	/// in pixels per second
-	const double MaxSpeedX = 40;
-
-	/// Maximum speed in the Y direction in
-	/// in pixels per second
-	const double MaxSpeedY = 60;
-
-	/// Minimum speed in the X direction in
-	/// in pixels per second
-	const double MinSpeedX = -30;
-
-	/// Minimum speed in the Y direction in
-	/// in pixels per second
-	const double MinSpeedY = 30;
-
-	/// Maximum starting position in the X direction
-	const double MaxPosX = Width / 2;
-
-	/// Minimum starting position in the X direction
-	const double MinPosX = -1 * Width / 2;
 
 	// Randomize X and Y speeds within limits
 	double tempSpeedX = MinSpeedX + ((double)rand() / RAND_MAX) * (MaxSpeedX - MinSpeedX);
@@ -266,7 +271,7 @@ void CEmitter::AddUML()
 
 	if (randomGuess > mProbability) // Bad Item
 	{
-		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
+		mGame->AddItem(make_shared<CBadUML>(name, atts, ops, badUmlErrorMessage, CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
 		
 	}
 	else // Good Item
@@ -371,7 +376,7 @@ void CEmitter::AddUML()
 					powerVelocity = item->GetVelocity();
 					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
 						moving = true;
-					else
+					else if (!visitor.IsActive())
 					{
 						item->SetLocation(CVector(powerPosX, 60));
 						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
@@ -395,7 +400,7 @@ void CEmitter::AddUML()
 					powerVelocity = item->GetVelocity();
 					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
 						moving = true;
-					else
+					else if (!visitor.IsActive())
 					{
 						item->SetLocation(CVector(powerPosX, 60));
 						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));
@@ -419,7 +424,7 @@ void CEmitter::AddUML()
 					powerVelocity = item->GetVelocity();
 					if (powerVelocity.X() != 0 && powerVelocity.Y() != 0)
 						moving = true;
-					else
+					else if (!visitor.IsActive())
 					{
 						item->SetLocation(CVector(powerPosX, 60));
 						item->SetVelocity(CVector(powerSpeedX, powerSpeedY));

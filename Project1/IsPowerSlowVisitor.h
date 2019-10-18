@@ -23,7 +23,14 @@ public:
 	* \returns True if the item is an Slow power item */
 	bool IsPowerSlow() { return mIsPowerSlow; }
 
+	/** Tells the visitor if the power is active
+	* \returns True if the power is active */
+	bool IsActive() { return mIsActive; }
+
 private:
-	/// Bool for if this is a pen item or not
+	/// Bool for if this is a slow power item or not
 	bool mIsPowerSlow = false;
+
+	/// Bool for if the power is active or not
+	bool mIsActive = false;
 };
