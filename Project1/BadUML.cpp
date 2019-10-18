@@ -2,6 +2,7 @@
  * \file BadUML.cpp
  *
  * \author Jaideep Prasad
+ * \author Isaac Mayers
  */
 
 #include "pch.h"
@@ -10,6 +11,7 @@
 
 using namespace Gdiplus;
 
+//Display Time
 const double OneSecond = 1;
 
 CBadUML::CBadUML(std::shared_ptr<CUMLAttribute> name, 
