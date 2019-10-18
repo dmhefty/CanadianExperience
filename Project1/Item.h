@@ -63,16 +63,20 @@ public:
 
 	virtual void Accept(CItemVisitor* visitor) = 0;
 
+	/// Sets the angle of the item
+	/// \param angle Angle to be used
 	virtual void SetAngle(double angle) {}
-
-	/**
-	 * Sets the item velocity multiplier
-	 * \param multiplier The new multiplier (default value is 1)
-	 */
+	
+	/// Sets the item velocity multiplier
+	/// \param multiplier The new multiplier (default value is 1)
 	void SetVelocityMultiplier(double multiplier = 1) { mVelocityMultiplier = multiplier; }
 
+	/// Getter for the velocity multiplier
+	/// \returns the multiplier
 	double GetVelocityMultiplier() const { return mVelocityMultiplier; }
 
+	/// Getter for the attached game object
+	/// \returns the game object
 	CGame* GetGame() { return mGame; }
 
 private:

@@ -46,11 +46,13 @@ public:
 	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
 
 	/// Getter for the dimensions of the UML object
+	/// \returns the current dimensions
 	virtual CVector GetDimensions() const override
 	{
 		return CVector(mWidth, mHeight);
 	}
 
+	/// Updates the object for things that effect it
 	virtual void Effect() override 
 	{ 
 		CItem::SetVelocity(CVector(0, 0));
