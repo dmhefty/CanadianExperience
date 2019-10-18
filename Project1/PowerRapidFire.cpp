@@ -30,6 +30,9 @@ CPowerRapidFire::CPowerRapidFire(CVector position, CVector velocity, CGame* game
 
 }
 
+/**
+* Sets the effect on the items
+*/
 void CPowerRapidFire::Effect()
 {
 	CGame* game = GetGame();
@@ -47,6 +50,10 @@ void CPowerRapidFire::Effect()
 	CPowerItem::Effect();
 }
 
+/**
+* Updates the position and checkes to see if the pen hits
+* \param elapsedTime time since the last update
+*/
 void CPowerRapidFire::Update(double elapsedTime)
 {
 	if (mIsActive)

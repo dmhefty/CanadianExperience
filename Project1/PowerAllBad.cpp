@@ -27,6 +27,9 @@ CPowerAllBad::CPowerAllBad(CVector position, CVector velocity, CGame* game) :
 
 }
 
+/**
+* Sets the effect on the items
+*/
 void CPowerAllBad::Effect()
 {
 	CGame* game = GetGame();

@@ -23,6 +23,7 @@ const double TimeLimit = 20;
  * All Fast power item constructor
  * \param position Position vector of item
  * \param velocity Velocity vector of item
+ * \param game The game pointer
  */
 CPowerFast::CPowerFast(CVector position, CVector velocity, CGame* game) :
 	CPowerItem(position, velocity, game, PowerFastImageName)
@@ -30,6 +31,9 @@ CPowerFast::CPowerFast(CVector position, CVector velocity, CGame* game) :
 
 }
 
+/**
+* Sets the effect on the items
+*/
 void CPowerFast::Effect()
 {
 	CGame* game = GetGame();
@@ -48,6 +52,10 @@ void CPowerFast::Effect()
 	CPowerItem::Effect();
 }
 
+/**
+* Updates the position and checkes to see if the pen hits
+* \param elapsedTime time since the last update
+*/
 void CPowerFast::Update(double elapsedTime)
 {
 	if (mIsActive)

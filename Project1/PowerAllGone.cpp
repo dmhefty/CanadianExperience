@@ -28,6 +28,9 @@ CPowerAllGone::CPowerAllGone(CVector position, CVector velocity, CGame* game) :
 
 }
 
+/**
+* Sets the effect on the items
+*/
 void CPowerAllGone::Effect()
 {
 	CGame* game = GetGame();

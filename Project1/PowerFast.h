@@ -21,6 +21,8 @@ public:
 
 	virtual void Effect() override;
 
+	/// Accepts a visitor
+	/// \param visitor The visitor that is accessing this object
 	virtual void Accept(CItemVisitor* visitor) override { visitor->VisitPowerFast(this); }
 
 	virtual void Update(double elapsedTime) override;

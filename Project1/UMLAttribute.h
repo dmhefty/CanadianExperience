@@ -27,6 +27,8 @@ public:
 	/// \return the attribute text
 	std::wstring GetAtt() { return mAttribute; }
 
+	/// Getter for Error message
+	/// \returns string saying "Unfair!"
 	virtual std::wstring GetErrorMessage() { return L"Unfair!"; }
 
 	/// sets the attribute of the uml
