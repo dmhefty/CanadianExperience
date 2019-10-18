@@ -25,11 +25,11 @@ using namespace std;
 using namespace xmlnode;
 
 /// 
-const double MAX_PROBABILITY = 0.50f;
-const double PROB_CHANGE_RATE = 0.025f;
-const int BAD_NAME = 1;
-const int BAD_ATTS = 2;
-const int BAD_OPS = 3;
+const double MaxProbability = 0.50f;
+const double ProbChangeRate = 0.025f;
+const int BadName = 1;
+const int BadAtts = 2;
+const int BadOps = 3;
 
 /// Game area width in virtual pixels
 const int Width = 1250;
@@ -181,7 +181,7 @@ void CEmitter::AddUML()
 	// pick out attributes based on if it is good/bad
 	if (randomGuess > mProbability) // Bad Item
 	{
-		if (randIssue == BAD_NAME)
+		if (randIssue == BadName)
 		{
 			int numOfAttributes = rand() % 4;
 			int numOfOperations = rand() % 4;
@@ -196,7 +196,7 @@ void CEmitter::AddUML()
 
 			badUmlErrorMessage = mNamesBad[randName]->GetErrorMessage();
 		}
-		else if (randIssue == BAD_ATTS)
+		else if (randIssue == BadAtts)
 		{
 			int numOfAttributes = rand() % 3;
 			int numOfOperations = rand() % 4;
@@ -214,7 +214,7 @@ void CEmitter::AddUML()
 			ops = opsTemp;
 			name = nameTemp;
 		}
-		else if (randIssue == BAD_OPS)
+		else if (randIssue == BadOps)
 		{
 			int numOfAttributes = rand() % 4;
 			int numOfOperations = rand() % 3;
@@ -437,9 +437,9 @@ void CEmitter::AddUML()
 		}
 	}
 	
-	if (mProbability <= MAX_PROBABILITY)
+	if (mProbability <= MaxProbability)
 	{
-		mProbability += PROB_CHANGE_RATE;
+		mProbability += ProbChangeRate;
 	}
 	else
 	{
