@@ -34,8 +34,8 @@ using namespace xmlnode;
 /// Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
 
-///	2 seconds in seconds
-const double TwoSeconds = 2.0;
+///	5 seconds in seconds
+const double FIVE_SECONDS = 5.0;
 
 
 /**
@@ -129,22 +129,6 @@ void CGame::Update(double elapsedTime)
 	CVector itemDimensions;
 
 	vector<shared_ptr<CItem> > outOfBounds;
-	vector<shared_ptr<CItem> > deletedUMLs;
-
-	for (auto item : mItems)
-	{
-		item->Accept(&umlVisitor);
-		if (umlVisitor.IsUML() && umlVisitor.IsDelted())
-		{
-			deletedUMLs.push_back(item);
-		}
-		umlVisitor.Reset();
-	}
-
-	for (auto uml : deletedUMLs)
-	{
-		RemoveItem(uml);
-	}
 
 	for (auto item : mItems)
 	{
@@ -196,9 +180,9 @@ void CGame::Update(double elapsedTime)
 			break;
 		}
 	}
-	Rect penRect((INT)(penPosition.X() - penDimensions.X() / 2),
-		(INT)(penPosition.Y() - penDimensions.X() / 2),
-		(INT)penDimensions.X(), (INT)penDimensions.Y());
+	Rect penRect(penPosition.X() - penDimensions.X() / 2,
+		penPosition.Y() - penDimensions.X() / 2,
+		penDimensions.X(), penDimensions.Y());
 
 	for (auto item : mItems)
 	{
@@ -211,9 +195,9 @@ void CGame::Update(double elapsedTime)
 
 		itemPosition = item->GetPosition();
 		itemDimensions = item->GetDimensions();
-		Rect itemRect((INT)(itemPosition.X() - itemDimensions.X() / 2),
-			(INT)(itemPosition.Y() - itemDimensions.Y() / 2),
-			(INT)itemDimensions.X(), (INT)itemDimensions.Y());
+		Rect itemRect(itemPosition.X() - itemDimensions.X() / 2,
+			itemPosition.Y() - itemDimensions.Y() / 2,
+			itemDimensions.X(), itemDimensions.Y());
 
 		if (!(pen->GetAttachedState()) && penRect.IntersectsWith(itemRect))
 		{
@@ -225,7 +209,7 @@ void CGame::Update(double elapsedTime)
 
 	// add a UML Item if it has been enough time.
 	mUMLTimeDelta += elapsedTime;
-	if (mUMLTimeDelta >= TwoSeconds)
+	if (mUMLTimeDelta >= FIVE_SECONDS)
 	{
 		mUMLTimeDelta = 0;
 		mEmitter.AddUML();
@@ -269,7 +253,7 @@ void CGame::RotatePen(double x, double y)
 	double oY = (y - mYOffset) / mScale;
 	// Determine and set the new angle
 	double angle = (atan2(Height - oY, oX) - AngleOffset) + (3.1415926535f)*3/4;
-	CVector pos(61.29437 * sin(angle), 61.29437f * cos(angle) + (float)(1000.0-95.0));
+	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle) + (float)(1000.0 - 105.0));
 	
 	CIsHaroldPenVisitor visitPen;
 	for (auto item : mItems)
@@ -335,11 +319,6 @@ void CGame::IncrementScore(int category)
 		mScoreBoard.IncrementUnfair();
 		break;
 	}
-}
-
-void CGame::DecrementUnfairScore()
-{
-	mScoreBoard.DecrementUnfair();
 }
 
 /**
