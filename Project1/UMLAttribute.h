@@ -13,8 +13,6 @@ public:
 	*/
 	std::wstring GetAtt() { return mAttribute; }
 
-	virtual std::wstring GetErrorMessage() { return L"Unfair!"; }
-
 	void SetAtt(std::wstring att) { mAttribute = att; }
 };
 

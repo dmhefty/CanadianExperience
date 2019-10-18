@@ -32,17 +32,28 @@ void CPowerAllGone::Effect()
 {
 	CGame* game = GetGame();
 	CIsUMLItemVisitor umlVisitor;
-
+	vector<shared_ptr<CItem> > allUML;
 	for (auto item : *game)
 	{
 		item->Accept(&umlVisitor);
 		if (umlVisitor.IsUML())
 		{
-			item->Effect();
+			allUML.push_back(item);
 			umlVisitor.Reset();
 		}
 		
 	}
+
+	CIsBadUMLVisitor badVisitor;
+	for (auto item : allUML)
+	{
+		item->Accept(&badVisitor);
+		if (badVisitor.IsBadUML()) game->IncrementScore(1);
+		else game->IncrementScore(-1);
+		game->RemoveItem(item);
+		badVisitor.Reset();
+	}
+	allUML.clear();
 
 	CPowerItem::Effect();
 }
