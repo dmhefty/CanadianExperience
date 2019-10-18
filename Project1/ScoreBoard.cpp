@@ -28,6 +28,7 @@ CScoreBoard::~CScoreBoard()
 
 /**
  * Draws the scores to the window screen
+ * \param graphics Graphics Object
  */
 void CScoreBoard::Draw(Gdiplus::Graphics* graphics)
 {
