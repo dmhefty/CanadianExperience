@@ -20,6 +20,9 @@ public:
 	CProject1App() noexcept;
 
 
+/// \cond
+/// This doxygen switch tells it to ignore this block of code
+
 // Overrides
 public:
 	virtual BOOL InitInstance();
@@ -34,6 +37,8 @@ public:
 private:
 	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 	ULONG_PTR gdiplusToken = 0;
+
+/// \endcond
 };
 
 extern CProject1App theApp;

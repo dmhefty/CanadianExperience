@@ -16,13 +16,18 @@ private:
 	/// UML error for this attribute
 	std::wstring mError = L"";
 public:
+
 	/// Creates the attribute
 	/// \param att The attribute we are working with
 	CUMLAttribute(std::wstring att) : mAttribute(att) {}
 
+	/** returns the uml attribute stored in this item
+	*/
 	/// Returns the uml attribute stored in this item
 	/// \return the attribute text
 	std::wstring GetAtt() { return mAttribute; }
+
+	virtual std::wstring GetErrorMessage() { return L"Unfair!"; }
 
 	/// sets the attribute of the uml
 	/// \param att The attribute we are passing to the uml object
