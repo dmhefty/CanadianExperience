@@ -28,12 +28,11 @@ CScoreBoard::~CScoreBoard()
 
 /**
  * Draws the scores to the window screen
- * \param graphics Graphics Object
  */
 void CScoreBoard::Draw(Gdiplus::Graphics* graphics)
 {
 	FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 26);
+	Gdiplus::Font font(&fontFamily, 16);
 
 	SolidBrush green(Color(200, 250, 200));
 	graphics->DrawString(to_wstring(mCorrect).c_str(), -1, &font, PointF(-575, 50), &green);
