@@ -141,7 +141,9 @@ void CEmitter::Load(const std::wstring& filePath)
 		AfxMessageBox(ex.Message().c_str());
 	}
 }
-
+/*
+* Emits Random UML and Random Power-Up
+*/
 void CEmitter::AddUML() 
 {
 	srand((unsigned int)time(NULL));

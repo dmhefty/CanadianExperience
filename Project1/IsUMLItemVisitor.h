@@ -43,6 +43,8 @@ public:
 	void Reset() { mIsUML = false; mIsDeleted = false; }
 
 private:
+	//if item is UML will be true
 	bool mIsUML = false;
+	//if item is delete will be true
 	bool mIsDeleted = false;
 };

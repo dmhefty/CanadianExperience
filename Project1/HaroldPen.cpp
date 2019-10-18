@@ -70,7 +70,10 @@ void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 	graphics->Restore(state);
 }
 
-
+/**
+*Update Pen item
+* \param elapsedTime Real Time Elapsed
+*/
 void CHaroldPen::Update(double elapsedTime)
 {
 	if (!mIsAttached)

@@ -123,6 +123,7 @@ private:
 	///The game scoreboard object
 	CScoreBoard mScoreBoard;
 
+	//Emitter
 	CEmitter mEmitter;
 
 	///List of all items on screen

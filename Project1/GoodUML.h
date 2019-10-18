@@ -24,7 +24,9 @@ public:
 		std::vector<std::shared_ptr<CUMLAttribute> > operations,
 		CVector position, CVector velocity, CGame* game);
 
-	//TODO -> Accept function to be added aftor visitors are implemented
+	/* Accepts Visitor
+	* \param visitor Visitor to be Accepted
+	*/
 	virtual void Accept(CItemVisitor* visitor) 
 	{ 
 		CUML::Accept(visitor);
@@ -35,6 +37,7 @@ public:
 
 	virtual void Effect() override;
 
+	//Getter for Unfair message for Good UMLs
 	std::wstring GetMessageOnHit() const { return L"Unfair!"; }
 };
 

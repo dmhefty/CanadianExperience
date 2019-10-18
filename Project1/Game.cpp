@@ -34,7 +34,7 @@ using namespace xmlnode;
 /// Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
 
-///	5 seconds in seconds
+///	2 seconds in seconds
 const double TwoSeconds = 2.0;
 
 

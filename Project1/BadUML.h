@@ -13,6 +13,9 @@ public:
 		std::wstring error,
 		CVector position, CVector velocity, CGame* game);
 
+	/* Accepts Visitor
+	* \param visitor Visitor to be Accepted
+	*/
 	virtual void Accept(CItemVisitor* visitor) override 
 	{ 
 		CUML::Accept(visitor);
@@ -23,7 +26,7 @@ public:
 
 	virtual void Effect() override;
 
-	// TODO: replace code below with return mError after constructor is updated
+	// Gets Error Message
 	std::wstring GetMessageOnHit() const { return mError; } 
 };
 

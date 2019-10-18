@@ -20,7 +20,12 @@ CGoodUML::CGoodUML(std::shared_ptr<CUMLAttribute> name,
 {
 
 }
-
+/*
+* Draws Good UML
+* \param graphics Graphics Objects
+* \param position Center Position of UML object
+*
+*/
 void CGoodUML::Draw(Gdiplus::Graphics* graphics, CVector position)
 {
 	CUML::Draw(graphics, position);

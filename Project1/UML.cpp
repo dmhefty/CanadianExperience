@@ -20,7 +20,9 @@ CUML::CUML(std::shared_ptr<CUMLAttribute> name,
 
 
 }
-
+/** Updates time elapsed for UML object
+* \param elapsedTime Real Elapsed Time
+*/
 
 void CUML::Update(double elapsedTime)
 {
@@ -31,7 +33,10 @@ void CUML::Update(double elapsedTime)
 	}
 }
 
-// draws uml items
+/** draws uml items
+* \param graphics Graphics Object
+* \param position Center position of UML object
+*/
 void CUML::Draw(Graphics* graphics, CVector position) 
 {
 	// Determine the box dimesions based on number of attributes and operations
