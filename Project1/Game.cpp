@@ -269,7 +269,7 @@ void CGame::RotatePen(double x, double y)
 	double oY = (y - mYOffset) / mScale;
 	// Determine and set the new angle
 	double angle = (atan2(Height - oY, oX) - AngleOffset) + (3.1415926535f)*3/4;
-	CVector pos(61.29437 * sin(angle) - 10.0f, 61.29437f * cos(angle) + (float)(1000.0 - 105.0));
+	CVector pos(61.29437 * sin(angle), 61.29437f * cos(angle) + (float)(1000.0-95.0));
 	
 	CIsHaroldPenVisitor visitPen;
 	for (auto item : mItems)
