@@ -5,7 +5,6 @@
  */
 
 #include "pch.h"
-#include "PowerFast.h"
 #include "IsPowerFastVisitor.h"
 
  /** \brief Visit a CPowerFast object
@@ -13,5 +12,4 @@
 void CIsPowerFastVisitor::VisitPowerFast(CPowerFast* fast)
 {
 	mIsPowerFast = true;
-	mIsActive = fast->IsActive();
 }

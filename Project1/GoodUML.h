@@ -9,7 +9,6 @@
 
 #pragma once
 
-#include <string>
 #include "UML.h"
 
 /**
@@ -31,10 +30,8 @@ public:
 		visitor->VisitGoodUML(this); 
 	}
 
-	virtual void Draw(Gdiplus::Graphics* graphics, CVector position) override;
-
 	virtual void Effect() override;
 
-	std::wstring GetMessageOnHit() const { return L"Unfair!"; }
+	void DisplayUnfair() {} // TODO DISPLAY "UNFAIR" WHEN HIT
 };
 
