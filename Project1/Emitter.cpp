@@ -22,12 +22,6 @@ const double PROB_CHANGE_RATE = 0.025f;
 const int BAD_NAME = 1;
 const int BAD_ATTS = 2;
 const int BAD_OPS = 3;
-const int ALL_BAD = 0;
-const int ALL_GONE = 1;
-const int ALL_GOOD = 2;
-const int FAST = 3;
-const int RAPID_FIRE = 4;
-const int SLOW = 5;
 
 /**
  * Loads a file containing characteristics for UML objects
@@ -111,6 +105,12 @@ void CEmitter::Load(const std::wstring& filePath)
 	{
 		AfxMessageBox(ex.Message().c_str());
 	}
+
+
+	// TODO: DELETE THE FOLLOWING LINES. FOR TESTING PURSPOSES ONLY
+	mGame->AddItem(make_shared<CPowerSlow>(CVector(0, 0), CVector(-3, 100), mGame));
+	mGame->AddItem(make_shared<CPowerRapidFire>(CVector(-500, 0), CVector(40, 190), mGame));
+	mGame->AddItem(make_shared<CPowerAllGone>(CVector(500, 0), CVector(-20, 80), mGame));
 }
 
 void CEmitter::AddUML() 
@@ -272,93 +272,4 @@ void CEmitter::AddUML()
 		mProbability = 50.0f;
 	}
 	
-}
-
-void CEmitter::AddPower()
-{
-	srand(time(NULL));
-
-	/// Game area width in virtual pixels
-	const static int Width = 1250;
-	/// Game area height in virtual pixels
-	const static int Height = 1000;
-	/// which issue is the case for the UML
-	int randPower; // 0: AllBad; 1: AllGone; 2: AllGood; 3: Fast; 4: RapidFire; 5: Slow
-
-	randPower = rand() % 6; // decides power
-	
-	// Code to randomize position and velocity of items. This should probably be moved to the item classes
-	// themselves and the position and vector parameters removed, but for now it'll be here.
-
-	/// Maximum speed in the X direction in
-	/// in pixels per second
-	const double MaxSpeedX = 40;
-
-	/// Maximum speed in the Y direction in
-	/// in pixels per second
-	const double MaxSpeedY = 60;
-
-	/// Minimum speed in the X direction in
-	/// in pixels per second
-	const double MinSpeedX = -30;
-
-	/// Minimum speed in the Y direction in
-	/// in pixels per second
-	const double MinSpeedY = 30;
-
-	/// Maximum starting position in the X direction
-	const double MaxPosX = Width / 2;
-
-	/// Minimum starting position in the X direction
-	const double MinPosX = -1 * Width / 2;
-
-	// Randomize X and Y speeds within limits
-	double tempSpeedX = MinSpeedX + ((double)rand() / RAND_MAX) * (MaxSpeedX - MinSpeedX);
-	double tempSpeedY = MinSpeedY + ((double)rand() / RAND_MAX) * (MaxSpeedY - MinSpeedY);
-
-	// Randomize X position within limits
-	double tempPosX = MinPosX + ((double)rand() / RAND_MAX) * (MaxPosX - MinPosX);
-
-	// Limit the X position so that it will not move off the screen with its set X velocity
-	if ((tempSpeedX < 0) && (-1 * Width / 2 >= (tempPosX + tempSpeedX * (Height / tempSpeedY))))
-	{
-		tempPosX = -1 * Width / 2 - (tempSpeedX * (Height / tempSpeedY));
-	}
-
-	if ((tempSpeedX > 0) && (Width / 2 <= (tempPosX + tempSpeedX * (Height / tempSpeedY))))
-	{
-		tempPosX = Width / 2 - (tempSpeedX * (Height / tempSpeedY));
-	}
-
-	// Generate a good or bad UML based on the probability
-
-	if (randPower == ALL_BAD)
-	{
-		mGame->AddItem(make_shared<CPowerAllBad>(CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	}
-
-	if (randPower == ALL_GONE)
-	{
-		mGame->AddItem(make_shared<CPowerAllGone>(CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	}
-
-	if (randPower == ALL_GOOD)
-	{
-		mGame->AddItem(make_shared<CPowerAllGood>(CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	}
-
-	if (randPower == FAST)
-	{
-		mGame->AddItem(make_shared<CPowerFast>(CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	}
-
-	if (randPower == RAPID_FIRE)
-	{
-		mGame->AddItem(make_shared<CPowerRapidFire>(CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	}
-
-	if (randPower == SLOW)
-	{
-		mGame->AddItem(make_shared<CPowerSlow>(CVector(tempPosX, 60), CVector(tempSpeedX, tempSpeedY), mGame));
-	}
 }

@@ -37,9 +37,6 @@ const double AngleOffset = 3.14159 / 2.0;
 ///	5 seconds in seconds
 const double FIVE_SECONDS = 5.0;
 
-///	10 seconds in seconds
-const double TEN_SECONDS = 10.0;
-
 
 /**
 * Draw the game area
@@ -216,14 +213,6 @@ void CGame::Update(double elapsedTime)
 	{
 		mUMLTimeDelta = 0;
 		mEmitter.AddUML();
-	}
-
-	// add a Powerup if it has been enough time.
-	mPowerTimeDelta += elapsedTime;
-	if (mPowerTimeDelta >= TEN_SECONDS)
-	{
-		mPowerTimeDelta = 0;
-		mEmitter.AddPower();
 	}
 
 

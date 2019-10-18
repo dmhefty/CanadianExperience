@@ -129,7 +129,5 @@ private:
 	/// Time since last UML object was Emitted
 	double mUMLTimeDelta = 0;
 
-	/// Time since last Power object was Emitted
-	double mPowerTimeDelta = 0;
 };
 
