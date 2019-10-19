@@ -17,8 +17,8 @@ public:
 	CScoreBoard();
 
 	/// Do not use copy constructor
-	/// \param CScoreBoard& The other scoreboard
-	CScoreBoard(const CScoreBoard&) = delete;
+	/// \param scoreBoard The other scoreboard
+	CScoreBoard(const CScoreBoard& scoreBoard) = delete;
 
 	virtual ~CScoreBoard();
 

@@ -40,8 +40,8 @@ public:
 	CEmitter() = delete;
 
 	/// Disabled  copy constructor. DO NOT USE
-	/// \param CEmitter& The other Emitter
-	CEmitter(const CEmitter&) = delete;
+	/// \param emitter The other Emitter
+	CEmitter(const CEmitter& emitter) = delete;
 
 	/// Constructor
 	/// \param game The game we are in
