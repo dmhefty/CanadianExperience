@@ -1,5 +1,7 @@
 #pragma once
 #include "UMLAttribute.h"
+
+/// Incorrect UML attribute
 class CBadUMLAttribute :
 	public CUMLAttribute
 {

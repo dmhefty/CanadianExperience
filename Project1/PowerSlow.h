@@ -11,7 +11,7 @@
 #include <string>
 #include "PowerItem.h"
 
-/* Slow power-up class*/
+/// Slow power-up class
 class CPowerSlow :
 	public CPowerItem
 {

@@ -15,29 +15,29 @@
 #include "Game.h"
 
 
-// CChildView window
+/// CChildView window
 
 class CChildView : public CWnd
 {
-// Construction
+/// Construction
 public:
 	CChildView();
 
-// Attributes
+/// Attributes
 public:
 
-// Operations
+/// Operations
 public:
 
-// Overrides
+/// Overrides
 	protected:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-// Implementation
+/// Implementation
 public:
 	virtual ~CChildView();
 
-	// Generated message map functions
+	/// Generated message map functions
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()

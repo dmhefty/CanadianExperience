@@ -1,6 +1,7 @@
 #pragma once
 #include "UML.h"
 
+/// Incorrect UML object
 class CBadUML :
 	public CUML
 {

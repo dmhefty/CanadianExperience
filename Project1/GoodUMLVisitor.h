@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 
+/// Visitor for a correct UML object
 class CGoodUMLVisitor :
 	public CItemVisitor
 {

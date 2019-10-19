@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 
+/// Visits incorrect UML attribute item
 class CBadUMLVisitor :
 	public CItemVisitor
 {

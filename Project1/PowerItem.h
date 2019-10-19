@@ -15,7 +15,7 @@
 #include <string>
 #include <memory>
 
-/* Describes PowerItem class */
+/// Describes PowerItem class
 class CPowerItem :
 	public CItem
 {

@@ -123,7 +123,7 @@ int CProject1App::ExitInstance()
 // CProject1App message handlers
 
 
-// CAboutDlg dialog used for App About
+/// CAboutDlg dialog used for App About
 
 class CAboutDlg : public CDialogEx
 {

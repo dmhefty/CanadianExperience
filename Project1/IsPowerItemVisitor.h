@@ -19,8 +19,8 @@ public:
 
 	virtual void VisitPowerItem(CPowerItem* poweritem) override;
 
-	/** Tells the visitor that this is a poweritem
-/* \returns True if the item is a power */
+	/// Tells the visitor that this is a poweritem
+	/// \returns True if the item is a power */
 	bool IsPowerItem() { return mIsPowerItem; }
 
 private:

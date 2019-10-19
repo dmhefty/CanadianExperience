@@ -13,7 +13,14 @@
 using namespace std;
 using namespace Gdiplus;
 
-/* Constructor */
+/**
+ * \brief Constructor for CPowerItem class
+ *
+ * \param position takes in a position in the form of a CVector
+ * \param velocity takes in a velocity in the form of a CVector
+ * \param game takes in the game pointer
+ * \param PowerItemImageName takes the image name of the power item as a string
+ */
 CPowerItem::CPowerItem(CVector position, CVector velocity, CGame* game, wstring PowerItemImageName) :
 	CItem(position, velocity, game)
 {

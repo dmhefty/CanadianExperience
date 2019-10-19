@@ -14,6 +14,7 @@
 #include "UMLAttribute.h"
 #include "Vector.h"
 
+/// Base class for UML objects
 class CUML :
 	public CItem
 {

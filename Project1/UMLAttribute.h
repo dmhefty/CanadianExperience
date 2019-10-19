@@ -8,6 +8,8 @@
 
 #pragma once
 #include <string>
+
+/// Attribute for UML object
 class CUMLAttribute
 {
 private:

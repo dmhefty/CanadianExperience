@@ -22,7 +22,7 @@
 #include "Emitter.h"
 
 
-
+/// Overall game object
 class CGame
 {
 public:

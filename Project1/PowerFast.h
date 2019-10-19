@@ -12,7 +12,7 @@
 #include "PowerItem.h"
 
 
- /* Fast power-up class*/
+/// Fast power-up class
 class CPowerFast :
 	public CPowerItem
 {

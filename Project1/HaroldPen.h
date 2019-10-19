@@ -14,6 +14,7 @@
 #include "ItemVisitor.h"
 #include <string>
 
+/// Pen object
 class CHaroldPen :
 	public CItem
 {

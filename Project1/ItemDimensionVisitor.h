@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include "Item.h"
 
+/// Visitor to access an item's dimensions
 class CItemDimensionVisitor :
 	public CItemVisitor
 {
