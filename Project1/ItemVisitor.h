@@ -27,6 +27,7 @@ class CPowerSlow;
 class CItemVisitor
 {
 public:
+	/// CItemVisitor destructor
 	virtual ~CItemVisitor() {}
 
 	/** Visit a general Item object

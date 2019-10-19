@@ -9,10 +9,10 @@
 
 #pragma once
 
+#include <string>
 #include "Item.h"
 #include "Vector.h"
 #include "ItemVisitor.h"
-#include <string>
 
 /// Pen object
 class CHaroldPen :

@@ -15,6 +15,10 @@ class CMakePenActiveVisitor :
 	public CItemVisitor
 {
 public:
+	/**
+	* Constructor
+	* \param angle The angle to set the pen to
+	*/
 	CMakePenActiveVisitor(double angle) : mAngle(angle)
 	{}
 

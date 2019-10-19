@@ -9,11 +9,11 @@
 
 
 #pragma once
+#include <string>
+#include <memory>
 #include "Item.h"
 #include "ItemVisitor.h"
 #include "Vector.h"
-#include <string>
-#include <memory>
 
 /// Describes PowerItem class
 class CPowerItem :

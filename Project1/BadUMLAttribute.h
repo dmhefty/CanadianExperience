@@ -1,3 +1,11 @@
+/**
+ * \file BadUMLAttribute.h
+ *
+ * \author Team Sarson
+ *
+ * Class for Bad UML Attributes
+ */
+
 #pragma once
 #include "UMLAttribute.h"
 
