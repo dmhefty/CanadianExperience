@@ -40,7 +40,7 @@ public:
 	CEmitter() = delete;
 
 	/// Disabled  copy constructor. DO NOT USE
-	/// \param CEmitter & The other Emitter
+	/// \param CEmitter& The other Emitter
 	CEmitter(const CEmitter&) = delete;
 
 	/// Constructor

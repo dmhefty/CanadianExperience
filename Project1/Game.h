@@ -28,7 +28,7 @@ class CGame
 public:
 
 	///copy constructor (disabled) DO NOT USE
-	/// \param CGame & The other game
+	/// \param CGame& The other game
 	CGame(const CGame&) = delete;
 
 	///default constructor
