@@ -14,7 +14,6 @@
 
 #include <vector>
 #include "HaroldPen.h"
-#include "ItemDimensionVisitor.h"
 #include "MakePenActiveVisitor.h"
 #include "IsHaroldPenVisitor.h"
 #include "PowerAllBad.h"

@@ -132,9 +132,6 @@
     <ClInclude Include="PowerSlow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ItemDimensionVisitor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IsBadUMLVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -246,9 +243,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PowerSlow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemDimensionVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IsBadUMLVisitor.cpp">
