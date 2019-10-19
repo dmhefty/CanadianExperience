@@ -21,6 +21,15 @@ const wstring PenImageName = L"images/redpen.png";
 /// Constant ratio to convert radians to degrees
 const double RtoD = 57.295779513;
 
+/// Pen position value to ensure proper position on screen
+const double PenOffset1 = 61.29437;
+
+/// Pen position value to ensure proper position on screen
+const double PenOffset2 = 1000.0;
+
+/// Pen position value to ensure proper position on screen
+const double PenOffset3 = 95.0;
+
 
 /// One second
 const double OneSecond = 1;
@@ -101,7 +110,7 @@ void CHaroldPen::ResetPen()
 {
 	mIsAttached = true;
 	mTravelTime = 0;
-	CItem::SetLocation(CVector(61.29437 * sin(mAngle), 61.29437f * cos(mAngle) + (float)(1000.0 - 95.0)));
+	CItem::SetLocation(CVector(PenOffset1 * sin(mAngle), PenOffset1 * cos(mAngle) + (float)(PenOffset2 - PenOffset3)));
 	CItem::SetVelocity(CVector(0.0f, 0.0f));
 }
 

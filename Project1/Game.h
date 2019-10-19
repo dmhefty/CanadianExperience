@@ -27,13 +27,14 @@ class CGame
 {
 public:
 
-	//copy constructor (disabled)
+	///copy constructor (disabled) DO NOT USE
+	/// \param CGame & The other game
 	CGame(const CGame&) = delete;
 
-	//default constructor
+	///default constructor
 	CGame();
 
-	//destructor
+	///destructor
 	virtual ~CGame();
 	
 	void OnDraw(Gdiplus::Graphics* graphics, int width, int height);

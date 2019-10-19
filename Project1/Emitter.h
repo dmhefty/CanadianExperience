@@ -36,8 +36,11 @@
 class CEmitter
 {
 public:
+	/// Default constructor disabled. DO NOT USE
 	CEmitter() = delete;
 
+	/// Disabled  copy constructor. DO NOT USE
+	/// \param CEmitter & The other Emitter
 	CEmitter(const CEmitter&) = delete;
 
 	/// Constructor

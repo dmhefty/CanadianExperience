@@ -33,6 +33,19 @@ using namespace xmlnode;
 /// Half Pi radians
 const double AngleOffset = 3.14159 / 2.0;
 
+/// Pen position value to ensure proper position on screen
+const double PenOffset1 = 61.29437;
+
+/// Pen position value to ensure proper position on screen
+const double PenOffset2 = 1000.0;
+
+/// Pen position value to ensure proper position on screen
+const double PenOffset3 = 95.0;
+
+
+/// Pen angle offset value to ensure proper position on screen
+const double PenAngleOffset = (3.1415926535f) * 3 / 4;
+
 ///	2 seconds in seconds
 const double TwoSeconds = 2.0;
 
@@ -267,8 +280,8 @@ void CGame::RotatePen(double x, double y)
 	double oX = (x - mXOffset) / mScale;
 	double oY = (y - mYOffset) / mScale;
 	// Determine and set the new angle
-	double angle = (atan2(Height - oY, oX) - AngleOffset) + (3.1415926535f)*3/4;
-	CVector pos(61.29437 * sin(angle), 61.29437f * cos(angle) + (float)(1000.0-95.0));
+	double angle = (atan2(Height - oY, oX) - AngleOffset) + PenAngleOffset;
+	CVector pos(PenOffset1 * sin(angle), PenOffset1 * cos(angle) + (float)(PenOffset2 - PenOffset3));
 	
 	CIsHaroldPenVisitor visitPen;
 	for (auto item : mItems)
@@ -313,7 +326,7 @@ void CGame::RemoveItem(std::shared_ptr<CItem> item)
 }
 
 /**
- * Removes an item from the item list via pointer
+ * Removes an item from the item list via pointer (in cases for using "this" pointer)
  * \param item Pointer to item to remove
  */
 void CGame::RemoveThisItem(CItem* item)
@@ -364,7 +377,7 @@ CGame::CGame() : mEmitter(this)
 	std::wstring filename = L"uml.xml";
 	mEmitter.Load(filename);
 
-	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f,1000.0-154.0f), CVector(0.0f,0.0f), this);
+	shared_ptr<CHaroldPen> hPen = make_shared<CHaroldPen>(CVector(29.0f, 1000.0 - 154.0f), CVector(0.0f, 0.0f), this);
 	AddItem(hPen);
 }
 
