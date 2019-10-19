@@ -11,7 +11,7 @@
 
 using namespace Gdiplus;
 
-//Display Time
+/// Display Time
 const double OneSecond = 1;
 
 CGoodUML::CGoodUML(std::shared_ptr<CUMLAttribute> name,

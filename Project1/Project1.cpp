@@ -14,6 +14,7 @@
 #define new DEBUG_NEW
 #endif
 
+/// \cond
 
 // CProject1App
 
@@ -46,7 +47,6 @@ CProject1App::CProject1App() noexcept
 // The one and only CProject1App object
 
 CProject1App theApp;
-
 
 // CProject1App initialization
 
@@ -164,5 +164,5 @@ void CProject1App::OnAppAbout()
 
 // CProject1App message handlers
 
-
+/// \endcond
 

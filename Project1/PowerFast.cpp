@@ -14,9 +14,10 @@
 
 using namespace std;
 
+/// Image name for the powerup
 const wstring PowerFastImageName = L"poweritem/FastFall.png";
 
-// Time limit of 20 seconds
+/// Time limit of 20 seconds
 const double TimeLimit = 20;
 
 /**

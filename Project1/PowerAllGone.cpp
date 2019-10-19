@@ -14,6 +14,7 @@
 
 using namespace std;
 
+/// Image name for the powerup
 const wstring PowerAllGoneImageName = L"poweritem/Nuke.png";
 
 /**

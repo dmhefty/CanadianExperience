@@ -24,11 +24,15 @@
 using namespace std;
 using namespace xmlnode;
 
-/// 
+/// Max probability
 const double MaxProbability = 0.50f;
+/// Rate that the probability changes
 const double ProbChangeRate = 0.025f;
+/// Number assossiated with BadName
 const int BadName = 1;
+/// Number assossiated with BadAtts
 const int BadAtts = 2;
+/// Number assossiated with BadOps
 const int BadOps = 3;
 
 /// Game area width in virtual pixels

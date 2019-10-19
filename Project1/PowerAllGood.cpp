@@ -13,6 +13,7 @@
 
 using namespace std;
 
+/// Image name for the powerup
 const wstring PowerAllGoodImageName = L"poweritem/AllGood.png";
 
 /**

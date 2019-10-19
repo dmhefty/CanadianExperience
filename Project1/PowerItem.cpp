@@ -21,7 +21,7 @@ using namespace Gdiplus;
  * \param game takes in the game pointer
  * \param PowerItemImageName takes the image name of the power item as a string
  */
-CPowerItem::CPowerItem(CVector position, CVector velocity, CGame* game, wstring PowerItemImageName) :
+CPowerItem::CPowerItem(CVector position, CVector velocity, CGame* game, std::wstring PowerItemImageName) :
 	CItem(position, velocity, game)
 {
 	mPowerItemImage = unique_ptr<Bitmap>(Bitmap::FromFile(PowerItemImageName.c_str()));
