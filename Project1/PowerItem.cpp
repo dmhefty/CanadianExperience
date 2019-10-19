@@ -33,7 +33,10 @@ CPowerItem::CPowerItem(CVector position, CVector velocity, CGame* game, std::wst
 	}
 }
 
-/* Draw power item*/
+/** Draw power item
+* \param graphics Gdiplus graphics to draw
+* \param position Position to draw
+*/
 void CPowerItem::Draw(Gdiplus::Graphics* graphics, CVector position)
 {
 	float wid = (float)mPowerItemImage->GetWidth();
@@ -46,7 +49,9 @@ void CPowerItem::Draw(Gdiplus::Graphics* graphics, CVector position)
 	graphics->Restore(state);
 }
 
-/* Update Image */
+/** Update Image
+* \param elapsedTime Time since last update
+*/
 void CPowerItem::Update(double elapsedTime)
 {
 	CItem::Update(elapsedTime);
