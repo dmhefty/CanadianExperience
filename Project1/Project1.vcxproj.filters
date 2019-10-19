@@ -120,12 +120,6 @@
     <ClInclude Include="PowerAllGone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GoodUMLVisitor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BadUMLVisitor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PowerRapidFire.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -243,12 +237,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PowerAllGone.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GoodUMLVisitor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BadUMLVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PowerRapidFire.cpp">
