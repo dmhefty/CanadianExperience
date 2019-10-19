@@ -1,3 +1,11 @@
+/**
+ * \file BadUML.h
+ *
+ * \author Team Sarson
+ *
+ * Class for bad UML objects
+ */
+
 #pragma once
 #include "UML.h"
 
