@@ -32,6 +32,8 @@ public:
 	*/
 	void Reset() { mIsHaroldPen = false; mAttachedState = false; }
 
+	/// Getter for pen object
+	/// \returns the pen object
 	CHaroldPen* GetPen() { return mHaroldPen; }
 
 	/**
@@ -39,10 +41,15 @@ public:
 	* \return bool for if an HaroldPen object was visited
 	*/
 	bool IsHaroldPen() { return mIsHaroldPen; }
+	/// Determines if the pen object is attached to Harold
+	/// \returns true if the pen is attached to Harold
 	bool IsAttached() { return mAttachedState; }
 
 private:
+	/// pointer to pen object
 	CHaroldPen* mHaroldPen = nullptr;
+	/// tracks if this is a pen
 	bool mIsHaroldPen = false;
+	/// tracks
 	bool mAttachedState = false;
 };

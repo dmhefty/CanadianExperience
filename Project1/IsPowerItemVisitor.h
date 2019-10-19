@@ -16,7 +16,7 @@ class CIsPowerItemVisitor :
 	public CItemVisitor
 {
 public:
-
+	
 	virtual void VisitPowerItem(CPowerItem* poweritem) override;
 
 	/// Tells the visitor that this is a poweritem

@@ -18,7 +18,7 @@ class CIsGoodUMLVisitor :
 public:
 	/**
 	* Visits an Item object and determines if it is a GoodUML object
-	* \param badML the CGoodUML object in question
+	* \param badUML the CBadUML object in question
 	*/
 	virtual void VisitGoodUML(CGoodUML* badUML) override { mIsGoodUML = true; }
 
@@ -34,6 +34,7 @@ public:
 	void Reset() { mIsGoodUML = false; }
 
 private:
+	/// Defaults bool to false to track if this is a good uml
 	bool mIsGoodUML = false;
 };
 

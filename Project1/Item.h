@@ -15,8 +15,6 @@
 
 class CGame;
 
-
-
  /**
   * \brief Basic parent Item class
   *
@@ -48,12 +46,16 @@ public:
 	* \returns velocity Item's velocity as a vector in pixels */
 	CVector GetVelocity() const { return mVelocity; }
 
+	/// Virtual getter for dimensions of item
+	/// \returns CVector of position
 	virtual CVector GetDimensions() const = 0;
 
-	virtual void Effect() = 0; // Item effect when hit with pen
+	virtual void Effect() = 0; ///< Item effect when hit with pen
 
 	/** 
 	 * \brief Meant to display the graphic for the object using gdiplus
+	 * \param graphics Gdiplus object for drawing
+	 * \param position Position to draw
 	 *
 	 * Pure Virtual Draw since it can't be drawn as a basic Item
 	 */
@@ -61,6 +63,8 @@ public:
 
 	virtual void Update(double elapsedTime);
 
+	/// Virtual function for accepting a visitor
+	/// \param visitor Visitor to accept
 	virtual void Accept(CItemVisitor* visitor) = 0;
 
 	/// Sets the angle of the item

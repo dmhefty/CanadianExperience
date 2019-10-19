@@ -15,10 +15,8 @@ class CMakePenActiveVisitor :
 	public CItemVisitor
 {
 public:
-	/**
-	* Constructor
-	* \param angle The angle to set the pen to
-	*/
+	/// Constructor
+	/// \param angle Angle to shoot the pen at
 	CMakePenActiveVisitor(double angle) : mAngle(angle)
 	{}
 
@@ -29,6 +27,7 @@ public:
 	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override;
 
 private:
+	/// angle to shoot the pen at
 	double mAngle;
 };
 

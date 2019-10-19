@@ -30,6 +30,7 @@ const double OneSecond = 1;
   *
   * \param position takes in a position in the form of a CVector
   * \param velocity takes in a velocity in the form of a CVector
+  * \param game Game we are working in
   */
 CHaroldPen::CHaroldPen(CVector position, CVector velocity, CGame* game) : 
 	CItem(position, velocity, game)
@@ -48,9 +49,7 @@ CHaroldPen::CHaroldPen(CVector position, CVector velocity, CGame* game) :
 /**
 * Draw this item
 * \param graphics The graphics context to draw on
-* \param x X location to draw in virtual pixels
-* \param y Y location to draw in virtual pixels
-* \param angle Angle of rotation in radians
+* \param position Position too draw the pen
 */
 void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 {
@@ -71,7 +70,7 @@ void CHaroldPen::Draw(Gdiplus::Graphics* graphics, CVector position)
 }
 
 /**
-*Update Pen item
+* Update Pen item
 * \param elapsedTime Real Time Elapsed
 */
 void CHaroldPen::Update(double elapsedTime)
@@ -95,8 +94,9 @@ void CHaroldPen::Update(double elapsedTime)
 	}
 }
 
-
-
+/**
+* Resets the pen back to Harold
+*/
 void CHaroldPen::ResetPen()
 {
 	mIsAttached = true;
