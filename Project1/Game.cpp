@@ -289,11 +289,19 @@ void CGame::RotatePen(double x, double y)
 	}
 }
 
+/**
+ * Adds an item to the item list
+ * \param item Item to add
+ */
 void CGame::AddItem(shared_ptr<CItem> item)
 {
 	mItems.push_back(item);
 }
 
+/**
+ * Removes an item from the item list
+ * \param item Item to remove
+ */
 void CGame::RemoveItem(std::shared_ptr<CItem> item)
 {
 	for (auto iter = mItems.begin(); iter != mItems.end(); iter++)
@@ -306,6 +314,10 @@ void CGame::RemoveItem(std::shared_ptr<CItem> item)
 	}
 }
 
+/**
+ * Removes an item from the item list via pointer
+ * \param item Pointer to item to remove
+ */
 void CGame::RemoveThisItem(CItem* item)
 {
 	for (auto sharedPtr : mItems)
@@ -338,6 +350,9 @@ void CGame::IncrementScore(int category)
 	}
 }
 
+/**
+ * Decrements the unfair score
+ */
 void CGame::DecrementUnfairScore()
 {
 	mScoreBoard.DecrementUnfair();

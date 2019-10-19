@@ -42,17 +42,25 @@ public:
 	
 	void Update(double elapsedTime);
 
+	/// Accepts a visitor
+	/// \param visitor Visitor that is accessing this object
 	void Accept(CItemVisitor* visitor);
 
 	void RotatePlayer(double x, double y);
 
 	void RotatePen(double x, double y);
 
+	/// Getter for height of window
+	/// \returns Height in pixels
 	int GetHeight() { return Height; }
+
+	/// Getter for width of window
+	/// \returns Width in pixels
 	int GetWidth() { return Width; }
 
-
+	/// Emmits a UML item
 	void EmmitUML() { mEmitter.AddUML(); };
+
 	void AddItem(std::shared_ptr<CItem> item);
 
 	void RemoveItem(std::shared_ptr<CItem> item);
@@ -67,12 +75,14 @@ public:
 	class Iter
 	{
 	public:
-		/** Constructor
-		 * \param game The game we are iterating over */
+		///Constructor
+		/// \param game The game we are iterating over
+		/// \param pos The position in the list
 		Iter(CGame* game, int pos) : mGame(game), mPos(pos) {}
 
-		/** Test for end of the iterator
-		 * \returns True if this position is not equal to the other position */
+		/// Test for end of the iterator
+		/// \param other The other item we are comparing with
+		/// \returns True if this position is not equal to the other position
 		bool operator!=(const Iter& other) const
 		{
 			return mPos != other.mPos;
@@ -117,16 +127,16 @@ private:
 	/// Game area height in virtual pixels
 	const static int Height = 1000;
 
-	///Player of the game
+	/// Player of the game
 	CHarold mPlayer;
 
 	///The game scoreboard object
 	CScoreBoard mScoreBoard;
 
-	//Emitter
+	/// Emitter
 	CEmitter mEmitter;
 
-	///List of all items on screen
+	/// List of all items on screen
 	std::vector<std::shared_ptr<CItem> > mItems;
 
 	/// Time since last UML object was Emitted

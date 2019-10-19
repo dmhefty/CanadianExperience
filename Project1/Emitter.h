@@ -40,6 +40,8 @@ public:
 
 	CEmitter(const CEmitter&) = delete;
 
+	/// Constructor
+	/// \param game The game we are in
 	CEmitter(CGame* game) : mGame(game) {}
 	void Load(const std::wstring& filePath);
 	void AddUML();
