@@ -23,11 +23,11 @@ CBadUML::CBadUML(std::shared_ptr<CUMLAttribute> name,
 {
 	mError = error;
 }
-/*
+
+/**
 * Draws Bad UML
 * \param graphics Graphics Objects
 * \param position Center Position of UML object
-*
 */
 void CBadUML::Draw(Gdiplus::Graphics* graphics, CVector position)
 {
@@ -52,6 +52,9 @@ void CBadUML::Draw(Gdiplus::Graphics* graphics, CVector position)
 	}
 }
 
+/**
+* Applies the effect of hitting a bad uml
+*/
 void CBadUML::Effect()
 {
 	if (!mHit)

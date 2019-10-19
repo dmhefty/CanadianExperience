@@ -12,12 +12,15 @@ class CBadUMLVisitor :
 public:
 	virtual ~CBadUMLVisitor() { mBadUMLs.clear(); }
 
+	/// visits a badUML object
+	/// \param badUML Object we are visiting
 	virtual void VisitBadUML(CBadUML* badUML) override
 	{
 		mBadUMLs.push_back(badUML);
 	}
 
-	std::vector<CBadUML*> GetGoodUMLs() { return mBadUMLs; }
+	/// Getter for 
+	std::vector<CBadUML*> GetBadUMLs() { return mBadUMLs; }
 
 private:
 	std::vector<CBadUML*> mBadUMLs;
