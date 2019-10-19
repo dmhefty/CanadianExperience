@@ -1,6 +1,6 @@
+#include <math.h>
 #include "pch.h"
 #include "MakePenActiveVisitor.h"
-#include <math.h>
 
 using namespace std;
 

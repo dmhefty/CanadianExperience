@@ -8,6 +8,9 @@
  */
 
 #include "pch.h"
+#include <time.h>
+#include <stdlib.h>
+#include <algorithm>
 #include "Emitter.h"
 #include "XmlNode.h"
 #include "Game.h"
@@ -17,9 +20,6 @@
 #include "IsPowerFastVisitor.h"
 #include "IsPowerSlowVisitor.h"
 #include "IsPowerRapidFireVisitor.h"
-#include <time.h>
-#include <stdlib.h>
-#include <algorithm>
 
 using namespace std;
 using namespace xmlnode;

@@ -6,9 +6,9 @@
  */
 
 #include "pch.h"
-#include "PowerItem.h"
 #include <string>
 #include <memory>
+#include "PowerItem.h"
 
 using namespace std;
 using namespace Gdiplus;

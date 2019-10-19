@@ -8,11 +8,10 @@
 
 #include "pch.h"
 #include <memory>
+#include <vector>
 #include "Game.h"
 #include "Item.h"
 #include "XmlNode.h"
-
-#include <vector>
 #include "HaroldPen.h"
 #include "MakePenActiveVisitor.h"
 #include "IsHaroldPenVisitor.h"
