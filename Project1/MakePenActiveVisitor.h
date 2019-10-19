@@ -20,10 +20,6 @@ public:
 	CMakePenActiveVisitor(double angle) : mAngle(angle)
 	{}
 
-	/**
-	* Visits a pen object and sets it to active
-	* \param HaroldPen the CHaroldPen object being made active
-	*/
 	virtual void VisitHaroldPen(CHaroldPen* HaroldPen) override;
 
 private:
