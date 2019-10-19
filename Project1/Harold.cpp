@@ -45,7 +45,6 @@ CHarold::~CHarold()
  * \param graphics The graphics context to draw on
  * \param x X location to draw in virtual pixels
  * \param y Y location to draw in virtual pixels
- * \param angle Angle of rotation in radians
  */
 void CHarold::Draw(Gdiplus::Graphics* graphics, double x, double y)
 {

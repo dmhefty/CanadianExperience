@@ -31,7 +31,8 @@ public:
 	* \returns Y location in pixels */
 	double GetY() const { return mY; }
 
-	/* Get Angle of Harold*/
+	/// Get Angle of Harold
+	/// \returns angle
 	double GetAngle() const { return mAngle; }
 
 	/// Set the item location
@@ -48,7 +49,7 @@ private:
 	// Harold's location in the Game
 	double  mX = 0;     ///< X location for the center of Harold
 	double  mY = 0;     ///< Y location for the center of Harold
-	double mAngle = 0; /// < Angle for Harold
+	double mAngle = 0;	///< Angle for Harold
 	std::unique_ptr<Gdiplus::Bitmap> mHaroldImage; ///< Harold's image to use.
 };
 

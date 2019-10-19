@@ -19,14 +19,20 @@ class CGoodUML :
 	public CUML
 {
 public:
+	/// Constructor
+	/// \param name The name of the object
+	/// \param attributes List of attributes
+	/// \param operations List of operations
+	/// \param position The position of the object
+	/// \param velocity The velocity of the object
+	/// \param game The game we are in
 	CGoodUML::CGoodUML(std::shared_ptr<CUMLAttribute> name,
 		std::vector<std::shared_ptr<CUMLAttribute> > attributes,
 		std::vector<std::shared_ptr<CUMLAttribute> > operations,
 		CVector position, CVector velocity, CGame* game);
 
-	/* Accepts Visitor
-	* \param visitor Visitor to be Accepted
-	*/
+	/// Accepts Visitor
+	/// \param visitor Visitor to be Accepted
 	virtual void Accept(CItemVisitor* visitor) 
 	{ 
 		CUML::Accept(visitor);
@@ -37,7 +43,8 @@ public:
 
 	virtual void Effect() override;
 
-	//Getter for Unfair message for Good UMLs
+	/// Getter for Unfair message for Good UMLs
+	/// \returns a string that says "Unfair!"
 	std::wstring GetMessageOnHit() const { return L"Unfair!"; }
 };
 

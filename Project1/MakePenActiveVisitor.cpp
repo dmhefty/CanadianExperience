@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/**
+ * Unattaches the pen and starts its movement
+ * \param HaroldPen Pen being used
+ */
 void CMakePenActiveVisitor::VisitHaroldPen(CHaroldPen* HaroldPen)
 {
 	HaroldPen->UnAttach();

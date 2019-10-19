@@ -34,15 +34,15 @@ public:
 	virtual void VisitItem(CItem* item) {}
 
 	/** Visit a CUML object
-	 * \param UML UML item we are visiting */
+	 * \param uml UML item we are visiting */
 	virtual void VisitUML(CUML* uml) {}
 
 	/** Visit a CUML object
-	 * \param UML Good UML item we are visiting */
+	 * \param goodUML Good UML item we are visiting */
 	virtual void VisitGoodUML(CGoodUML* goodUML) {}
 
 	/** Visit a CUML object
-	 * \param UML Bad UML item we are visiting */
+	 * \param badUML Bad UML item we are visiting */
 	virtual void VisitBadUML(CBadUML* badUML) {}
 
 	/** Visit a CPowerItem object
